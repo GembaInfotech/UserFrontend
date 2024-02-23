@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 
+import axios from 'axios';
+
 const initialValues = {
-  vehicleName: '',
-  vehicleNumber: '',
-  vehicleType: '',
+  vehicle_name: '',
+  vehicle_number: '',
+  vehicle_type: '',
 };
 
 const VehicleForm = () => {
@@ -17,10 +19,32 @@ const VehicleForm = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission logic here
-    console.log(formData);
+
+    
+
+try {
+  const response = await axios.post(
+    'http://localhost:7001/v1/api/endUser/addVehicle/65d81ecebf0f7a0260f70bc0',
+    JSON.stringify(formData), // Convert formData to JSON string
+    {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }
+  );
+
+  console.log(response.data);
+  console.log('Vehicle added successfully');
+
+  // Optionally, you can reset the form after successful submission
+  setFormData(initialValues);
+
+} catch (error) {
+  console.error('Error adding vehicle:', error.message);
+}
+
   };
 
   return (
@@ -29,7 +53,7 @@ const VehicleForm = () => {
         <div className="mb-8 grid grid-cols-3 gap-6">
           {Object.keys(formData).map((fieldName, index) => (
             <div key={index} className="relative h-10 w-full">
-              {fieldName !== 'vehicleType' ? (
+              {fieldName !== 'vehicle_type' ? (
                 <input
                   className="peer h-full w-full bg-slate-50 rounded-[7px] border border-blue-gray-200 border-t-transparent bg-transparent px-3 py-2.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-gray-900 focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50 placeholder:opacity-0 focus:placeholder:opacity-100"
                   id={fieldName}
@@ -70,3 +94,36 @@ const VehicleForm = () => {
 };
 
 export default VehicleForm;
+
+
+
+
+
+
+
+
+// import React from 'react';
+
+// const VehicleCard = ({ vehicle }) => {
+//   return (
+//     <div className="max-w-xs bg-white shadow-lg rounded-lg overflow-hidden">
+//       <div className="px-6 py-4">
+//         {/* <div className="font-bold text-xl mb-2">Vehicle Details</div> */}
+//         <div className="mb-2">
+//           <label className="text-gray-700">Vehicle Name:</label>
+//           <span className="text-gray-900 ml-2">{vehicle.vehicle_name}</span>
+//         </div>
+//         <div className="mb-2">
+//           <label className="text-gray-700">Vehicle Number:</label>
+//           <span className="text-gray-900 ml-2">{vehicle.vehicle_number}</span>
+//         </div>
+//         <div className="mb-2">
+//           <label className="text-gray-700">Vehicle Type:</label>
+//           <span className="text-gray-900 ml-2">{vehicle.vehicle_type}</span>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default VehicleCard;

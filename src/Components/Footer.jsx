@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 function Footer() {
   return (
@@ -126,8 +127,9 @@ function Footer() {
         <div class="mt-16 flex flex-col md:flex-row md:justify-between items-center text-sm text-gray-400">
         <p className="text-xs text-gray-500">&copy; 2022. Company Name. All rights reserved.</p>
             <div class="order-1 md:order-2">
-                <span class="px-2">About us</span>
-                <span class="px-2 border-l">Contact us</span>
+                <Link to='/about'><span class="px-2">About us</span></Link>
+                <Link to ='/contact'><span class="px-2 border-l">Contact us</span></Link>
+                
                 <span class="px-2 border-l">Privacy Policy</span>
             </div>
         </div>

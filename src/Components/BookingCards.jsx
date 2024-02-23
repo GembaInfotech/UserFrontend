@@ -3,8 +3,8 @@ import { MdCurrencyRupee } from "react-icons/md";
 
 const BookingCard = ({ booking }) => {
   return (
-    <div className=" bg-[#edf1f7] shadow-md rounded-lg p-4 mx-2 border border-gray-200 ">
-      <p className="text-base font-semibold text-gray-800 ">Parking: <span className='font-normal text-sm'> {booking.parkingId}</span> </p>
+    <div className=" bg-[#f8fbff] shadow-md rounded-lg p-4 mx-2  border-gray-200 ">
+      <p className="text-base font-semibold text-gray-800 ">Parking: <span className='font-normal text-sm'> {booking.ParkingName}</span> </p>
       <div className='flex flex-row items-center justify-start '>
         <p className="text-sm text-gray-700 font-semibold mr-1">Booking Price:</p>
         <MdCurrencyRupee className="text-sm text-gray-700"/>

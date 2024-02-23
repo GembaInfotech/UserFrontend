@@ -28,6 +28,13 @@ const [isLoggedIn, setIsLoggedIn]  =useState(false);
     };
   }, []);
 
+
+  const handleLogout = () => {
+    localStorage.removeItem('userData');
+    window.location.href = '/login';
+  };
+
+
   return (
     <nav className={`p-4 fixed top-0 w-full mb-12 z-10 transition-all duration-300 ${isScrolled ? 'bg-white shadow-md' : 'bg-transparent'}`}>
       <div className=" mx-auto flex justify-between space-x-4 items-center">
@@ -44,7 +51,7 @@ const [isLoggedIn, setIsLoggedIn]  =useState(false);
           <Link to="/contact" className="text-gray-800 font-medium hover:text-gray-500 transition">Contact Us</Link>
           <Link to="/profile" className="text-gray-800 font-medium hover:text-gray-500 transition">Profile</Link>
 
-          <Link to="/#" className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-md dark:shadow-blue-800/80 font-xl rounded-md text-xl px-6 py-2 text-center me-2 mb-2">
+          <Link to="/#" onClick={handleLogout} className="text-black bg-white hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-md dark:shadow-blue-800/80 font-xl rounded-md text-xl px-6 py-2 text-center me-2 mb-2">
            Logout
           </Link>
         </div> :  <div className="md:flex items-center space-x-4">

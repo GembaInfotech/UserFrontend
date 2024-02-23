@@ -35,9 +35,9 @@ const Login = () => {
 
   const handleSubmit = async (values) => {
     try {
-      const response = await axios.post('http://localhost:7001/u1/api/endUser/login', values);
+      const response = await axios.post('http://localhost:7001/v1/api/endUser/login', values);
       localStorage.setItem('userData', JSON.stringify(response.data.data));
-      // console.log(response.data.data);
+      console.log(response.data.data);
       window.location.href = "/";
     } catch (error) {
       console.error('Error saving data:', error);

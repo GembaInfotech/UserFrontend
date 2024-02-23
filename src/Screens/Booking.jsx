@@ -21,7 +21,7 @@ function Booking() {
 
     const  Totime = JSON.parse(decodeURIComponent(totime));  
 
-    console.log(parkingData._id)
+    console.log(parkingData.parkingName)
     
 
     const [user, setUser] = useState({})
@@ -35,8 +35,10 @@ function Booking() {
        await setFromDate(Intime);
        await setToDate(Totime);
         const bookingDetails = {
+          email:user.email,
           enserId: user._id,
-          parkingId:'65d32bed77a295e912a381e4',
+          parkingId:parkingData._id,
+          ParkingName:parkingData.parkingName,
           timeIn: fromDate || Intime, 
           timeOut: toDate || Totime,
           status:"Incoming",
