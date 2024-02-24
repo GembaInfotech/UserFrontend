@@ -89,7 +89,7 @@ function ParkingDetails() {
       </div>
       <div className=' h-14'>
       </div>
-      <div className='flex   '>
+      <div className='flex min-h-[500px]  '>
         <div className='w-1/4 max-h-[800px]  overflow-y-auto '>
         <div className='overflow-y-auto'>
         {parkings?.map(parking => (

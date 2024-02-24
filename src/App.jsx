@@ -24,7 +24,7 @@ function App() {
   return (
       <>
 
-<Provider store={Store}>
+<Provider store={store}>
       <QueryClientProvider client={queryClient}>
        <Router>
       <Routes>

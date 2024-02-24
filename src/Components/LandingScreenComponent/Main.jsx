@@ -12,6 +12,7 @@ import image2 from '../../assets/parking3.jpg'
 import image3 from '../../assets/parking5.webp'
 import image4 from '../../assets/parking.webp'
 import { IoSearch } from "react-icons/io5";
+import { Link } from 'react-router-dom'
 
 
 
@@ -41,6 +42,7 @@ function Main() {
            
             className="px-4 py-2 max-md:px-2 border rounded-lg focus:outline-none focus:border-blue-500"
           />
+          <Link to={`details/${location}`}>
           <button
              onClick={handleclick}
             className="bg-blue-500 text-white px-4 max-md:px-2 py-2 rounded-lg hover:bg-blue-600 transition duration-300"
@@ -49,6 +51,8 @@ function Main() {
            <h1 className='pt-1 px-1 text-2xl'> <IoSearch /></h1>
            </div>
           </button>
+          </Link>
+        
     
       </div>
     </div>

@@ -6,7 +6,7 @@ import background from '.././assets/background.png'
 
 function LandingScreen() {
   return (
-    <div className='bg-cover  bg-blue-700 bg-center min-h-screen'>
+    <div className='bg-cover  bg-blue-500 bg-center min-h-screen'>
       <Header />
    <h1 className='hidden'>hello</h1>
      

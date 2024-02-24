@@ -3,15 +3,13 @@ import norecord from '../../assets/norecord.avif';
 import BookingCard from '../BookingCards';
 import { useDispatch, useSelector } from 'react-redux';
 // import { fetchBookings } from '../store/bookingsSlice';import 
-import { fetchBookings } from '../../slice/BookingSlice';
-
+import { fetchBookingsAsync } from '../../slice/BookingSlice';
 
 function UserBookings() {
-  const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
-  const booking = useSelector((state) => state.bookings.entities);
-
+  const bookings = useSelector((state) => state.bookings.data);
+  console.log(bookings)
   // useEffect(() => {
   //   const fetchData = async () => {
   //     try {
@@ -44,12 +42,15 @@ function UserBookings() {
   // }, []);
 
   useEffect(() => {
-    dispatch(fetchBookings());
+    const storedUserData = JSON.parse(localStorage.getItem('userData'));
+
+          const userId =storedUserData?._id;
+    dispatch(fetchBookingsAsync({userId:userId}));
   }, [dispatch]);
 
   return (
     <>
-      {loading ? (
+      { bookings.length==0? (
         <div className='flex justify-center'>
           <p>Loading...</p>
         </div>

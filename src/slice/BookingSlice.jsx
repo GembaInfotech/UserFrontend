@@ -1,35 +1,74 @@
+// features/booking/BookingSlice.js
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-// import bookingAPI from '../api/bookingAPI'
-import bookingAPI from '../api/api';
+import { fetchBookings } from '../api/api';
+export const fetchBookingsAsync = createAsyncThunk(
+  'bookings/fetch',
+  async ({userId}) => {
+    const response = await fetchBookings({userId});
+    return response;
+  }
+);
 
-export const fetchBookings = createAsyncThunk('bookings/fetchBookings', async () => {
-  const response = await bookingAPI.getAllBookings();
-  return response;
-});
+export const addBookingAsync = createAsyncThunk(
+  'bookings/add',
+  async (bookingData) => {
+    const response = await createBooking(bookingData);
+    return response.data;
+  }
+);
 
-const bookingsSlice = createSlice({
+export const updateBookingAsync = createAsyncThunk(
+  'bookings/update',
+  async ({ id, status }) => {
+    const response = await updateBookingAPI(id, status);
+    return response.data;
+  }
+);
+
+export const deleteBookingAsync = createAsyncThunk(
+  'bookings/delete',
+  async (id) => {
+    await deleteBookingAPI(id);
+    return id;
+  }
+);
+
+const BookingSlice = createSlice({
   name: 'bookings',
   initialState: {
-    entities: [],
-    loading: 'idle',
+    data: [],
+    status: 'idle',
     error: null,
   },
   reducers: {
-    // Additional reducers can be defined here
+    // Add additional reducers if needed
   },
-  extraReducers: {
-    [fetchBookings.pending]: (state) => {
-      state.loading = 'pending';
-    },
-    [fetchBookings.fulfilled]: (state, action) => {
-      state.loading = 'idle';
-      state.entities = action.payload;
-    },
-    [fetchBookings.rejected]: (state, action) => {
-      state.loading = 'idle';
-      state.error = action.error.message;
-    },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchBookingsAsync.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(fetchBookingsAsync.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.data = action.payload;
+      })
+      .addCase(fetchBookingsAsync.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.error.message;
+      })
+      .addCase(addBookingAsync.fulfilled, (state, action) => {
+        state.data.push(action.payload);
+      })
+      .addCase(updateBookingAsync.fulfilled, (state, action) => {
+        const index = state.data.findIndex(booking => booking.id === action.payload.id);
+        if (index !== -1) {
+          state.data[index] = action.payload;
+        }
+      })
+      .addCase(deleteBookingAsync.fulfilled, (state, action) => {
+        state.data = state.data.filter(booking => booking.id !== action.payload);
+      });
   },
 });
 
-export default bookingsSlice.reducer;
+export default BookingSlice.reducer;
