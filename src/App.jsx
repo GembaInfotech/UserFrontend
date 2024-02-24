@@ -14,11 +14,18 @@ import ProfileLayout from './Layout/ProfileLayout'
 import UserInfo from './Components/ProfileComponents/UserInfo'
 import UserVehicle from './Components/ProfileComponents/UserVehicle'
 
-function App() {
+import { Provider } from 'react-redux';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import store from './store'
 
+function App() {
+  const queryClient = new QueryClient();
 
   return (
       <>
+
+<Provider store={Store}>
+      <QueryClientProvider client={queryClient}>
        <Router>
       <Routes>
         <Route path="/" element={<LandingScreen />} />
@@ -40,6 +47,9 @@ function App() {
 
       </Routes>
     </Router>
+
+    </QueryClientProvider>
+    </Provider>
       </>
   )
 }

@@ -28,28 +28,36 @@ function UserVehicle() {
         setAdd(true);
     }
 
+    const handleFormClose = () => {
+        setAdd(false);
+    };
+
     return (
         <>
-            <div className=' w-full h-fit p-16'>
+            <div className='w-full h-fit p-8'>
                 <div className=''>
-                    <h1>My vehicles</h1>
-                    <div className=' flex flex-row  items-center justify-center '>
-
-                    {vehicles.map(vehicle => (
-                      
-                    
-                           <VehicleCard  key={vehicle.id} vehicle={vehicle} />
-                           ))}
-                      </div>
-
-                  
-                    {isAdd ? (
-                        <VehicleForm onSuccess={() => setAdd(false)} />
-                    ) : (
+                    <div className='flex flex-row justify-between items-center mx-4 mb-4'>
+                        <h1 className='text-xl text-gray-600 '>My vehicles</h1>
                         <div>
-                            <button onClick={add}>Add new</button>
+                            {isAdd ? (
+                                <VehicleForm onSuccess={handleFormClose} onCancel={handleFormClose} />
+                            ) : (
+                                <button onClick={add} className="bg-gray-100 hover:bg-white text-black  py-2 px-4 rounded drop-shadow-lg">
+                                    Add new
+                                </button>
+                            )}
                         </div>
-                    )}
+                    </div>
+                    <div className='flex flex-wrap justify-center'>
+
+                        {vehicles.map(vehicle => (
+                            <div key={vehicle.id} className='w-full sm:w-1/2 md:w-1/3 lg:w-1/3 xl:w-1/3 p-2'>
+                                <VehicleCard vehicle={vehicle} />
+                            </div>
+                        ))}
+                    </div>
+
+
                 </div>
             </div>
         </>

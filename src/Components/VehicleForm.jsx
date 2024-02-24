@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-
 import axios from 'axios';
 
 const initialValues = {
@@ -8,7 +7,7 @@ const initialValues = {
   vehicle_type: '',
 };
 
-const VehicleForm = () => {
+const VehicleForm = ({ onSuccess, onCancel }) => {
   const [formData, setFormData] = useState(initialValues);
 
   const handleChange = (e) => {
@@ -22,35 +21,39 @@ const VehicleForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    
+    try {
+      const response = await axios.post(
+        'http://localhost:7001/v1/api/endUser/addVehicle/65d81ecebf0f7a0260f70bc0',
+        formData,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
 
-try {
-  const response = await axios.post(
-    'http://localhost:7001/v1/api/endUser/addVehicle/65d81ecebf0f7a0260f70bc0',
-    JSON.stringify(formData), // Convert formData to JSON string
-    {
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      console.log(response.data);
+      console.log('Vehicle added successfully');
+
+      setFormData(initialValues);
+      onSuccess(); // Close the form
+    } catch (error) {
+      console.error('Error adding vehicle:', error.message);
     }
-  );
+  };
 
-  console.log(response.data);
-  console.log('Vehicle added successfully');
-
-  // Optionally, you can reset the form after successful submission
-  setFormData(initialValues);
-
-} catch (error) {
-  console.error('Error adding vehicle:', error.message);
-}
-
+  const handleCancel = () => {
+    onCancel(); // Close the form
   };
 
   return (
     <div>
-      <form onSubmit={handleSubmit} className="bg-[#ffffff] shadow-xl border border-gray-300 rounded-sm w-full duration-300 ease-in-out overflow-hidden p-12" style={{ height: "32vh" }}>
-        <div className="mb-8 grid grid-cols-3 gap-6">
+      <form
+        onSubmit={handleSubmit}
+        className="bg-[#ffffff] shadow-xl border border-gray-300 rounded-sm w-full duration-300 ease-in-out overflow-hidden p-12"
+        style={{ height: '32vh' }}
+      >
+                <div className="mb-8 grid grid-cols-3 gap-6">
           {Object.keys(formData).map((fieldName, index) => (
             <div key={index} className="relative h-10 w-full">
               {fieldName !== 'vehicle_type' ? (
@@ -72,8 +75,8 @@ try {
                   onChange={handleChange}
                 >
                   <option value="">Select Vehicle Type</option>
-                  <option value="Two Wheeler">Two Wheeler</option>
-                  <option value="Four Wheeler">Four Wheeler</option>
+                  <option value="two wheeler">Two Wheeler</option>
+                  <option value="four wheeler">Four Wheeler</option>
                 </select>
               )}
               <label
@@ -86,7 +89,12 @@ try {
           ))}
         </div>
         <div className="flex justify-center">
-          <button type="submit" className="bg-blue-500 text-white py-1 px-2 rounded-sm mx-2 hover:bg-blue-600 focus:outline-none">Submit</button>
+          <button type="submit" className="bg-blue-500 text-white py-1 px-2 rounded-sm mx-2 hover:bg-blue-600 focus:outline-none">
+            Submit
+          </button>
+          <button type="button" onClick={handleCancel} className="bg-gray-500 text-white py-1 px-2 rounded-sm mx-2 hover:bg-gray-600 focus:outline-none">
+            Cancel
+          </button>
         </div>
       </form>
     </div>
@@ -94,36 +102,3 @@ try {
 };
 
 export default VehicleForm;
-
-
-
-
-
-
-
-
-// import React from 'react';
-
-// const VehicleCard = ({ vehicle }) => {
-//   return (
-//     <div className="max-w-xs bg-white shadow-lg rounded-lg overflow-hidden">
-//       <div className="px-6 py-4">
-//         {/* <div className="font-bold text-xl mb-2">Vehicle Details</div> */}
-//         <div className="mb-2">
-//           <label className="text-gray-700">Vehicle Name:</label>
-//           <span className="text-gray-900 ml-2">{vehicle.vehicle_name}</span>
-//         </div>
-//         <div className="mb-2">
-//           <label className="text-gray-700">Vehicle Number:</label>
-//           <span className="text-gray-900 ml-2">{vehicle.vehicle_number}</span>
-//         </div>
-//         <div className="mb-2">
-//           <label className="text-gray-700">Vehicle Type:</label>
-//           <span className="text-gray-900 ml-2">{vehicle.vehicle_type}</span>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default VehicleCard;
