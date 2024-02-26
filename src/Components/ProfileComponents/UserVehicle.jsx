@@ -1,28 +1,44 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 import VehicleCard from '../VehicleCard';
 import VehicleForm from '../VehicleForm';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { fetchVehiclesAsync } from '../../slice/VehiclesSlice';    
 
 function UserVehicle() {
+
     const [isAdd, setAdd] = useState(false);
-    const [vehicles, setVehicles] = useState([]);
+    // const [vehicles, setVehicles] = useState([]);
 
+    const dispatch = useDispatch(); 
+    const vehicles = useSelector((state) => state.Vehicles.data);
+    console.log(vehicles);
+  
     useEffect(() => {
-        const fetchVehicles = async () => {
-            try {
-                const response = await axios.get('http://localhost:7001/v1/api/endUser/getVehicles/65d81ecebf0f7a0260f70bc0');
-                if (response.status === 200) {
-                    setVehicles(response.data.vehicles || []);
-                } else {
-                    console.error('Failed to fetch vehicles');
-                }
-            } catch (error) {
-                console.error('Error fetching vehicles:', error);
-            }
-        };
+      const storedUserData = JSON.parse(localStorage.getItem('userData'));
+      
+      const userId = storedUserData?._id;
+      dispatch(fetchVehiclesAsync({ userId: userId }));
+    }, [dispatch]);
 
-        fetchVehicles();
-    }, []);
+
+    // useEffect(() => {
+    //     const fetchVehicles = async () => {
+    //         try {
+    //             const response = await axios.get('http://localhost:7001/v1/api/endUser/getVehicles/65d81ecebf0f7a0260f70bc0');
+    //             if (response.status === 200) {
+    //                 setVehicles(response.data.vehicles || []);
+    //             } else {
+    //                 console.error('Failed to fetch vehicles');
+    //             }
+    //         } catch (error) {
+    //             console.error('Error fetching vehicles:', error);
+    //         }
+    //     };
+
+    //     fetchVehicles();
+    // }, []);
 
     const add = () => {
         setAdd(true);

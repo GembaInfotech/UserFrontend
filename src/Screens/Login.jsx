@@ -4,12 +4,13 @@ import * as Yup from 'yup';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { MdHome } from "react-icons/md";
-
+import { BiX } from "react-icons/bi";
+import { BiHide } from "react-icons/bi";
+import { BiShowAlt } from "react-icons/bi";
 import img1 from '../assets/parking.webp';
 import img2 from '../assets/parking3.jpg';
 import img3 from '../assets/parking.webp';
 import img4 from '../assets/parking5.webp';
-import logo from '../assets/logo1.png';
 
 const SignupSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email address').required('Required'),
@@ -18,7 +19,21 @@ const SignupSchema = Yup.object().shape({
 
 const Login = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [showPassword, setShowPassword] = useState(false); 
   const images = [img1, img2, img3, img4];
+  const [errorMessage, setErrorMessage] = React.useState('');
+
+  useEffect(() => {
+    let timer;
+
+    if (errorMessage) {
+      timer = setTimeout(() => {
+        setErrorMessage('');
+      }, 6000); // Adjust the duration (in milliseconds) as needed
+    }
+
+    return () => clearTimeout(timer);
+  }, [errorMessage]);
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -33,20 +48,53 @@ const Login = () => {
     password: ''
   };
 
+  function validateEmail(data) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(data);
+  }
+
   const handleSubmit = async (values) => {
     try {
+      if (!validateEmail(values.email)) {
+        throw new Error('Enter valid email');
+      } else if (values.password.length < 3) {
+        throw new Error('Enter valid password');
+      }
+
       const response = await axios.post('http://localhost:7001/v1/api/endUser/login', values);
-      localStorage.setItem('userData', JSON.stringify(response.data.data));
-      console.log(response.data.data);
-      window.location.href = "/";
+
+      if (response.status === 200) {
+        const responseData = response.data;
+        if (responseData.data) {
+          localStorage.setItem('userData', JSON.stringify(responseData.data));
+          console.log(responseData.data);
+          window.location.href = "/";
+        } else {
+          throw new Error('No data received from server');
+        }
+      } else {
+        throw new Error('Unexpected error occurred');
+      }
     } catch (error) {
-      console.error('Error saving data:', error);
+      let errorMessage = 'An error occurred.';
+
+      if (error.response) {
+        if (error.response.status === 401) {
+          errorMessage = 'Invalid password.';
+        } else if (error.response.status === 404) {
+          errorMessage = 'User not found.';
+        } else if (error.response.status === 500) {
+          errorMessage = 'Failed to update user.';
+        }
+      }
+
+      setErrorMessage(errorMessage);
     }
   };
 
   return (
     <div className="flex flex-row justify-center items-center bg-blue-600">
-      <div className="w-[50%] overflow-hidden">
+      <div className="relative w-[50%] overflow-hidden">
         <div
           className="flex transition-transform duration-1000 ease-in-out"
           style={{
@@ -59,9 +107,10 @@ const Login = () => {
           ))}
         </div>
       </div>
+
       <div className='flex-row mx-auto md:h-screen lg:py-0 w-[50%]'>
         <Link to="/">
-          <h1 className='float-right py-4 pr-2 text-white text-4xl'><MdHome/></h1>
+          <h1 className='float-right py-4 pr-2 text-white text-4xl'><MdHome /></h1>
         </Link>
         <div className="flex flex-col items-center justify-center px-6 py-12">
           <h1 className="flex items-center mb-6 text-[44px] font-semibold text-white">Welcome back here </h1>
@@ -90,14 +139,23 @@ const Login = () => {
                     <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-600">
                       Password
                     </label>
-                    <Field
-                      type="password"
-                      name="password"
-                      id="password"
-                      placeholder="••••••••"
-                      className="bg-gray-100 font-bold border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-4 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                      required
-                    />
+                    <div className="relative">
+                      <Field
+                        type={showPassword ? "text" : "password"}
+                        name="password"
+                        id="password"
+                        placeholder="••••••••"
+                        className="bg-gray-100 font-bold border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-4 pr-12 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        required
+                      />
+                      <button
+                        type="button"
+                        className="absolute inset-y-0 right-0 flex items-center px-3 text-gray-700"
+                        onClick={() => setShowPassword(!showPassword)}
+                      >
+                        {showPassword ? (<BiHide />) : (<BiShowAlt />)}
+                      </button>
+                    </div>
                     <ErrorMessage name="password" component="div" className="text-red-500 text-xs italic" />
                   </div>
                   <button
@@ -117,6 +175,14 @@ const Login = () => {
             </div>
           </div>
         </div>
+        {errorMessage && (
+          <div className="text-center mt-4">
+            <div className="bg-red-700 text-white px-4 py-3 rounded relative mx-auto flex items-center justify-between w-96">
+              {errorMessage}
+              <BiX className="cursor-pointer" onClick={() => setErrorMessage('')} />
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

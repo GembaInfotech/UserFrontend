@@ -12,7 +12,15 @@ export const fetchBookings = async ({userId}) => {
 };
 
 export const createBooking = async (bookingData) => {
-  const response = await instance.post('/bookings/bookings', bookingData);
+  const response = await instance.post('/bookings/book', bookingData);
+  return response.data;
+};
+
+
+
+export const fetchVehicles = async ({userId}) => {
+  const response = await instance.get(`/endUser/getVehicles/${userId}`);
+  console.log(response.data);
   return response.data;
 };
 

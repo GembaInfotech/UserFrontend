@@ -1,6 +1,7 @@
 // features/booking/BookingSlice.js
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { fetchBookings } from '../api/api';
+import { createBooking } from '../api/api';
 export const fetchBookingsAsync = createAsyncThunk(
   'bookings/fetch',
   async ({userId}) => {
@@ -9,7 +10,7 @@ export const fetchBookingsAsync = createAsyncThunk(
   }
 );
 
-export const addBookingAsync = createAsyncThunk(
+export const createBookingAsync = createAsyncThunk(
   'bookings/add',
   async (bookingData) => {
     const response = await createBooking(bookingData);
@@ -56,9 +57,26 @@ const BookingSlice = createSlice({
         state.status = 'failed';
         state.error = action.error.message;
       })
-      .addCase(addBookingAsync.fulfilled, (state, action) => {
-        state.data.push(action.payload);
+
+      .addCase(createBookingAsync.pending, (state) => {
+        state.status = 'loading';
       })
+      .addCase(createBookingAsync.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.data = action.payload;
+      })
+      .addCase(createBookingAsync.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.error.message;
+      })
+
+
+
+
+
+      // .addCase(addBookingAsync.fulfilled, (state, action) => {
+      //   state.data.push(action.payload);
+      // })
       .addCase(updateBookingAsync.fulfilled, (state, action) => {
         const index = state.data.findIndex(booking => booking.id === action.payload.id);
         if (index !== -1) {
