@@ -2,11 +2,49 @@
 import img from '../../../assets/parking.webp'
 import { PiCurrencyInrBold } from "react-icons/pi";
 import { Link } from 'react-router-dom';
-
+import { useState } from 'react';
+import ShortCard from '../../ShortCard';
+import { Fade, ScaleFade, WrapItem,Slide, SlideFade, Button, Box, useDisclosure, Collapse } from '@chakra-ui/react'
 
 
 function ParkingCard({ data, intime , totime }) {
-  console.log(totime)
+  const [distance, sdis]=useState(0);
+  const userLocation= [localStorage.getItem('lat'), localStorage.getItem('long')]
+  console.log(userLocation)
+   const parkingLocation =[ data.location.coordinates[1], data.location.coordinates[0]];
+   console.log(parkingLocation)
+
+  function calculateDistance(userLocation, parkingLocation) {
+    const [lat1, lon1] = userLocation;
+    const [lat2, lon2] = parkingLocation;
+
+    const R = 6371e3; // Earth's radius in meters
+    const φ1 = (lat1 * Math.PI) / 180; // Latitude of user's location in radians
+    const φ2 = (lat2 * Math.PI) / 180; // Latitude of parking location in radians
+    const Δφ = ((lat2 - lat1) * Math.PI) / 180; // Difference in latitudes in radians
+    const Δλ = ((lon2 - lon1) * Math.PI) / 180; // Difference in longitudes in radians
+
+    const a =
+        Math.sin(Δφ / 2) * Math.sin(Δφ / 2) +
+        Math.cos(φ1) * Math.cos(φ2) * Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+    const distance = R * c; // Distance in meters
+return  Math.floor(distance/1000)+1;
+}
+
+const { isOpen, onToggle } = useDisclosure()
+
+  const [show, setshow]= useState(false);
+  const showDetails =()=>{
+    sdis(calculateDistance(userLocation, parkingLocation)
+)
+    onToggle();
+setshow(true);
+  }
+  const hideDetails =()=>{
+    setshow(false);
+      }
 
   return (
     <div>
@@ -25,8 +63,11 @@ function ParkingCard({ data, intime , totime }) {
               <h3 className="  font-bold tracking-tight text-[16px] text-gray-900 ">{data.parkingName}</h3>
               <h3 className="  font-semibold tracking-tight text-sm text-gray-600 ">{data.parkingArea}</h3>
             </div>
-            <div>
-              <h1 className='font-medium text-2xl px-2'><PiCurrencyInrBold />{data.capacity}</h1>
+            <div className='flex justify-between'>
+              <h1 className='font-medium text-xl pt-1'><PiCurrencyInrBold /></h1>
+              <h1 className='font-medium text-xl pr-2'>        {data.capacity}</h1>
+
+    
             </div>
           </div>
 
@@ -36,18 +77,33 @@ function ParkingCard({ data, intime , totime }) {
 
           {/* {`/generatee/${encodeURIComponent(JSON.stringify(detail))}`} */}
             <Link to={`/booking/${encodeURIComponent(JSON.stringify(data))}/${encodeURIComponent(JSON.stringify(intime))}/${encodeURIComponent(JSON.stringify(totime))}`}>
-              <button>
-                <h4 href="#" className="inline-flex items-center px-2 py-1  text-sm text-center text-white bg-blue-700 rounded-sm hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                  Book now
-                </h4>
-              </button></Link>
+            <WrapItem>
+      <Button  onClick={showDetails} size='sm'  colorScheme='green'>Book</Button>
+    </WrapItem>
 
-            <h1 className='text-sm text-green-700 px-2 '>available</h1>
+              
+              </Link>
+            
+              <WrapItem>
+      <Button  onClick={showDetails} size='sm' colorScheme='gray'>Details</Button>
+    </WrapItem>
+         
+
+
+            <h1 className='text-sm text-green-700 px-2 '>{distance}KM</h1>
           </div>
+          
         </div>
+        
       </div>
+      <Collapse in={isOpen} animateOpacity>
+ 
+ <ShortCard hideDetails={onToggle} data = {data}/>
+
+</Collapse>
     </div>
   )
 }
 
 export default ParkingCard
+

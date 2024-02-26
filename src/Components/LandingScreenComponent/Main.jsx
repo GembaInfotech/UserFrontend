@@ -22,7 +22,6 @@ function Main() {
 
   const handleclick = () =>{
     window.location.href= `details/${location}`
-    console.log(location)
   }
   return (
 <div className='pt-16' >

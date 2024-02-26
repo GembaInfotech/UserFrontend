@@ -1,3 +1,23 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* For WebKit-based browsers */
+::-webkit-scrollbar {
+    width: 7px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 8px; /* Add rounded corners to the track */
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 8px; /* Add rounded corners to the thumb */
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+  
