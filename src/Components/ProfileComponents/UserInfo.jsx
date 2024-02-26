@@ -8,9 +8,11 @@ function UserInfo() {
   const [otp, setOtp] = useState('');
   const [isOtpCorrect, setIsOtpCorrect] = useState(false);
 
+  let storedUserData =''
   useEffect(() => {
-    const storedUserData = JSON.parse(localStorage.getItem('userData'));
+     storedUserData = JSON.parse(localStorage.getItem('userData'));
     setUser(storedUserData);
+    console.log(storedUserData._id)
   }, []);
 
   const handleEmailChange = (e) => {
@@ -23,7 +25,8 @@ function UserInfo() {
 
   const handleSendOtp = async () => {
     try {
-      const response = await fetch(`http://localhost:7001/v1/api/endUser/sendOtp/65d81ecebf0f7a0260f70bc0`, {
+      console.log(user)
+      const response = await fetch(`http://localhost:7001/v1/api/endUser/sendOtp/${user?._id}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -43,7 +46,7 @@ function UserInfo() {
 
   const handleEmailUpdate = async () => {
     try {
-      const response = await fetch(`http://localhost:7001/v1/api/endUser/update/65d81ecebf0f7a0260f70bc0`, {
+      const response = await fetch(`http://localhost:7001/v1/api/endUser/update/${user?._id}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -65,7 +68,7 @@ function UserInfo() {
 
   const handleOtpVerify = async () => {
     try {
-      const response = await fetch(`http://localhost:7001/v1/api/endUser/verify/65d81ecebf0f7a0260f70bc0`, {
+      const response = await fetch(`http://localhost:7001/v1/api/endUser/verify/${user?._id}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

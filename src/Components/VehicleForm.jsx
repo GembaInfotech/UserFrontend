@@ -7,7 +7,7 @@ const initialValues = {
   vehicle_type: '',
 };
 
-const VehicleForm = ({ onSuccess, onCancel }) => {
+const VehicleForm = ({ onSuccess,id,  onCancel }) => {
   const [formData, setFormData] = useState(initialValues);
 
   const handleChange = (e) => {
@@ -23,7 +23,7 @@ const VehicleForm = ({ onSuccess, onCancel }) => {
 
     try {
       const response = await axios.post(
-        'http://localhost:7001/v1/api/endUser/addVehicle/65d81ecebf0f7a0260f70bc0',
+        `http://localhost:7001/v1/api/endUser/addVehicle/${id}`,
         formData,
         {
           headers: {
@@ -33,14 +33,16 @@ const VehicleForm = ({ onSuccess, onCancel }) => {
       );
 
       console.log(response.data);
+      console.log(response.data)
       console.log('Vehicle added successfully');
-
+     localStorage.setItem('userData', JSON.stringify(response.data.endUser) )
       setFormData(initialValues);
       onSuccess(); // Close the form
     } catch (error) {
       console.error('Error adding vehicle:', error.message);
     }
   };
+
 
   const handleCancel = () => {
     onCancel(); // Close the form

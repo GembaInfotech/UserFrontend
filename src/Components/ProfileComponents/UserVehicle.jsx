@@ -7,6 +7,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchVehiclesAsync } from '../../slice/VehiclesSlice';    
 
 function UserVehicle() {
+    let storedUserData =''
+    const [id, setid]= useState(null);
 
     const [isAdd, setAdd] = useState(false);
     // const [vehicles, setVehicles] = useState([]);
@@ -16,29 +18,17 @@ function UserVehicle() {
     console.log(vehicles);
   
     useEffect(() => {
-      const storedUserData = JSON.parse(localStorage.getItem('userData'));
+       storedUserData = JSON.parse(localStorage.getItem('userData'));
       
       const userId = storedUserData?._id;
+      setid(userId)
+      console.log(storedUserData);
+
+      
       dispatch(fetchVehiclesAsync({ userId: userId }));
     }, [dispatch]);
 
 
-    // useEffect(() => {
-    //     const fetchVehicles = async () => {
-    //         try {
-    //             const response = await axios.get('http://localhost:7001/v1/api/endUser/getVehicles/65d81ecebf0f7a0260f70bc0');
-    //             if (response.status === 200) {
-    //                 setVehicles(response.data.vehicles || []);
-    //             } else {
-    //                 console.error('Failed to fetch vehicles');
-    //             }
-    //         } catch (error) {
-    //             console.error('Error fetching vehicles:', error);
-    //         }
-    //     };
-
-    //     fetchVehicles();
-    // }, []);
 
     const add = () => {
         setAdd(true);
@@ -56,7 +46,8 @@ function UserVehicle() {
                         <h1 className='text-xl text-gray-600 '>My vehicles</h1>
                         <div>
                             {isAdd ? (
-                                <VehicleForm onSuccess={handleFormClose} onCancel={handleFormClose} />
+                            
+                                <VehicleForm id={id} onSuccess={handleFormClose} onCancel={handleFormClose} />
                             ) : (
                                 <button onClick={add} className="bg-gray-100 hover:bg-white text-black  py-2 px-4 rounded drop-shadow-lg">
                                     Add new

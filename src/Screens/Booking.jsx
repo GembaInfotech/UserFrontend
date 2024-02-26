@@ -19,7 +19,7 @@ function Booking() {
   const { data, intime, totime } = useParams();
   const parkingData = JSON.parse(decodeURIComponent(data));
   const [price, setPrice] = useState(parkingData?.capacity)
-
+console.log(parkingData)
   const Intime = JSON.parse(decodeURIComponent(intime));
   const Totime = JSON.parse(decodeURIComponent(totime));
 
@@ -45,6 +45,7 @@ const getPrice =()=>{
 
  
 console.log(days, hours,minutes )
+
 const mul= hours+ minutes/60
 const value = Math.ceil(parkingData.capacity*mul);
  setPrice(value)
@@ -56,7 +57,7 @@ const value = Math.ceil(parkingData.capacity*mul);
   const handleConfirmBooking = async () => {
     try {
       // Construct booking payload
-
+    console.log(parkingData.parkingName)
       const bookingDetails = {
         email: user.email,
         enserId: user._id,
@@ -65,10 +66,11 @@ const value = Math.ceil(parkingData.capacity*mul);
         timeIn: fromDate || Intime,
         timeOut: toDate || Totime,
         status: "Incoming",
-        CarNumber: "CH80CG5436",
+        CarNumber: user.vehicle_info[0].vehicle_number,
         bookingPrice: price
       };
       // Call the POST API
+      console.log(bookingDetails)
       const response = await fetch('http://localhost:7001/v1/api/bookings/book', {
         method: 'POST',
         headers: {
@@ -111,6 +113,7 @@ const value = Math.ceil(parkingData.capacity*mul);
     if (storedUserData?._id) {
       setIsLoggedIn(true)
       setUser(storedUserData)
+      console.log(user)
     }
 
 

@@ -36,7 +36,7 @@ const SignUp = () => {
 
   const handleSubmit = async (values, { setSubmitting, resetForm }) => {
     try {
-      const response = await axios.post('http://localhost:7001/u1/api/endUser/register', values);
+      const response = await axios.post('http://localhost:7001/v1/api/endUser/register', values);
       if (response.status === 201) {
         toast.success('Signup successful! Please check your email for further instructions.');
 
