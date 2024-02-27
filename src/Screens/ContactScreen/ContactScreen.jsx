@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
 
-function Contacy() {
+function ContactScreen() {
   return (
     <div className="flex justify-center items-center h-screen bg-[#f6f7fb]">
       <div className="max-w-md w-full bg-white shadow-md rounded-lg p-6">
@@ -26,4 +26,4 @@ function Contacy() {
   );
 }
 
-export default Contacy;
+export default ContactScreen;
