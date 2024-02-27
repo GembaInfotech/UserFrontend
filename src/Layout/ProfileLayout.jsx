@@ -1,6 +1,6 @@
 import React, { Children } from 'react'
 import ProfileScreen from '../Screens/ProfileScreen';
-import Header from '../Components/Header'
+import Header from '../Components/LayoutComponents/Header'
 function ProfileLayout({children}) {
   return (
     <>

@@ -1,5 +1,4 @@
-import React from 'react'
-import QueryForm from './LandingScreenComponent/QueryForm'
+import QueryForm from './QueryForm'
 function BusinessQuery() {
   return (
   <div>

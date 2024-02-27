@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from 'react';
-// import axios from 'axios';
-import VehicleCard from '../VehicleCard';
-import VehicleForm from '../VehicleForm';
+import { useEffect, useState } from 'react';
+import VehicleCard from '../../Components/ProfileComponents/VehicleComponent/VehicleCard';
+import VehicleForm from '../../Components/ProfileComponents/VehicleComponent/VehicleForm';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { fetchVehiclesAsync } from '../../slice/VehiclesSlice';    
 
-function UserVehicle() {
+function VehicleScreen() {
     let storedUserData =''
     const [id, setid]= useState(null);
 
@@ -71,4 +70,4 @@ function UserVehicle() {
     );
 }
 
-export default UserVehicle;
+export default VehicleScreen;

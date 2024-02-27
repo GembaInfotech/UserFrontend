@@ -1,9 +1,9 @@
 // import React from 'react'
-import img from '../../../assets/parking.webp'
+import img from '../../assets/parking.webp'
 import { PiCurrencyInrBold } from "react-icons/pi";
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
-import ShortCard from '../../ShortCard';
+import ShortCard from './ShortCard';
 import { Fade, ScaleFade, WrapItem,Slide, SlideFade, Button, Box, useDisclosure, Collapse } from '@chakra-ui/react'
 
 
@@ -76,7 +76,7 @@ setshow(true);
 
 
           {/* {`/generatee/${encodeURIComponent(JSON.stringify(detail))}`} */}
-            <Link to={`/booking/${encodeURIComponent(JSON.stringify(data))}/${encodeURIComponent(JSON.stringify(intime))}/${encodeURIComponent(JSON.stringify(totime))}`}>
+            <Link to={`/checkout/${encodeURIComponent(JSON.stringify(data))}/${encodeURIComponent(JSON.stringify(intime))}/${encodeURIComponent(JSON.stringify(totime))}`}>
             <WrapItem>
       <Button  onClick={showDetails} size='sm'  colorScheme='green'>Book</Button>
     </WrapItem>

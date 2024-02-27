@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { MdEdit, MdCheckCircle } from "react-icons/md";
 
-function UserInfo() {
+function InformationScreen() {
   const [showModal, setShowModal] = useState(false);
   const [user, setUser] = useState(null);
   const [newEmail, setNewEmail] = useState('');
@@ -138,4 +138,4 @@ function UserInfo() {
   );
 }
 
-export default UserInfo;
+export default InformationScreen;

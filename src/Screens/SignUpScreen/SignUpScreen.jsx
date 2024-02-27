@@ -1,17 +1,4 @@
-import React from 'react';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
-import * as Yup from 'yup';
-import tailwindConfig from '../../tailwind.config';
-import img from '../assets/parking.webp'
-import logo from '../assets/logo1.png'
-import { Link } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-
-import axios from 'axios';
-
-
-
+import {React,Formik,Field,Yup,Link,ToastContainer,toast,axios} from './Index'
 const SignupSchema = Yup.object().shape({
   Name: Yup.string().required('Name is required'),
 

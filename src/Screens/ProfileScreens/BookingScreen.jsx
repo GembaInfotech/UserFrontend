@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import norecord from '../../assets/norecord.avif';
-import BookingCard from '../BookingCards';
+import BookingCard from '../../Components/ProfileComponents/BookingComponent/BookingCard';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchBookingsAsync } from '../../slice/BookingSlice';
 
-function UserBookings() {
+function BookingScreen() {
 
   const dispatch = useDispatch();
   const bookings = useSelector((state) => state.bookings.data);
@@ -49,4 +49,4 @@ function UserBookings() {
   );
 }
 
-export default UserBookings;
+export default BookingScreen;

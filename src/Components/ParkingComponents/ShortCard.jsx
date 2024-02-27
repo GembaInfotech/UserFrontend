@@ -1,4 +1,3 @@
-import React from 'react'
 import { Card, Stack, CardBody, Divider,CardFooter,ButtonGroup,Heading ,Button ,Image, Text} from '@chakra-ui/react'
 import { PiCurrencyInrBold } from "react-icons/pi";
 

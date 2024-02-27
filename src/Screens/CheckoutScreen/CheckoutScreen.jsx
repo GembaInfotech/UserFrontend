@@ -1,17 +1,7 @@
-import { useEffect } from 'react'
-import DatePicker from 'react-datepicker';
-import { MdEdit } from "react-icons/md";
+import { useEffect, useState, DatePicker, MdEdit, useParams, UserInfoForm,  PiCurrencyInrBold, Swal, PaymentInfo } from './index';
 
-import { useState } from 'react';
-import image from '.././assets/parking.webp'
-import { useParams } from 'react-router-dom';
-import UserInfoForm from '../Components/BookingScreen/UserInfoForm';
-import { FaArrowRight } from "react-icons/fa";
-import { PiCurrencyInrBold } from "react-icons/pi";
-import Swal from 'sweetalert2';
 
-import 'react-datepicker/dist/react-datepicker.css';
-import PaymentInfo from '../Components/BookingScreen/PaymentInfo';
+
 function Booking() {
   const [fromDate, setFromDate] = useState(new Date());
   const [toDate, setToDate] = useState(new Date());
@@ -91,7 +81,7 @@ const value = Math.ceil(parkingData.capacity*mul);
           // Check if the user clicked "OK"
           if (result.isConfirmed) {
             // Redirect to another page after clicking OK
-            window.location.href = '/my-bookings'; // Replace '/another-page' with your desired URL
+            window.location.href = '/profile/bookings'; // Replace '/another-page' with your desired URL
           }
         });
       } else {
@@ -185,13 +175,9 @@ const value = Math.ceil(parkingData.capacity*mul);
 
       </div>
       <div className='flex-row p-4 w-1/3 '>
-        <img src={image}
-          className='w-72 h-96 mt-20 rounded-md'
-          alt="" />
         <div className='flex-row w-3/4'>
           <h1 className='text-gray-700 py-2 text-xl font-bold'> Provided Facilities</h1>
           <h1 className='text-sm font-sans font-light '>Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores deserunt, minima quisquam reprehenderit eius doloremque ut maxime possimus magni alias eligendi saepe. Exercitationem perferendis cupiditate incidunt reiciendis, iste earum ullam.</h1>
-
           <h1 className='text-sm font-sans py-2 font-light'>Please park within the timeframe on your pass. Parking outside your timeframe will incur additional fees. The garage allows 10 mins grace period on arrival and departure.</h1>
           <h1 className='text-2xl font-semibold text-green-600 w-3/4'>****</h1>
         </div>

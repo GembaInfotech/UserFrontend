@@ -1,14 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router';
-import DatePicker from 'react-datepicker';
-import { IoSearch } from "react-icons/io5";
-import { Spinner } from '@chakra-ui/react'
-import { Skeleton,Stack,  SkeletonCircle, SkeletonText } from '@chakra-ui/react'
-import 'react-datepicker/dist/react-datepicker.css';
-import ParkingCard from '../Components/LandingScreenComponent/ParkingDetails/ParkingCard';
-import Footer from '../Components/Footer';
-
-function ParkingDetails() {
+import  { useParams, React, DatePicker, useState, useEffect,  IoSearch, Spinner, Skeleton, Stack, SkeletonCircle, SkeletonText, ParkingCard, Footer } from './index'
+function ParkingScreen() {
   const [locationValue, setLocationValue] = useState('');
   const [fromDate, setFromDate] = useState(new Date());
   const [toDate, setToDate] = useState(new Date());
@@ -208,4 +199,4 @@ function ParkingDetails() {
   );
 }
 
-export default ParkingDetails;
+export default ParkingScreen;

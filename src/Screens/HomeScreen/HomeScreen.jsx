@@ -1,8 +1,7 @@
-import React from 'react'
-import Header from '../Components/Header';
-import Footer from '../Components/Footer';
-import Main from '../Components/LandingScreenComponent/Main';
-import background from '.././assets/desk.jpg'
+import Header from '../../Components/LayoutComponents/Header'
+import Footer from '../../Components/LayoutComponents/Footer'
+
+import Main from '../../Components/HomeComponents/Main';
 
 function LandingScreen() {
   return (

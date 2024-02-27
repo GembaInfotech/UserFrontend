@@ -1,7 +1,8 @@
-import React from 'react'
-import Header from '../Components/Header'
-import Footer from '../Components/Footer'
+
 import background from '.././assets/background.png'
+import Header from '../Components/LayoutComponents/Header'
+import Footer from '../Components/LayoutComponents/Footer'
+
 
 function Layout({children}) {
   return (

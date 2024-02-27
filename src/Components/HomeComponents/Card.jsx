@@ -1,5 +1,5 @@
-import React from 'react'
-import img from '.././assets/car.webp'
+
+import img from '../../assets/car.webp'
 
 function Card() {
   return (

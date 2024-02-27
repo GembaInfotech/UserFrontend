@@ -1,19 +1,18 @@
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import './App.css'
-import LandingScreen from './Screens/LandingScreen'
 import Layout from './Layout/Layout'
-import About from './Screens/About'
-import Login from './Screens/Login'
-import ParkingDetails from './Screens/ParkingDetails'
-import SignUp from './Screens/SignUp'
-import Contacy from './Screens/Contacy'
-import Booking from './Screens/Booking'
-import UserBookings from './Components/ProfileComponents/UserBookings'
+import HomeScreen from './Screens/HomeScreen/HomeScreen'
+import LoginScreen from './Screens/LoginScreen/LoginScreen'
+import SignUpScreen from './Screens/SignUpScreen/SignUpScreen'
+import ContactScreen from './Screens/ContactScreen/ContactScreen'
+import AboutScreen from './Screens/AboutScreen/AboutScreen' 
+import CheckoutScreen from './Screens/CheckoutScreen/CheckoutScreen'
+import ParkingScreen from './Screens/ParkingScreen/ParkingScreen'
 import ProfileLayout from './Layout/ProfileLayout'
-import UserInfo from './Components/ProfileComponents/UserInfo'
-import UserVehicle from './Components/ProfileComponents/UserVehicle'
-
+import BookingScreen from './Screens/ProfileScreens/BookingScreen'
+import InformationScreen from './Screens/ProfileScreens/InformationScreen'
+import VehicleScreen from './Screens/ProfileScreens/VehicleScreen'
 import { Provider } from 'react-redux';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import store from './store'
@@ -28,26 +27,18 @@ function App() {
       <QueryClientProvider client={queryClient}>
        <Router>
       <Routes>
-        <Route path="/" element={<LandingScreen />} />
-        <Route path="/about" element={<Layout><About /></Layout>} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/contact" element={<Layout><Contacy /></Layout>} />
-        <Route path="/signup" element={< SignUp />} />
-        <Route path="/details/:location" element={< ParkingDetails />} />
-        <Route path="/booking/:data/:intime/:totime" element={< Booking />} />
-        <Route path="/profile" element={ <ProfileLayout><UserInfo/></ProfileLayout> } />
-
-        <Route path="/my-bookings" element={ <ProfileLayout><UserBookings/></ProfileLayout> } />
-
-        <Route path="/my-vehicle" element={ <ProfileLayout><UserVehicle/></ProfileLayout> } />
-
-
-
-
-
+        <Route path="/" element={<HomeScreen/>} />
+        <Route path="/about" element={<Layout><AboutScreen /></Layout>} />
+        <Route path="/login" element={<LoginScreen />} />
+        <Route path="/contact" element={<Layout><ContactScreen /></Layout>} />
+        <Route path="/sign-up" element={< SignUpScreen />} />
+        <Route path="/parking/:location" element={< ParkingScreen />} />
+        <Route path="/checkout/:data/:intime/:totime" element={< CheckoutScreen />} />
+        <Route path="/profile/info" element={ <ProfileLayout><InformationScreen/></ProfileLayout> } />
+        <Route path="/profile/bookings" element={ <ProfileLayout><BookingScreen/></ProfileLayout> } />
+        <Route path="/profile/vehicles" element={ <ProfileLayout><VehicleScreen/></ProfileLayout> } />
       </Routes>
     </Router>
-
     </QueryClientProvider>
     </Provider>
       </>
