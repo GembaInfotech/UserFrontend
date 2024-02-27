@@ -26,9 +26,7 @@ function QueryForm() {
     setIsSubmitting(true); // Set isSubmitting to true when form is being submitted
     try {
       await axios.post('http://localhost:7001/v1/api/queries/query', values);
-
       resetForm(initialValues);
-
       Swal.fire({
         icon: 'success',
         title: 'Success!',
@@ -53,7 +51,7 @@ function QueryForm() {
         validationSchema={validationSchema}
         onSubmit={onSubmit}
       >
-        {({ isSubmitting }) => (
+        
           <Form>
             <div className="mb-4">
               <Field type="text" id="name" name="name" placeholder="Name" className="border p-3 rounded-lg w-full" />
@@ -81,7 +79,7 @@ function QueryForm() {
               </span>
             </button>
           </Form>
-        )}
+     
       </Formik>
     </div>
   );

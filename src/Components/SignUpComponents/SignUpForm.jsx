@@ -45,7 +45,7 @@ console.log("error")
   };
 
   return (
-    <div className="flex flex-col items-center justify-center px-6 py-2  mx-auto md:h-screen lg:py-0 w-[50%]  ">
+    <div className="flex flex-col items-center justify-center px-6 py-2   mx-auto md:h-screen lg:py-0 w-[50%] max-sm:py-8 max-sm:w-full  ">
         
     <div className="w-full  space-x-4 bg-[#f6f7fb] rounded-lg shadow  md:mt-0 sm:max-w-lg xl:p-0  dark:border-gray-700">
       <div className="p-6 space-y-4 md:space-y-6  sm:p-8">

@@ -36,75 +36,65 @@ const PaymentInfo = () => {
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
       >
-        {({ isSubmitting }) => (
-          <Form>
-            <div className="mb-4">
-              <label htmlFor="cardNumber" className="block mb-1">
-                Card Number
+        <Form>
+          <div className="mb-4">
+            <label htmlFor="cardNumber" className="block mb-1">
+              Card Number
+            </label>
+            <Field
+              type="text"
+              id="cardNumber"
+              name="cardNumber"
+              placeholder="Enter your card number"
+              className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500"
+            />
+            <ErrorMessage name="cardNumber" component="div" className="text-red-500 mt-1" />
+          </div>
+
+          <div className="grid grid-cols-3 gap-4 mb-4">
+            <div>
+              <label htmlFor="expiryDate" className="block mb-1">
+                Expiry Date
               </label>
               <Field
                 type="text"
-                id="cardNumber"
-                name="cardNumber"
-                placeholder="Enter your card number"
+                id="expiryDate"
+                name="expiryDate"
+                placeholder="MM/YY"
                 className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500"
               />
-              <ErrorMessage name="cardNumber" component="div" className="text-red-500 mt-1" />
+              <ErrorMessage name="expiryDate" component="div" className="text-red-500 mt-1" />
             </div>
 
-            <div className="grid grid-cols-3 gap-4 mb-4">
-              <div>
-                <label htmlFor="expiryDate" className="block mb-1">
-                  Expiry Date
-                </label>
-                <Field
-                  type="text"
-                  id="expiryDate"
-                  name="expiryDate"
-                  placeholder="MM/YY"
-                  className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500"
-                />
-                <ErrorMessage name="expiryDate" component="div" className="text-red-500 mt-1" />
-              </div>
-
-              <div>
-                <label htmlFor="expiryYear" className="block mb-1">
-                  Year
-                </label>
-                <Field
-                  type="text"
-                  id="expiryYear"
-                  name="expiryYear"
-                  placeholder="YY"
-                  className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500"
-                />
-                <ErrorMessage name="expiryYear" component="div" className="text-red-500 mt-1" />
-              </div>
-
-              <div>
-                <label htmlFor="cvv" className="block mb-1">
-                  CVV
-                </label>
-                <Field
-                  type="text"
-                  id="cvv"
-                  name="cvv"
-                  placeholder="Enter CVV"
-                  className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500"
-                />
-                <ErrorMessage name="cvv" component="div" className="text-red-500 mt-1" />
-              </div>
+            <div>
+              <label htmlFor="expiryYear" className="block mb-1">
+                Year
+              </label>
+              <Field
+                type="text"
+                id="expiryYear"
+                name="expiryYear"
+                placeholder="YY"
+                className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500"
+              />
+              <ErrorMessage name="expiryYear" component="div" className="text-red-500 mt-1" />
             </div>
 
-            {/* <button
-              type="submit"
-              disabled={isSubmitting}
-              className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
-            >
-              {isSubmitting ? 'Submitting...' : 'Submit'}
-            </button> */}
-          </Form>
-        )}
+            <div>
+              <label htmlFor="cvv" className="block mb-1">
+                CVV
+              </label>
+              <Field
+                type="text"
+                id="cvv"
+                name="cvv"
+                placeholder="Enter CVV"
+                className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500"
+              />
+              <ErrorMessage name="cvv" component="div" className="text-red-500 mt-1" />
+            </div>
+          </div>
+        </Form>
       </Formik>
     </div>
   );

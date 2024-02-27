@@ -71,12 +71,12 @@ const LoginForm = () => {
   };
 
   return (
-    <div className='flex-row mx-auto md:h-screen lg:py-0 w-[50%]'>
+    <div className='flex-row max-sm:h-[530px]  mx-auto md:h-screen lg:py-0 w-[50%] max-sm:w-full'>
       <Link to="/">
-        <h1 className='float-right py-4 pr-2 text-white text-4xl'><MdHome /></h1>
+        <h1 className='float-right py-4 pr-2 text-white max-sm:text-xl max-sm:hidden text-4xl'><MdHome /></h1>
       </Link>
-      <div className="flex flex-col items-center justify-center px-6 py-12">
-        <h1 className="flex items-center mb-6 text-[44px] font-semibold text-white">Welcome back here </h1>
+      <div className="flex flex-col items-center justify-center max-sm:py-1 px-6 py-12">
+        <h1 className="flex items-center mb-6 text-[44px] max-sm:text-2xl max-sm:mt-2 font-semibold text-white">Welcome back here </h1>
         <div className="w-full bg-white rounded-lg shadow md:mt-0 sm:max-w-md xl:p-0 dark:border-gray-700">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-600 md:text-2xl dark:text-gray-600">

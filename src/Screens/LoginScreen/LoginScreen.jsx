@@ -12,17 +12,17 @@ const Login = () => {
   }, []);
 
   return (
-    <div className="flex flex-row justify-center items-center bg-blue-600">
-      <div className="relative w-[50%] overflow-hidden">
+    <div className="flex flex-row max-sm:flex-col justify-center items-center bg-blue-600">
+      <div className="relative w-[50%]  max-sm:w-full overflow-hidden">
         <div
-          className="flex transition-transform duration-1000 ease-in-out"
+          className="flex transition-transform duration-1000  ease-in-out"
           style={{
             transform: `translateX(-${currentIndex * 100}%)`,
             transition: currentIndex === 0 ? 'none' : 'transform 1s ease-in-out'
           }}
         >
           {images.map((image, index) => (
-            <img key={index} src={image} className="w-full min-h-screen" alt="" />
+            <img key={index} src={image} className="w-full sm:min-h-screen h-[300px] " alt="" />
           ))}
         </div>
       </div>

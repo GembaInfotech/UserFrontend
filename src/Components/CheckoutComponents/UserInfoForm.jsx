@@ -1,4 +1,3 @@
-import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 
@@ -38,7 +37,6 @@ const UserInfoForm = () => {
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
       >
-        {({ isSubmitting }) => (
           <Form>
           
           <div className='flex space-x-8'>
@@ -84,16 +82,7 @@ const UserInfoForm = () => {
               />
               <ErrorMessage name="mobile" component="div" className="text-red-500 mt-1" />
             </div>
-
-            {/* <button
-              type="submit"
-              disabled={isSubmitting}
-              className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
-            >
-              {isSubmitting ? 'Submitting...' : 'Submit'}
-            </button> */}
           </Form>
-        )}
       </Formik>
     </div>
   );
