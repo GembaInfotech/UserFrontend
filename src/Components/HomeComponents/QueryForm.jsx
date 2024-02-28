@@ -45,7 +45,7 @@ function QueryForm() {
   };
 
   return (
-    <div className='p-16 flex justify-center'>
+    <div className=' max-sm:p-0 flex max-sm:flex-col justify-center'>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}

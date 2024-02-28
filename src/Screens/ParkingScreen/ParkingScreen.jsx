@@ -1,4 +1,6 @@
+import { fetchParkingsAsync } from '../../slice/ParkingSlice';
 import  { useParams, React, DatePicker, useState, useEffect,  IoSearch, Spinner, Skeleton, Stack, SkeletonCircle, SkeletonText, ParkingCard, Footer } from './index'
+import { useSelector, useDispatch } from 'react-redux';
 function ParkingScreen() {
   const [locationValue, setLocationValue] = useState('');
   const [fromDate, setFromDate] = useState(new Date());
@@ -10,70 +12,20 @@ function ParkingScreen() {
   const Longitude = -74.0060
 
 
+  const dispatch = useDispatch();
+  const parkingdata = useSelector((state) => state.Parkings.data);
+
   const [parkings, setParkings] = useState([]);
- 
   useEffect(() => {
-    setLocationValue(location);
-    setLoading(true);
-    fetch(`http://localhost:7001/v1/api/parking/parkings/27.1751/78.0421/${radii}`)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
-      .then(data => {
-        setParkings(data.data);
-        setLoading(false);
-      })
-      .catch(error => {
-        console.error('Error fetching All bookings:', error);
-      });
-      if ("geolocation" in navigator) {
-        // Get the user's current position
-        navigator.geolocation.getCurrentPosition(
-          // Success callback
-          (position) => {
-            const { latitude, longitude } = position.coords;
-            localStorage.setItem('lat', latitude)
-            localStorage.setItem('long', longitude)
-            // You can send this information to your server for further processing
-          },
-          // Error callback
-          (error) => {
-            console.error("Error getting user's location:", error.message);
-          }
-        );
-      } else {
-        console.log("Geolocation is not supported by this browser.");
-      }
+    setParkings(parkingdata);
+    console.log(parkingdata)
+  }, [parkingdata]);
 
-    
-  }, []);
-  // Add a conditional rendering to check if parkings is not empty
+  useEffect(() => {
+    dispatch(fetchParkingsAsync({ radii }));
+  }, [dispatch, radii]);
 
-
-
-
-  const handleSearch = () => {
-    setLoading(true);
-    fetch(`http://localhost:7001/v1/api/parking/parkings/27.1751/78.0421/${radii}`)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
-      .then(data => {
-        setParkings(data.data);
-        setLoading(false)
-      })
-      .catch(error => {
-        console.error('Error fetching All bookings:', error);
-      });
-    
-
-  };
+ 
 
   return (
     <div>{
@@ -86,7 +38,7 @@ function ParkingScreen() {
 <div>contents wrapped</div>
 <div>won't be visible</div>
 </Skeleton>
-        <div className='flex flex h-full justify-center items-center'>
+        <div className='flex  h-full justify-center items-center'>
       
                        
       <Stack className='w-[30%] py-2 px-2'>
@@ -152,14 +104,7 @@ function ParkingScreen() {
                   className="px-4 py-1 max-md:px-2 bg-gray-100 rounded-sm focus:outline-none focus:border-blue-500 "
                 />
               </div>
-              <button
-                onClick={handleSearch}
-                className="bg-green-500 text-white px-4 max-md:px-2 py-1 rounded-md hover:bg-blue-600 hover:text-black transition duration-300"
-              >
-                <div className='flex'>
-                  <h1 className='pt-1 px-1 text-xl'> <IoSearch /></h1>
-                </div>
-              </button>
+            
             </div>
             <div className=' h-14'>
             </div>
@@ -168,7 +113,7 @@ function ParkingScreen() {
                 <div className='overflow-y-auto scrollbar'>
                   <h1 className='w-full pt-1 px-4 text-sm font-semibold'>{parkings.length} available parkings</h1>
                   {parkings?.map(parking => (
-                    <ParkingCard key={parking._id} data={parking} intime={fromDate} totime={toDate} />
+                   <ParkingCard key={[parking._id] } data={parking} intime={parking.openingTime} totime={parking.closingTime} />
                   ))}
       
                 </div>

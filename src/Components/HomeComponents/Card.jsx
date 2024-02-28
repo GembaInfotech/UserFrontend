@@ -4,7 +4,7 @@ import img from '../../assets/car.webp'
 function Card() {
     return (
 
-        <div className="max-w-sm bg-white  my-24 mx-4  rounded-2xl shadow dark:bg-white">
+        <div className="max-w-sm bg-white  my-24 max-sm:my-4 mx-4 max-sm:mx-0  rounded-2xl shadow dark:bg-white">
             <a href="#">
                 <img className="rounded-t-lg w-full h-48 rounded-tr-2xl rounded-tl-2xl" src={img} />
             </a>

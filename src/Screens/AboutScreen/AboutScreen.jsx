@@ -8,7 +8,7 @@ function AboutScreen() {
       <h1 className='text-gray-700 text-4xl p-4 font-bold '>Welcome to Our Parking Booking System</h1>
       <p className='text-gray-600 font-semibold font-xl p-6  font-sans'>At Parkar, we understand the frustration that comes with searching for parking spaces, especially in busy urban areas. That's why we've developed a comprehensive parking booking system to streamline the process and make parking hassle-free for everyone.
       </p>
-      <div className='flex justify-center'>
+      <div className='flex  max-sm:p-2 justify-center flex-wrap'>
         <Card />
         <Card />
         <Card />
