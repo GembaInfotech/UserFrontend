@@ -36,14 +36,12 @@ const LoginForm = () => {
         throw new Error('Enter valid password');
       }
       console.log("g");
-
       const response = await axios.post('http://localhost:7001/v1/api/endUser/login', values);
       console.log(response)
       if (response.status === 200) {
         const responseData = response.data;
         if (responseData.data) {
           console.log("h");
-
           localStorage.setItem('userData', JSON.stringify(responseData.data));
           console.log(responseData.data);
           window.location.href = "/";
@@ -65,7 +63,6 @@ const LoginForm = () => {
           errorMessage = 'Failed to update user.';
         }
       }
-
       setErrorMessage(errorMessage);
     }
   };

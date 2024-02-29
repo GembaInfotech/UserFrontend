@@ -13,7 +13,6 @@ function BusinessQuery() {
     </div>
   </div>
   )
-
 }
 
 export default BusinessQuery

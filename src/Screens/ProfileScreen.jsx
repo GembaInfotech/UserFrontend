@@ -15,7 +15,7 @@ function ProfileScreen() {
         <div className="flex-row">
           <div  className="m-1 max-w-36 text-sm px-1 py-4   text-gray-600 hover:text-gray-800  rounded-sm">
             <Link
-              to="/profile"
+              to="/profile/info"
               className="text-white font-medium hover:text-gray-500 transition"
             >
          <div className="flex ">

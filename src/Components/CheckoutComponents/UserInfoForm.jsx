@@ -38,7 +38,6 @@ const UserInfoForm = () => {
         onSubmit={handleSubmit}
       >
           <Form>
-          
           <div className='flex space-x-8'>
           <div className="mb-4">
               <label htmlFor="name" className="block mb-1">

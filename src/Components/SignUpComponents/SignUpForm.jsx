@@ -1,4 +1,8 @@
 import { Formik, Field, Form, ErrorMessage, Yup, Link, toast, axios } from '../../Screens/SignUpScreen/Index'
+import { useSelector, useDispatch } from 'react-redux';
+import { signUpAsync } from './../../slice/AuthSlice/SignUpSlice';
+import { useEffect } from 'react';
+import Swal from 'sweetalert2';
 const SignupSchema = Yup.object().shape({
   Name: Yup.string().required('Name is required'),
 
@@ -17,26 +21,36 @@ const SignUpForm = () => {
     phone: '',
     email: '',
     password: '',
-
-
   };
+
+  const dispatch = useDispatch();
+  const userdata = useSelector((state) => state.SignUp.data.status);
+  console.log(userdata)
+
+
+  useEffect(() => {
+    console.log(userdata);
+
+    if (userdata === 201) {
+      Swal.fire({
+        icon: 'success',
+        title: 'Signup successful!',
+        text: 'Please check your email for further instructions.'
+      });
+    } else if (userdata === 205) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Email Already Exists',
+        text: 'Please try with another email.'
+      });
+    }
+  }, [userdata]);
 
   const handleSubmit = async (values, { setSubmitting, resetForm }) => {
     try {
-      const response = await axios.post('http://localhost:7001/v1/api/endUser/register', values);
-      if (response.status === 201) {
-        toast.success('Signup successful! Please check your email for further instructions.');
-
-        alert('Signup successful! Please check your email for further instructions.');
-        resetForm();
-      }
-      if (response.status === 205) {
-        toast.error('Email Already Exists. Please try with another email.');
-        console.log("error")
-        resetForm();
-      }
+      dispatch(signUpAsync({ values }));
+      resetForm();
     } catch (error) {
-
       console.error('Error:', error);
     } finally {
       setSubmitting(false);
@@ -127,7 +141,6 @@ const SignUpForm = () => {
         </div>
       </div>
     </div>
-
   );
 };
 
