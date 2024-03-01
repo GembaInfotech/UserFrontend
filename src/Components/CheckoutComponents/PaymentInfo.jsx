@@ -30,7 +30,7 @@ const PaymentInfo = () => {
 
   return (
     <div className="max-w-md mx-auto">
-      <h2 className="text-xl font-bold mb-4">Payment Information</h2>
+      <h2 className="text-xl font-bold max-sm:text-base mb-4">Payment Information</h2>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}

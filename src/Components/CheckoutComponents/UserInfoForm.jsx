@@ -31,7 +31,7 @@ const UserInfoForm = () => {
 
   return (
     <div className="flex-row flex-start ">
-      <h2 className="text-xl font-bold mb-4">User Information</h2>
+      <h2 className="text-xl font-bold mb-4 max-sm:text-base">User Information</h2>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}

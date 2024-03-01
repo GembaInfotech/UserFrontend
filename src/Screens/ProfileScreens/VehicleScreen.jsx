@@ -29,15 +29,15 @@ function VehicleScreen() {
 
     return (
         <>
-            <div className='w-full h-fit p-8'>
+            <div className='w-full h-fit p-8 max-sm:p-0'>
                 <div className=''>
-                    <div className='flex flex-row justify-between items-center mx-4 mb-4'>
-                        <h1 className='text-xl text-gray-600 '>My vehicles</h1>
+                    <div className='flex flex-row justify-between items-center mx-4 mb-4 max-sm:m- '>
+                        <h1 className='text-xl text-gray-600 max-sm:text-base'>My vehicles</h1>
                         <div>
                             {isAdd ? (
                                 <VehicleForm id={id} onSuccess={handleFormClose} onCancel={handleFormClose} />
                             ) : (
-                                <button onClick={add} className="bg-gray-100 hover:bg-white text-black  py-2 px-4 rounded drop-shadow-lg">
+                                <button onClick={add} className="bg-gray-100 hover:bg-white text-black  py-2 px-4  max-sm:p-1 rounded drop-shadow-lg">
                                     Add new
                                 </button>
                             )}

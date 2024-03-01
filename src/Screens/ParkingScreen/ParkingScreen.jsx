@@ -47,52 +47,58 @@ function ParkingScreen() {
       </div>
       : <div className='bg-slate-100'>
         <div>
-          <div className="fixed top-0 left-0 w-full flex items-center justify-between px-4 py-2  bg-[#5D76A9] z-10">
-            <h1 className=' font-medium max-md:hidden text-white'>Search for your nearby Parking Spot</h1>
+          <div className="fixed top-0 left-0 w-full flex items-center justify-between px-4 py-2  bg-[#5D76A9] z-10 max-sm:flex-col">
+            <h1 className=' font-medium  max-sm:font-normal text-white max-sm:mb-1'>Search for your nearby Parking Spot</h1>
             <input
               type="text"
               placeholder="Search by city, market, etc."
               onChange={(e) => setLocationValue(e.target.value)}
               value={locationValue}
-              className="px-4 py-1 max-md:px-2 border rounded-sm focus:outline-none bg-gray-100 focus:border-blue-500 ml-2"
+              className="px-4 py-1 max-md:py-0 border rounded-sm focus:outline-none bg-gray-100 focus:border-blue-500 ml-2"
             />
-            <div className="flex">
-              <label htmlFor="distanceSelect" className=' text-white px-2 mt-2 font-medium max-md:hidden'> Distance:</label>
-              <select
-                className="px-4 py-1 max-md:px-2 bg-gray-100 rounded-sm focus:outline-none focus:border-blue-500"
+            <div className="flex max-sm:flex-col ">
+              <div className=' max-sm:flex-row max-sm:mt-1 max-sm:p-0'>
+                <label htmlFor="distanceSelect" className=' text-white px-2 mt-2 font-medium max-sm:font-light max-sm:mt-1 max-sm:px-0 max-sm:mb-1'> Distance: </label>
+                <select
+                  className="px-4 py-1   max-md:px-2 max-md:py-0 max-sm:mb-1 bg-gray-100 rounded-sm focus:outline-none focus:border-blue-500"
 
-                id="distanceSelect" value={radii} onChange={(e) => { setradii(e.target.value) }}>
-                <option value={100}>100 meters</option>
-                <option value={500}>500 meters</option>
-                <option value={1000}>1 kilometer</option>
-                <option value={5000}>5 kilometers</option>
-                <option value={10000}>10 kilometers</option>
-                <option value={500000}>20 kilometers</option>
+                  id="distanceSelect" value={radii} onChange={(e) => { setradii(e.target.value) }}>
+                  <option value={100}>100 meters</option>
+                  <option value={500}>500 meters</option>
+                  <option value={1000}>1 kilometer</option>
+                  <option value={5000}>5 kilometers</option>
+                  <option value={10000}>10 kilometers</option>
+                  <option value={500000}>20 kilometers</option>
 
 
-              </select>
-              <h1 className='text-white px-2 font-medium mt-2 max-md:hidden'>From</h1>
-              <DatePicker
-                selected={fromDate}
-                onChange={(date) => setFromDate(date)}
-                showTimeSelect
-                dateFormat="MM/dd/yyyy h:mm aa"
-                className="px-4 py-1 max-md:px-2 bg-gray-100 rounded-sm focus:outline-none focus:border-blue-500"
-              />
-              <h1 className=' text-white px-2 mt-2 font-medium max-md:hidden'>To</h1>
-              <DatePicker
-                selected={toDate}
-                onChange={(date) => setToDate(date)}
-                showTimeSelect
-                dateFormat="MM/dd/yyyy h:mm aa"
-                className="px-4 py-1 max-md:px-2 bg-gray-100 rounded-sm focus:outline-none focus:border-blue-500 "
-              />
+                </select>
+              </div>
+              <div className='flex max-sm:flex-row max-sm:mt-1 max-sm:p-0'>
+                <h1 className='text-white px-2 font-medium max-sm:font-light mt-2 max-sm:m-0 '>From:</h1>
+                <DatePicker
+                  selected={fromDate}
+                  onChange={(date) => setFromDate(date)}
+                  showTimeSelect
+                  dateFormat="MM/dd/yyyy h:mm aa"
+                  className="px-4 py-1 max-md:px-1 max-sm:py-0 bg-gray-100 rounded-sm focus:outline-none focus:border-blue-500"
+                />
+              </div>
+              <div className='flex max-sm:flex-row max-sm:mt-1 max-sm:p-0'>
+                <h1 className=' text-white px-2 mt-2 font-medium max-sm:font-light max-sm:m-0'>To:</h1>
+                <DatePicker
+                  selected={toDate}
+                  onChange={(date) => setToDate(date)}
+                  showTimeSelect
+                  dateFormat="MM/dd/yyyy h:mm aa"
+                  className="px-4 py-1 max-md:px-1 max-sm:py-0 bg-gray-100 rounded-sm focus:outline-none focus:border-blue-500 "
+                />
+              </div>
             </div>
           </div>
-          <div className=' h-14'>
+          <div className='h-14 max-sm:h-7'>
           </div>
-          <div className='flex min-h-[500px]  '>
-            <div className='w-1/4 max-h-[600px]  overflow-y-auto '>
+          <div className='flex min-h-[500px] max-sm:flex-col-reverse  '>
+            <div className='w-1/4 max-h-[600px]  overflow-y-auto  max-sm:w-full'>
               <div className='overflow-y-auto scrollbar'>
                 <h1 className='w-full pt-1 px-4 text-sm font-semibold'>{parkings.length} available parkings</h1>
                 {parkings?.map(parking => (
@@ -100,9 +106,9 @@ function ParkingScreen() {
                 ))}
               </div>
             </div>
-            <div className='w-3/4 '>
+            <div className='w-3/4 max-sm:w-full  '>
               <iframe
-                className='w-full h-full'
+                className='w-full h-full max-sm:min-h-[400px]'
                 title="Map"
                 frameBorder="0"
                 scrolling="no"
@@ -114,7 +120,9 @@ function ParkingScreen() {
             </div>
           </div>
         </div>
+        <div className='max-sm: h-2'>
         <Footer />
+        </div>
       </div>
     }</div>
   );
