@@ -18,7 +18,7 @@ function Booking() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const { data, intime, totime } = useParams();
   const parkingData = JSON.parse(decodeURIComponent(data));
-  const [price, setPrice] = useState(parkingData?.capacity)
+  const [price, setPrice] = useState(parkingData?.price)
 console.log(parkingData)
   const Intime = JSON.parse(decodeURIComponent(intime));
   const Totime = JSON.parse(decodeURIComponent(totime));
@@ -47,7 +47,7 @@ const getPrice =()=>{
 console.log(days, hours,minutes )
 
 const mul= hours+ minutes/60
-const value = Math.ceil(parkingData.capacity*mul);
+const value = Math.ceil(parkingData.price*mul);
  setPrice(value)
 }
 
@@ -62,7 +62,7 @@ const value = Math.ceil(parkingData.capacity*mul);
         email: user.email,
         enserId: user._id,
         parkingId: parkingData._id,
-        parkingName: parkingData?.parkingName,
+        parkingName: parkingData?.pn,
         timeIn: fromDate || Intime,
         timeOut: toDate || Totime,
         status: "Incoming",
@@ -71,7 +71,7 @@ const value = Math.ceil(parkingData.capacity*mul);
       };
       // Call the POST API
       console.log(bookingDetails)
-      const response = await fetch('http://localhost:7001/v1/api/bookings/book', {
+      const response = await fetch('http://localhost:7001/v1/api/booking', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -125,7 +125,7 @@ const value = Math.ceil(parkingData.capacity*mul);
       <div className='w-2/3 flex-col px-32 '>
         <div className=' border-black w-full h-48 my-1  py-6'>
           <h1 className='font-light text-gray-800'>complete your booking process</h1>
-          <h1 className='text-gray-800 text-xl font-bold px-2 my-2'>{parkingData.parkingName}</h1>
+          <h1 className='text-gray-800 text-xl font-bold px-2 my-2'>{parkingData.pn}</h1>
           <div className=' flex bg-[#f0f4f9] p-2  rounded-lg h-24 justify-evenly items-center'>
 
             <DatePicker

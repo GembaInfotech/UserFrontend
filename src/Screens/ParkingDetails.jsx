@@ -24,7 +24,7 @@ function ParkingDetails() {
   useEffect(() => {
     setLocationValue(location);
     setLoading(true);
-    fetch(`http://localhost:7001/v1/api/parking/parkings/27.1751/78.0421/${radii}`)
+    fetch(`http://localhost:7001/v1/api/parking/27.1751/78.0421/${radii}`)
       .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -66,7 +66,7 @@ function ParkingDetails() {
 
   const handleSearch = () => {
     setLoading(true);
-    fetch(`http://localhost:7001/v1/api/parking/parkings/27.1751/78.0421/${radii}`)
+    fetch(`http://localhost:7001/v1/api/parking/27.1751/78.0421/${radii}`)
       .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok');

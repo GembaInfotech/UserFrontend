@@ -11,7 +11,7 @@ function ParkingCard({ data, intime , totime }) {
   const [distance, sdis]=useState(0);
   const userLocation= [localStorage.getItem('lat'), localStorage.getItem('long')]
   console.log(userLocation)
-   const parkingLocation =[ data.location.coordinates[1], data.location.coordinates[0]];
+   const parkingLocation =[ data.lc.cord[1], data.lc.cord[0]];
    console.log(parkingLocation)
 
   function calculateDistance(userLocation, parkingLocation) {
@@ -60,12 +60,12 @@ setshow(true);
 
           <div className=' flex justify-between'>
             <div>
-              <h3 className="  font-bold tracking-tight text-[16px] text-gray-900 ">{data.parkingName}</h3>
-              <h3 className="  font-semibold tracking-tight text-sm text-gray-600 ">{data.parkingArea}</h3>
+              <h3 className="  font-bold tracking-tight text-[16px] text-gray-900 ">{data.parkingName || data.pn}</h3>
+              <h3 className="  font-semibold tracking-tight text-sm text-gray-600 ">{data.parkingArea || data.pa}</h3>
             </div>
             <div className='flex justify-between'>
               <h1 className='font-medium text-xl pt-1'><PiCurrencyInrBold /></h1>
-              <h1 className='font-medium text-xl pr-2'>        {data.capacity}</h1>
+              <h1 className='font-medium text-xl pr-2'>        {data.capacity || data.cc}</h1>
 
     
             </div>
