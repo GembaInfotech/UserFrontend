@@ -1,7 +1,5 @@
-// features/booking/BookingSlice.js
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-// import { fetchVehicle } from '../api/api';
-import { fetchVehicles } from '../api/api';
+import { fetchVehicles } from '../api/ProfileAPI/VehiclesAPI';
 
 export const fetchVehiclesAsync = createAsyncThunk(
   'Vehicles/fetch',
@@ -12,7 +10,6 @@ export const fetchVehiclesAsync = createAsyncThunk(
   }
 );
 
-
 const VehiclesSlice = createSlice({
   name: 'Vehicles',
   initialState: {
@@ -20,9 +17,7 @@ const VehiclesSlice = createSlice({
     status: 'idle',
     error: null,
   },
-  reducers: {
-    // Add additional reducers if needed
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(fetchVehiclesAsync.pending, (state) => {
@@ -36,18 +31,6 @@ const VehiclesSlice = createSlice({
         state.status = 'failed';
         state.error = action.error.message;
       })
-    //   .addCase(addBookingAsync.fulfilled, (state, action) => {
-    //     state.data.push(action.payload);
-    //   })
-    //   .addCase(updateBookingAsync.fulfilled, (state, action) => {
-    //     const index = state.data.findIndex(booking => booking.id === action.payload.id);
-    //     if (index !== -1) {
-    //       state.data[index] = action.payload;
-    //     }
-    //   })
-    //   .addCase(deleteBookingAsync.fulfilled, (state, action) => {
-    //     state.data = state.data.filter(booking => booking.id !== action.payload);
-    //   });
   },
 });
 
