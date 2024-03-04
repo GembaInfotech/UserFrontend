@@ -5,7 +5,7 @@ const instance = axios.create({
 });
 
 export const fetchVehicles = async ({userId}) => {
-  const response = await instance.get(`/endUser/getVehicles/${userId}`);
+  const response = await instance.get(`/User/getVehicles/${userId}`);
   console.log(response.data);
   return response.data;
 };

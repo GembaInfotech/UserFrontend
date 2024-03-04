@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 const initialValues = {
-  vehicle_name: '',
-  vehicle_number: '',
-  vehicle_type: '',
+  name: '',
+  num: '',
+  type: '',
 };
 
 const VehicleForm = ({ onSuccess,id,  onCancel }) => {
@@ -23,7 +23,7 @@ const VehicleForm = ({ onSuccess,id,  onCancel }) => {
 
     try {
       const response = await axios.post(
-        `http://localhost:7001/v1/api/endUser/addVehicle/${id}`,
+        `http://localhost:7001/v1/api/User/addVehicle/${id}`,
         formData,
         {
           headers: {
@@ -32,10 +32,9 @@ const VehicleForm = ({ onSuccess,id,  onCancel }) => {
         }
       );
 
-      console.log(response.data);
-      console.log(response.data)
+      console.log(response.data.data)
       console.log('Vehicle added successfully');
-     localStorage.setItem('userData', JSON.stringify(response.data.endUser) )
+     localStorage.setItem('userData', JSON.stringify(response.data.data) )
       setFormData(initialValues);
       onSuccess(); // Close the form
     } catch (error) {

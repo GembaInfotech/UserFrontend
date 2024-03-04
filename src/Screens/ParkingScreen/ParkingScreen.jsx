@@ -102,7 +102,7 @@ function ParkingScreen() {
               <div className='overflow-y-auto scrollbar'>
                 <h1 className='w-full pt-1 px-4 text-sm font-semibold'>{parkings.length} available parkings</h1>
                 {parkings?.map(parking => (
-                  <ParkingCard key={[parking._id]} data={parking} intime={parking.openingTime} totime={parking.closingTime} />
+                  <ParkingCard key={[parking._id]} data={parking} intime={fromDate} totime={toDate} />
                 ))}
               </div>
             </div>

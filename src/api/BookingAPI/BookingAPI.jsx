@@ -6,11 +6,11 @@ const instance = axios.create({
 
 export const fetchBookings = async ({userId}) => {
   console.log("called")
-  const response = await instance.get(`/bookings/bookings/?enserId=${userId}`);
+  const response = await instance.get(`/booking/?userid=${userId}`);
   return response.data.data;
 };
 
 export const createBooking = async ({bookingData}) => {
-  const response = await instance.post('/bookings/book', {bookingData});
+  const response = await instance.post('/booking/', {bookingData});
   return response.data;
 };
