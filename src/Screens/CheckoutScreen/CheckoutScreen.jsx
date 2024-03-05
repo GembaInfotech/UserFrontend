@@ -2,7 +2,7 @@ import { useEffect, useState, DatePicker, MdEdit, useParams, UserInfoForm, PiCur
 
 
 // import { useState } from 'react';
-import image from '.././assets/parking.webp'
+import image from '../../assets/parking.webp'
 // import { useParams } from 'react-router-dom';
 // import UserInfoForm from '../Components/BookingScreen/UserInfoForm';
 // import { FaArrowRight } from "react-icons/fa";
