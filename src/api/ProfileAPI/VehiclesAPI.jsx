@@ -9,3 +9,10 @@ export const fetchVehicles = async ({userId}) => {
   console.log(response.data);
   return response.data;
 };
+
+export const deleteVehicles = async ({userid, id}) => {
+  console.log(id);
+  const response = await instance.delete(`/User/deleteVehicle/${userid}`,  { data: { id } });
+  console.log(response.status);
+  return response.status;
+};

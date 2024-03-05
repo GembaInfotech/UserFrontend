@@ -1,16 +1,6 @@
 import { useEffect, useState, DatePicker, MdEdit, useParams, UserInfoForm, PiCurrencyInrBold, Swal, PaymentInfo } from './index';
-
-
-// import { useState } from 'react';
 import image from '../../assets/parking.webp'
-// import { useParams } from 'react-router-dom';
-// import UserInfoForm from '../Components/BookingScreen/UserInfoForm';
-// import { FaArrowRight } from "react-icons/fa";
-// import { PiCurrencyInrBold } from "react-icons/pi";
-// import Swal from 'sweetalert2';
-
 import 'react-datepicker/dist/react-datepicker.css';
-// import PaymentInfo from '../Components/BookingScreen/PaymentInfo';
 function Booking() {
   const [fromDate, setFromDate] = useState(new Date());
   const [toDate, setToDate] = useState(new Date());
@@ -25,8 +15,6 @@ console.log(parkingData)
   useEffect(() => {
     setFromDate(Intime);
     setToDate(Totime);
-   
-
   },[])
 
   const [user, setUser] = useState({})
@@ -66,7 +54,9 @@ const value = Math.ceil(parkingData.price*mul);
         out: toDate || Totime,
         status: "Incoming",
         num: user.vehicle[0].num,
-        price: price
+        price: price,
+        sgst:  Math.floor(price*0.09),
+        cgst:  Math.floor(price*0.09)
       };
       // Call the POST API
       console.log(bookingDetails)
