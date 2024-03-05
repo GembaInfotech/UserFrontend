@@ -37,6 +37,7 @@ const VehicleForm = ({ onSuccess,id,  onCancel }) => {
      localStorage.setItem('userData', JSON.stringify(response.data.data) )
       setFormData(initialValues);
       onSuccess(); // Close the form
+      window.location.reload();
     } catch (error) {
       console.error('Error adding vehicle:', error.message);
     }

@@ -1,112 +1,112 @@
 import { useEffect, useState, DatePicker, MdEdit, useParams, UserInfoForm, PiCurrencyInrBold, Swal, PaymentInfo } from './index';
 import image from '../../assets/parking.webp'
 import 'react-datepicker/dist/react-datepicker.css';
+import { setDefaultVehicleAsync } from '../../slice/VehiclesSlice';
 function Booking() {
   const [fromDate, setFromDate] = useState(new Date());
   const [toDate, setToDate] = useState(new Date());
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [defaultVehicle, setDefaultVehicle] = useState(null); 
   const { data, intime, totime } = useParams();
   const parkingData = JSON.parse(decodeURIComponent(data));
-  const [price, setPrice] = useState(parkingData?.price)
-console.log(parkingData)
+  const [price, setPrice] = useState(parkingData?.price);
+
+  console.log(parkingData)
   const Intime = JSON.parse(decodeURIComponent(intime));
   const Totime = JSON.parse(decodeURIComponent(totime));
 
   useEffect(() => {
     setFromDate(Intime);
     setToDate(Totime);
-  },[])
+  }, []);
 
-  const [user, setUser] = useState({})
+  const [user, setUser] = useState({});
 
-const getPrice =()=>{
-  if (!toDate || isNaN(new Date(toDate).getTime())) {
-    // Handle invalid or missing checkoutTime
-    console.error('Invalid checkoutTime:', toDate);
-    return { days: 0, hours: 0, minutes: 0 };
+  useEffect(() => {
+    const storedUserData = JSON.parse(localStorage.getItem('userData'));
+    if (storedUserData?._id) {
+      setIsLoggedIn(true);
+      setUser(storedUserData);
+      console.log('User Data:', storedUserData);
+
+      const defaultVehicle = storedUserData.vehicle.find(vehicle => vehicle.def === true);
+      if (defaultVehicle) {
+        console.log('Default Vehicle:', defaultVehicle);
+        setDefaultVehicle(defaultVehicle); 
+      } else {
+        console.log('No default vehicle found');
+      }
+    }
+  }, []);
+
+  const getPrice = () => {
+    if (!toDate || isNaN(new Date(toDate).getTime())) {
+      console.error('Invalid checkoutTime:', toDate);
+      return { days: 0, hours: 0, minutes: 0 };
+    }
+    const exceedTimeInMillis = Math.max(0, new Date(toDate).getTime() - new Date(fromDate).getTime());
+    const days = Math.floor(exceedTimeInMillis / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((exceedTimeInMillis % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((exceedTimeInMillis % (1000 * 60 * 60)) / (1000 * 60));
+
+    console.log(days, hours, minutes)
+
+    const mul = hours + minutes / 60;
+    const value = Math.ceil(parkingData.price * mul);
+    setPrice(value);
   }
-  const exceedTimeInMillis = Math.max(0, new Date(toDate).getTime() - new Date(fromDate).getTime());
-  const days = Math.floor(exceedTimeInMillis / (1000 * 60 * 60 * 24));
-  const hours = Math.floor((exceedTimeInMillis % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  const minutes = Math.floor((exceedTimeInMillis % (1000 * 60 * 60)) / (1000 * 60));
-
- 
-console.log(days, hours,minutes )
-
-const mul= hours+ minutes/60
-const value = Math.ceil(parkingData.price*mul);
- setPrice(value)
-}
-
-  
-   
 
   const handleConfirmBooking = async () => {
     try {
-      // Construct booking payload
+      if (!defaultVehicle) {
+        console.error('No default vehicle selected');
+        return;
+      }
+
       const bookingDetails = {
         mail: user.mail,
         userid: user._id,
-        parkingid:parkingData._id,
+        parkingid: parkingData._id,
         pn: parkingData.pn,
         pa: parkingData?.pa,
         In: fromDate || Intime,
         out: toDate || Totime,
         status: "Incoming",
-        num: user.vehicle[0].num,
+        num: defaultVehicle.num, 
         price: price,
-        sgst:  Math.floor(price*0.09),
-        cgst:  Math.floor(price*0.09)
+        sgst: Math.floor(price * 0.09),
+        cgst: Math.floor(price * 0.09)
       };
-      // Call the POST API
-      console.log(bookingDetails)
-      const response = await fetch('http://localhost:7001/v1/api/booking', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(bookingDetails),
-      });
+   
+     // Call the POST API
+     console.log(bookingDetails)
+     const response = await fetch('http://localhost:7001/v1/api/booking', {
+       method: 'POST',
+       headers: {
+         'Content-Type': 'application/json',
+       },
+       body: JSON.stringify(bookingDetails),
+     });
 
-      if (response.ok) {
-        // Booking successful
-        console.log('Booking successful');
-        // Show SweetAlert notification
-        await Swal.fire({
-          icon: 'success',
-          title: 'Success',
-          text: 'Your parking booked successfully',
-        }).then((result) => {
-          // Check if the user clicked "OK"
-          if (result.isConfirmed) {
-            // Redirect to another page after clicking OK
-            window.location.href = '/profile/bookings'; // Replace '/another-page' with your desired URL
-          }
-        });
-      } else {
-        // Booking failed
-        console.error('Failed to book');
-        // Handle error, show error message or retry booking
-      }
-    } catch (error) {
-      console.error('Error during booking:', error);
-      // Handle error, show error message or retry booking
-    }
-  };
+     if (response.ok) {
+       console.log('Booking successful');
+       await Swal.fire({
+         icon: 'success',
+         title: 'Success',
+         text: 'Your parking booked successfully',
+       }).then((result) => {
+         if (result.isConfirmed) {
+           window.location.href = '/profile/bookings'; 
+         }
+       });
+     } else {
+       console.error('Failed to book');
+     }
+   } catch (error) {
+     console.error('Error during booking:', error);
 
-
-
-  useEffect(() => {
-    
-    const storedUserData = JSON.parse(localStorage.getItem('userData'));
-    if (storedUserData?._id) {
-      setIsLoggedIn(true)
-      setUser(storedUserData)
-      console.log(user)
-    }
-
-
-  }, []);
+   }
+ };
 
 
   return (

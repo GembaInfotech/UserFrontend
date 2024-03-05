@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { fetchVehicles, deleteVehicles } from '../api/ProfileAPI/VehiclesAPI';
+import { fetchVehicles, deleteVehicles, setDefaultVehicles } from '../api/ProfileAPI/VehiclesAPI';
 
 export const fetchVehiclesAsync = createAsyncThunk(
   'Vehicles/fetch',
@@ -18,6 +18,16 @@ export const deleteVehiclesAsync = createAsyncThunk(
     return response;
   }
 );
+export const setDefaultVehicleAsync = createAsyncThunk(
+  'Vehicles/setDefault',
+  async ({userid, id,def}) => {
+    console.log(userid, id);
+    const response = await setDefaultVehicles({userid, id,def});
+    console.log(response);
+    return response;
+  }
+);
+
 const VehiclesSlice = createSlice({
   name: 'Vehicles',
   initialState: {

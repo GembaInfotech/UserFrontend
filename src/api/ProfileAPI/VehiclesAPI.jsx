@@ -16,3 +16,10 @@ export const deleteVehicles = async ({userid, id}) => {
   console.log(response.status);
   return response.status;
 };
+
+export const setDefaultVehicles = async ({userid, id, def}) => {
+  console.log(id);
+  const response = await instance.put(`/User/setDefaultVehicle/${userid}`,   { id, def  });
+  console.log(response.status);
+  return response.status;
+};
