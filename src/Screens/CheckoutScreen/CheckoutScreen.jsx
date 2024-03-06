@@ -75,7 +75,7 @@ function Booking() {
         num: defaultVehicle.num, 
         price: price,
         sgst: Math.floor(price * 0.09),
-        cgst: Math.floor(price * 0.09)
+        cgst: Math.floor(price * 0.09),
       };
    
      // Call the POST API

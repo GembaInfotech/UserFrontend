@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../../assets/tlogo.png';
 
@@ -6,6 +6,8 @@ const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [showLoginPopup, setShowLoginPopup] = useState(false);
+  const popupRef = useRef(null);
 
   const handleScroll = () => {
     const scrollTop = window.scrollY;
@@ -24,6 +26,22 @@ const Navbar = () => {
     };
   }, []);
 
+  useEffect(() => {
+    // Close the popup when the component mounts
+    const handleOutsideClick = (event) => {
+      if (popupRef.current && !popupRef.current.contains(event.target)) {
+        setShowLoginPopup(false);
+      }
+    };
+
+    window.addEventListener('mousedown', handleOutsideClick);
+
+    // Cleanup the event listener
+    return () => {
+      window.removeEventListener('mousedown', handleOutsideClick);
+    };
+  }, []);
+
   const handleLogout = () => {
     localStorage.removeItem('userData');
     window.location.href = '/login';
@@ -31,6 +49,14 @@ const Navbar = () => {
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
+  const openLoginPopup = () => {
+    setShowLoginPopup(true);
+  };
+
+  const closeLoginPopup = () => {
+    setShowLoginPopup(false);
   };
 
   return (
@@ -65,7 +91,7 @@ const Navbar = () => {
               <Link to="/" className="text-gray-800 font-medium hover:text-gray-500 transition">Home</Link>
               <Link to="/about" className="text-gray-800 font-medium hover:text-gray-500 transition">About</Link>
               <Link to="/contact" className="text-gray-800 font-medium hover:text-gray-500 transition">Contact Us</Link>
-              <Link to="/login" className="text-gray-800 font-medium hover:text-gray-500 transition">Login</Link>
+              <button onClick={openLoginPopup} className="text-gray-800 font-medium hover:text-gray-500 transition">Login</button>
               <Link to="/sign-up">
                 <button className="bg-blue-500 hover:bg-transparent text-white font-semibold hover:text-blue-700 py-2 px-4 border border-blue-500 hover:border-transparent rounded">
                   Sign up
@@ -75,6 +101,22 @@ const Navbar = () => {
           )}
         </div>
       </div>
+      {/* Login Popup */}
+      {showLoginPopup && (
+  <div ref={popupRef} className="fixed top-20 right-6 transform -translate-x-1/6 p-0 rounded-lg ">
+    <div className="bg-white p-2 rounded-lg">
+      <div className="flex flex-col">
+        <Link to="/login">
+          <button className="hover:bg-blue-500 hover:text-white text-black px-2 py-1 mb-2 rounded-l w-full">Login as User</button>
+        </Link>
+
+        <a href="http://localhost:5173/" className="hover:bg-blue-500 hover:text-white text-black px-2 py-1 mb-2 rounded-l w-full">Login as vendor
+      </a>
+      </div>
+    </div>
+  </div>
+)}
+
     </nav>
   );
 };
