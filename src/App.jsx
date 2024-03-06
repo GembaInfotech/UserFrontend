@@ -16,6 +16,7 @@ import VehicleScreen from './Screens/ProfileScreens/VehicleScreen'
 import { Provider } from 'react-redux';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import store from './store'
+import NotFound from './Components/Utils/NotFound'
 
 function App() {
   const queryClient = new QueryClient();
@@ -37,6 +38,8 @@ function App() {
         <Route path="/profile/info" element={ <ProfileLayout><InformationScreen/></ProfileLayout> } />
         <Route path="/profile/bookings" element={ <ProfileLayout><BookingScreen/></ProfileLayout> } />
         <Route path="/profile/vehicles" element={ <ProfileLayout><VehicleScreen/></ProfileLayout> } />
+        <Route path="*" element={ <NotFound/> } />
+
       </Routes>
     </Router>
     </QueryClientProvider>

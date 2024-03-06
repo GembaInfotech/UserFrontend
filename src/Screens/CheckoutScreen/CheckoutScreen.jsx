@@ -44,10 +44,12 @@ function Booking() {
     setPrice(value);
   }
   const handleConfirmBooking = async () => {
+    console.log("dsf")
     try {
-      if (!defaultVehicle) {  
+      if (!vehicles) {  
         return;
       }
+      
       const bookingDetails = {
         mail: user.mail,
         userid: user._id,
@@ -57,7 +59,7 @@ function Booking() {
         In: fromDate || Intime,
         out: toDate || Totime,
         status: "Incoming",
-        num: 123, 
+        num: vehicles.num, 
         price: price,
         sgst: Math.floor(price * 0.09),
         cgst: Math.floor(price * 0.09),
