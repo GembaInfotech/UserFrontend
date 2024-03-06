@@ -1,8 +1,10 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../../assets/tlogo.png';
-
+import {useSelector , useDispatch}  from "react-redux";
+import { fetchVehiclesAsync } from '../../slice/VehiclesSlice';
 const Navbar = () => {
+  const dispatch = useDispatch();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -18,7 +20,9 @@ const Navbar = () => {
     const storedUserData = JSON.parse(localStorage.getItem('userData'));
     if (storedUserData?.token) {
       setIsLoggedIn(true);
+      dispatch(fetchVehiclesAsync({userId:storedUserData._id}))
     }
+
 
     window.addEventListener('scroll', handleScroll);
     return () => {

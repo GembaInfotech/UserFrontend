@@ -15,11 +15,13 @@ const VehicleCard = ({ vehicle, userid }) => {
   const handleSetDefault = () => {
     dispatch(setDefaultVehicleAsync({ userid, id: vehicle._id, def: true }));
     setShowPopup(false);
+    window.location.reload();
   };
 
   const removeDefault = () => {
     dispatch(setDefaultVehicleAsync({ userid, id: vehicle._id, def: false }));
     setShowPopup(false);
+    window.location.reload();
   };
 
   return (
@@ -40,11 +42,11 @@ const VehicleCard = ({ vehicle, userid }) => {
          <p className="mb-4"><span className="font-semibold">Vehicle Type:</span> {vehicle.type}</p>
          <div className="flex justify-end">
            {vehicle.def ? (
-             <button onClick={removeDefault} className="px-4 py-2 mr-2 bg-red-500 text-white rounded hover:bg-red-600 focus:outline-none focus:bg-red-600">Remove Default</button>
+             <button onClick={removeDefault} className="px-4 py-2 mr-2 bg-yellow-400 text-white rounded hover:bg-yellow-600 focus:outline-none focus:bg-red-600">Remove Default</button>
            ) : (
              <button onClick={handleSetDefault} className="px-4 py-2 mr-2 bg-blue-500 text-white rounded hover:bg-blue-600 focus:outline-none focus:bg-blue-600">Set as Default</button>
            )}
-           <button onClick={handleDelete} className="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600 focus:outline-none focus:bg-gray-600">Delete</button>
+           <button onClick={handleDelete} className="px-4 mr-2 py-2 bg-red-500 text-white rounded hover:bg-red-600 focus:outline-none focus:bg-gray-600">Delete</button>
            <button onClick={() => setShowPopup(false)} className="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600 focus:outline-none focus:bg-gray-600">Close</button>
          </div>
        </div>

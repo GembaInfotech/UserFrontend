@@ -1,17 +1,21 @@
 import { useEffect, useState, DatePicker, MdEdit, useParams, UserInfoForm, PiCurrencyInrBold, Swal, PaymentInfo } from './index';
 import image from '../../assets/parking.webp'
 import 'react-datepicker/dist/react-datepicker.css';
-import { setDefaultVehicleAsync } from '../../slice/VehiclesSlice';
+import Header from '../../Components/LayoutComponents/Header'
+import { fetchVehiclesAsync, selectVehicleById, setDefaultVehicleAsync } from '../../slice/VehiclesSlice';
+import { useSelector, useDispatch } from 'react-redux';
 function Booking() {
+  const dispatch =useDispatch()
   const [fromDate, setFromDate] = useState(new Date());
   const [toDate, setToDate] = useState(new Date());
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [defaultVehicle, setDefaultVehicle] = useState(null); 
+
   const { data, intime, totime } = useParams();
   const parkingData = JSON.parse(decodeURIComponent(data));
   const [price, setPrice] = useState(parkingData?.price);
 
-  console.log(parkingData)
+
   const Intime = JSON.parse(decodeURIComponent(intime));
   const Totime = JSON.parse(decodeURIComponent(totime));
 
@@ -21,27 +25,22 @@ function Booking() {
   }, []);
 
   const [user, setUser] = useState({});
+  const vehicles = useSelector((state)=> selectVehicleById(state))
 
-  useEffect(() => {
+  useEffect(()=> async()=> {
     const storedUserData = JSON.parse(localStorage.getItem('userData'));
     if (storedUserData?._id) {
       setIsLoggedIn(true);
-      setUser(storedUserData);
+    setUser(storedUserData);
       console.log('User Data:', storedUserData);
-
-      const defaultVehicle = storedUserData.vehicle.find(vehicle => vehicle.def === true);
-      if (defaultVehicle) {
-        console.log('Default Vehicle:', defaultVehicle);
-        setDefaultVehicle(defaultVehicle); 
-      } else {
-        console.log('No default vehicle found');
-      }
+    const userId = user._id  
     }
   }, []);
 
+
   const getPrice = () => {
     if (!toDate || isNaN(new Date(toDate).getTime())) {
-      console.error('Invalid checkoutTime:', toDate);
+      
       return { days: 0, hours: 0, minutes: 0 };
     }
     const exceedTimeInMillis = Math.max(0, new Date(toDate).getTime() - new Date(fromDate).getTime());
@@ -49,7 +48,6 @@ function Booking() {
     const hours = Math.floor((exceedTimeInMillis % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     const minutes = Math.floor((exceedTimeInMillis % (1000 * 60 * 60)) / (1000 * 60));
 
-    console.log(days, hours, minutes)
 
     const mul = hours + minutes / 60;
     const value = Math.ceil(parkingData.price * mul);
@@ -59,7 +57,7 @@ function Booking() {
   const handleConfirmBooking = async () => {
     try {
       if (!defaultVehicle) {
-        console.error('No default vehicle selected');
+       
         return;
       }
 
@@ -72,13 +70,12 @@ function Booking() {
         In: fromDate || Intime,
         out: toDate || Totime,
         status: "Incoming",
-        num: defaultVehicle.num, 
+        num: 123, 
         price: price,
         sgst: Math.floor(price * 0.09),
         cgst: Math.floor(price * 0.09),
       };
-   
-     // Call the POST API
+ 
      console.log(bookingDetails)
      const response = await fetch('http://localhost:7001/v1/api/booking', {
        method: 'POST',
@@ -89,7 +86,7 @@ function Booking() {
      });
 
      if (response.ok) {
-       console.log('Booking successful');
+      
        await Swal.fire({
          icon: 'success',
          title: 'Success',
@@ -110,7 +107,9 @@ function Booking() {
 
 
   return (
-    <section className='flex min-h-screen '>
+   <>
+    <Header/>
+    <section className='flex min-h-screen mt-12 '>
       <div className='w-2/3 flex-col px-32 '>
         <div className=' border-black w-full h-48 my-1  py-6'>
           <h1 className='font-light text-gray-800'>complete your booking process</h1>
@@ -189,6 +188,7 @@ function Booking() {
       </div>
 
     </section>
+   </>
   )
 }
 

@@ -20,6 +20,8 @@ export const deleteVehicles = async ({userid, id}) => {
 export const setDefaultVehicles = async ({userid, id, def}) => {
   console.log(id);
   const response = await instance.put(`/User/setDefaultVehicle/${userid}`,   { id, def  });
+  // localStorage.setItem('userData', JSON.stringify(responseData.data));
+  console.log(response.data.data)
   console.log(response.status);
   return response.status;
 };

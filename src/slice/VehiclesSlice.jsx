@@ -51,5 +51,8 @@ const VehiclesSlice = createSlice({
       })
   },
 });
+export const selectVehicleById = (state) => {
+  return state.Vehicles.data.find(vehicle => vehicle.def === true);
+};
 
 export default VehiclesSlice.reducer;
