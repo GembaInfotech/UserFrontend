@@ -15,5 +15,4 @@ const BookingCard = ({ booking }) => {
     </div>
   );
 };
-
 export default BookingCard;

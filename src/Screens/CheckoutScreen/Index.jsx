@@ -8,5 +8,4 @@ import { PiCurrencyInrBold } from 'react-icons/pi';
 import Swal from 'sweetalert2';
 import 'react-datepicker/dist/react-datepicker.css';
 import PaymentInfo from '../../Components/CheckoutComponents/PaymentInfo';
-
 export { useEffect, useState, DatePicker, MdEdit, useParams, UserInfoForm, FaArrowRight, PiCurrencyInrBold, Swal, PaymentInfo };

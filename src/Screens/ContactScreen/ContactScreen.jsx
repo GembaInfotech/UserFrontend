@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React from 'react';
 
 function ContactScreen() {
@@ -25,5 +24,4 @@ function ContactScreen() {
     </div>
   );
 }
-
 export default ContactScreen;

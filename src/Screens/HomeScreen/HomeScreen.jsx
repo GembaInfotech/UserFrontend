@@ -4,7 +4,6 @@ import Main from '../../Components/HomeComponents/Main';
 import image from '../../assets/parking4.jpg'
 
 function LandingScreen() {
-  
   return (
     <div className='relative  min-h-screen'>
     <div className='absolute inset-0 bg-cover bg-center  cover' style={{ backgroundImage: `url(${image})` }}></div> {/* Background Image */}
@@ -13,10 +12,8 @@ function LandingScreen() {
        <Header />
       <Main/>
       <Footer />
-    
     </div>
   </div>
   )
 }
-
 export default LandingScreen

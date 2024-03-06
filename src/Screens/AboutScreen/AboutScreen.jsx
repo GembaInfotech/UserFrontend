@@ -1,8 +1,6 @@
-/* eslint-disable react/no-unescaped-entities */
 import { Card } from './index';
 
 function AboutScreen() {
-  
   return (
     <div className='py-32 px-12 bg-[#f6f7fb]'>
       <h1 className='text-gray-700 text-4xl p-4 font-bold '>Welcome to Our Parking Booking System</h1>
@@ -42,7 +40,6 @@ function AboutScreen() {
     </div>
   )
 }
-
 export default AboutScreen
 
 

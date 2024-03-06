@@ -6,15 +6,11 @@ import './index.css'
 import { ChakraProvider } from '@chakra-ui/react'
 
 const rootElement = document.getElementById('root')
-
-  
-
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <ChakraProvider>
     <App />
     </ChakraProvider>
-    
   </React.StrictMode>,
 )
 

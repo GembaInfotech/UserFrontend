@@ -12,17 +12,13 @@ function ParkingScreen() {
   const Longitude = -74.0060
   const dispatch = useDispatch();
   const parkingdata = useSelector((state) => state.Parkings.data);
-
   const [parkings, setParkings] = useState([]);
   useEffect(() => {
     setParkings(parkingdata);
-    console.log(parkingdata)
   }, [parkingdata]);
-
   useEffect(() => {
     dispatch(fetchParkingsAsync({ radii }));
   }, [dispatch, radii]);
-
   return (
     <div>{loading ?
       <div className='flex-col items-center p-2'>
@@ -61,7 +57,6 @@ function ParkingScreen() {
                 <label htmlFor="distanceSelect" className=' text-white px-2 mt-2 font-medium max-sm:font-light max-sm:mt-1 max-sm:px-0 max-sm:mb-1'> Distance: </label>
                 <select
                   className="px-4 py-1   max-md:px-2 max-md:py-0 max-sm:mb-1 bg-gray-100 rounded-sm focus:outline-none focus:border-blue-500"
-
                   id="distanceSelect" value={radii} onChange={(e) => { setradii(e.target.value) }}>
                   <option value={100}>100 meters</option>
                   <option value={500}>500 meters</option>
@@ -69,8 +64,6 @@ function ParkingScreen() {
                   <option value={5000}>5 kilometers</option>
                   <option value={10000}>10 kilometers</option>
                   <option value={500000}>20 kilometers</option>
-
-
                 </select>
               </div>
               <div className='flex max-sm:flex-row max-sm:mt-1 max-sm:p-0'>

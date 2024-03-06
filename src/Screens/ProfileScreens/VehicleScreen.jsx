@@ -10,23 +10,18 @@ function VehicleScreen() {
     const [isAdd, setAdd] = useState(false);
     const dispatch = useDispatch();
     const vehicles = useSelector((state) => state.Vehicles.data);
-    console.log(vehicles);
-
     useEffect(() => {
         storedUserData = JSON.parse(localStorage.getItem('userData'));
         const userId = storedUserData?._id;
         setid(userId)
-        console.log(storedUserData);
         dispatch(fetchVehiclesAsync({ userId: userId }));
     }, [dispatch]);
-
     const add = () => {
         setAdd(true);
     }
     const handleFormClose = () => {
         setAdd(false);
     };
-
     return (
         <>
             <div className='w-full h-fit p-8 max-sm:p-0'>
@@ -55,5 +50,4 @@ function VehicleScreen() {
         </>
     );
 }
-
 export default VehicleScreen;

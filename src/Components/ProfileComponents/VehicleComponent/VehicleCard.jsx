@@ -5,25 +5,21 @@ import { deleteVehiclesAsync, setDefaultVehicleAsync } from '../../../slice/Vehi
 const VehicleCard = ({ vehicle, userid }) => {
   const dispatch = useDispatch();
   const [showPopup, setShowPopup] = useState(false);
-
   const handleDelete = () => {
     dispatch(deleteVehiclesAsync({ userid, id: vehicle._id }));
     setShowPopup(false);
     window.location.reload(); 
   };
-
   const handleSetDefault = () => {
     dispatch(setDefaultVehicleAsync({ userid, id: vehicle._id, def: true }));
     setShowPopup(false);
     window.location.reload();
   };
-
   const removeDefault = () => {
     dispatch(setDefaultVehicleAsync({ userid, id: vehicle._id, def: false }));
     setShowPopup(false);
     window.location.reload();
   };
-
   return (
     <div className="max-w-xs bg-white shadow-lg rounded-lg overflow-hidden mx-2 mb-4">
       <div onClick={() => setShowPopup(true)} className="px-4 py-3">
@@ -31,8 +27,7 @@ const VehicleCard = ({ vehicle, userid }) => {
         <p className="text-gray-700 text-sm mb-1">Vehicle Number: <span className="text-gray-900">{vehicle.num}</span></p>
         <p className="text-gray-700 text-sm mb-1">Vehicle Type: <span className="text-gray-900">{vehicle.type}</span></p>
         {vehicle.def && <p className="text-gray-700 text-sm mb-1">Vehicle Type: <span className="text-gray-900">DEFAULT</span></p>}
-      </div>
-      
+      </div>    
       {showPopup && (
        <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-800 bg-opacity-50 z-50">
        <div className="bg-white p-8 rounded shadow-lg w-96">
@@ -51,11 +46,8 @@ const VehicleCard = ({ vehicle, userid }) => {
          </div>
        </div>
      </div>
-      
-     
       )}
     </div>
   );
 };
-
 export default VehicleCard;

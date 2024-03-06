@@ -1,12 +1,9 @@
-/* eslint-disable no-unused-vars */
 import React from "react";
 import { Link } from "react-router-dom";
 import { MdBookmarks } from "react-icons/md";
 import { IoIosSettings } from "react-icons/io";
 import { CgProfile } from "react-icons/cg";
 import { PiCarProfileFill } from "react-icons/pi";
-
-
 
 function ProfileScreen() {
   return (
@@ -46,11 +43,9 @@ function ProfileScreen() {
               </div>
             </Link>
           </div>
-
         </div>
       </div>
     </>
   );
 }
-
 export default ProfileScreen;

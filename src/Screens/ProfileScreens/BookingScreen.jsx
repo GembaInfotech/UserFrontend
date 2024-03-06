@@ -5,18 +5,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchBookingsAsync } from '../../slice/BookingSlice';
 
 function BookingScreen() {
-
   const dispatch = useDispatch();
   const bookings = useSelector((state) => state.bookings.data);
-  console.log(bookings)
-
   useEffect(() => {
     const storedUserData = JSON.parse(localStorage.getItem('userData'));
-
     const userId = storedUserData?._id;
     dispatch(fetchBookingsAsync({ userId: userId }));
   }, [dispatch]);
-
   return (
     <>
   {bookings.length === 0 ? (
@@ -44,8 +39,6 @@ function BookingScreen() {
     </>
   )}
 </>
-
   );
 }
-
 export default BookingScreen;

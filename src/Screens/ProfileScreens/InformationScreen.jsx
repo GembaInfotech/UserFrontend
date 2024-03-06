@@ -12,7 +12,6 @@ function InformationScreen() {
   useEffect(() => {
      storedUserData = JSON.parse(localStorage.getItem('userData'));
     setUser(storedUserData);
-    console.log(storedUserData._id)
   }, []);
 
   const handleEmailChange = (e) => {
@@ -22,10 +21,8 @@ function InformationScreen() {
   const handleOtpChange = (e) => {
     setOtp(e.target.value);
   };
-
   const handleSendOtp = async () => {
     try {
-      console.log(user)
       const response = await fetch(`http://localhost:7001/v1/api/endUser/sendOtp/${user?._id}`, {
         method: 'POST',
         headers: {
@@ -35,15 +32,14 @@ function InformationScreen() {
       });
       const data = await response.json();
       if (response.ok) {
-        alert(data.message); // Alert for success
+        alert(data.message);
       } else {
-        alert(data.message); // Alert for error
+        alert(data.message);
       }
     } catch (error) {
       console.error('Error:', error);
     }
   };
-
   const handleEmailUpdate = async () => {
     try {
       const response = await fetch(`http://localhost:7001/v1/api/endUser/update/${user?._id}`, {
@@ -55,17 +51,16 @@ function InformationScreen() {
       });
       const data = await response.json();
       if (response.ok) {
-        alert('Email updated successfully'); // Alert for success
+        alert('Email updated successfully');
         localStorage.setItem('userData', JSON.stringify(data.user));
         setShowModal(false);
       } else {
-        alert(data.message); // Alert for error
+        alert(data.message); 
       }
     } catch (error) {
       console.error('Error:', error);
     }
   };
-
   const handleOtpVerify = async () => {
     try {
       const response = await fetch(`http://localhost:7001/v1/api/endUser/verify/${user?._id}`, {
@@ -78,23 +73,21 @@ function InformationScreen() {
       const data = await response.json();
       if (response.ok) {
         setIsOtpCorrect(true);
-        alert(data.message); // Alert for success
+        alert(data.message); 
       } else {
         setIsOtpCorrect(false);
-        alert(data.message); // Alert for error
+        alert(data.message); 
       }
     } catch (error) {
       console.error('Error:', error);
     }
   };
-
   const handleCancel = () => {
     setShowModal(false);
     setNewEmail('');
     setOtp('');
     setIsOtpCorrect(false);
   };
-
   return (
     <div className='flex-row w-full p-8 max-sm:p-4'>
       <div className=' mb-4'>
@@ -108,7 +101,6 @@ function InformationScreen() {
           </div>
         </div>
       </div>
-
       {showModal && (
         <div className="fixed inset-0 flex items-center justify-center z-50">
           <div className="absolute inset-0 bg-gray-500 opacity-75"></div>

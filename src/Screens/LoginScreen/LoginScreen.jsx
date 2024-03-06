@@ -10,7 +10,6 @@ const Login = () => {
     }, 3000);
     return () => clearInterval(intervalId);
   }, []);
-
   return (
     <div className="flex flex-row max-sm:flex-col justify-center items-center bg-blue-600">
       <div className="relative w-[50%]  max-sm:w-full overflow-hidden">

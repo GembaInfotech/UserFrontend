@@ -13,21 +13,7 @@ function ProfileLayout({ children }) {
           {children}
         </div>
       </div>
-      {/* <div className=' flex flex-row justify-between min-h-screen  bg-[#fff]  py-24 px-48'>
-        <div className = 'w-[40%]  pt-16 pb-48 max-w-max max-h-screen px-8 bg-[#edf1f7]  '>
-            <ProfileScreen/>
-        </div>
-        <div className='overflow-y-scroll'> 
-       <div>
-       {children}
-       </div>
-        </div>
-    
-    </div> */}
     </>
-
   )
 }
-
-
 export default ProfileLayout;

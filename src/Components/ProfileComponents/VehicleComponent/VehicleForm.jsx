@@ -31,9 +31,6 @@ const VehicleForm = ({ onSuccess,id,  onCancel }) => {
           },
         }
       );
-
-      console.log(response.data.data)
-      console.log('Vehicle added successfully');
      localStorage.setItem('userData', JSON.stringify(response.data.data) )
       setFormData(initialValues);
       onSuccess(); // Close the form

@@ -5,7 +5,7 @@ const instance = axios.create({
 });
 
 export const fetchBookings = async ({userId}) => {
-  console.log("called")
+
   const response = await instance.get(`/booking/?userid=${userId}`);
   return response.data.data;
 };

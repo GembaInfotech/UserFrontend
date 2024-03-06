@@ -28,22 +28,17 @@ const LoginForm = () => {
   }
 
   const handleSubmit = async (values) => {
-    console.log("f");
     try {
       if (!validateEmail(values.mail)) {
         throw new Error('Enter valid email');
       } else if (values.password.length < 3) {
         throw new Error('Enter valid password');
-      }
-      console.log("g");
-      const response = await axios.post('http://localhost:7001/v1/api/User/login', values);
-      console.log(response)
+      }   
+      const response = await axios.post('http://localhost:7001/v1/api/User/login', values);     
       if (response.status === 200) {
         const responseData = response.data;
-        if (responseData.data) {
-          console.log("h");
-          localStorage.setItem('userData', JSON.stringify(responseData.data));
-          console.log(responseData.data);
+        if (responseData.data) {         
+          localStorage.setItem('userData', JSON.stringify(responseData.data));         
           window.location.href = "/";
         } else {
           throw new Error('No data received from server');
@@ -53,7 +48,6 @@ const LoginForm = () => {
       }
     } catch (error) {
       let errorMessage = 'An error occurred.';
-
       if (error.response) {
         if (error.response.status === 401) {
           errorMessage = 'Invalid password.';
@@ -66,7 +60,6 @@ const LoginForm = () => {
       setErrorMessage(errorMessage);
     }
   };
-
   return (
     <div className='flex-row max-sm:h-[530px]  mx-auto md:h-screen lg:py-0 w-[50%] max-sm:w-full'>
       <Link to="/">

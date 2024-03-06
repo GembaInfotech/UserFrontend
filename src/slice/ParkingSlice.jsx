@@ -1,4 +1,3 @@
-// features/booking/BookingSlice.js
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { fetchParking } from '../api/ParkingAPI/ParkingAPI';
 export const fetchParkingsAsync = createAsyncThunk(

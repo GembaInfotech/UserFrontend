@@ -5,25 +5,25 @@ export const fetchVehiclesAsync = createAsyncThunk(
   'Vehicles/fetch',
   async ({userId}) => {
     const response = await fetchVehicles({userId});
-    console.log(response.data);
+   
     return response.data;
   }
 );
 export const deleteVehiclesAsync = createAsyncThunk(
   'Vehicles/delete',
   async ({userid, id}) => {
-    console.log(userid, id);
+  
     const response = await deleteVehicles({userid, id});
-    console.log(response);
+ 
     return response;
   }
 );
 export const setDefaultVehicleAsync = createAsyncThunk(
   'Vehicles/setDefault',
   async ({userid, id,def}) => {
-    console.log(userid, id);
+    
     const response = await setDefaultVehicles({userid, id,def});
-    console.log(response);
+    
     return response;
   }
 );
