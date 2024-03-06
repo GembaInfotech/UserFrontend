@@ -9,7 +9,7 @@ const VehicleCard = ({ vehicle, userid }) => {
   const handleDelete = () => {
     dispatch(deleteVehiclesAsync({ userid, id: vehicle._id }));
     setShowPopup(false);
-    window.location.reload(); // Reload the window after deletion
+    window.location.reload(); 
   };
 
   const handleSetDefault = () => {
@@ -49,6 +49,7 @@ const VehicleCard = ({ vehicle, userid }) => {
          </div>
        </div>
      </div>
+      
      
       )}
     </div>
