@@ -114,7 +114,7 @@ const Navbar = () => {
           <button className="hover:bg-blue-500 hover:text-white text-black px-2 py-1 mb-2 rounded-l w-full">Login as User</button>
         </Link>
 
-        <a href="http://localhost:5173/" className="hover:bg-blue-500 hover:text-white text-black px-2 py-1 mb-2 rounded-l w-full">Login as vendor
+        <a href="https://gparkingvendor.gembainfotech.com/" className="hover:bg-blue-500 hover:text-white text-black px-2 py-1 mb-2 rounded-l w-full">Login as vendor
       </a>
       </div>
     </div>
