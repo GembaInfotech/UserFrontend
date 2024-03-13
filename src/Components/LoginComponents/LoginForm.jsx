@@ -34,7 +34,7 @@ const LoginForm = () => {
       } else if (values.password.length < 3) {
         throw new Error('Enter valid password');
       }   
-      const response = await axios.post('http://localhost:7001/v1/api/User/login', values);     
+      const response = await axios.post('https://backend-2-v1ta.onrender.com/v1/api/User/login', values);     
       if (response.status === 200) {
         const responseData = response.data;
         if (responseData.data) {         

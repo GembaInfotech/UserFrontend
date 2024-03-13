@@ -23,7 +23,7 @@ function InformationScreen() {
   };
   const handleSendOtp = async () => {
     try {
-      const response = await fetch(`http://localhost:7001/v1/api/endUser/sendOtp/${user?._id}`, {
+      const response = await fetch(`https://backend-2-v1ta.onrender.com/v1/api/endUser/sendOtp/${user?._id}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -42,7 +42,7 @@ function InformationScreen() {
   };
   const handleEmailUpdate = async () => {
     try {
-      const response = await fetch(`http://localhost:7001/v1/api/endUser/update/${user?._id}`, {
+      const response = await fetch(`https://backend-2-v1ta.onrender.com/v1/api/endUser/update/${user?._id}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -63,7 +63,7 @@ function InformationScreen() {
   };
   const handleOtpVerify = async () => {
     try {
-      const response = await fetch(`http://localhost:7001/v1/api/endUser/verify/${user?._id}`, {
+      const response = await fetch(`https://backend-2-v1ta.onrender.com/v1/api/endUser/verify/${user?._id}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

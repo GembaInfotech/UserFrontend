@@ -65,7 +65,7 @@ function Booking() {
         cgst: Math.floor(price * 0.09),
       };
      console.log(bookingDetails)
-     const response = await fetch('http://localhost:7001/v1/api/booking', {
+     const response = await fetch('https://backend-2-v1ta.onrender.com/v1/api/booking', {
        method: 'POST',
        headers: {
          'Content-Type': 'application/json',
