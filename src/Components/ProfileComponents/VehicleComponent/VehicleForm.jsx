@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useSelector, useDispatch } from 'react-redux';
+import { addVehicleAsync } from '../../../slice/VehiclesSlice';
 
 const initialValues = {
   name: '',
@@ -7,7 +9,11 @@ const initialValues = {
   type: '',
 };
 
-const VehicleForm = ({ onSuccess,id,  onCancel }) => {
+const VehicleForm = ({ onSuccess,token,  onCancel }) => {
+ 
+  const dispatch = useDispatch();
+  
+     
   const [formData, setFormData] = useState(initialValues);
 
   const handleChange = (e) => {
@@ -22,19 +28,9 @@ const VehicleForm = ({ onSuccess,id,  onCancel }) => {
     e.preventDefault();
 
     try {
-      const response = await axios.post(
-        `https://backend-2-v1ta.onrender.com/v1/api/User/addVehicle/${id}`,
-        formData,
-        {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }
-      );
-     localStorage.setItem('userData', JSON.stringify(response.data.data) )
-      setFormData(initialValues);
+  dispatch(addVehicleAsync({token, formData}));
+         console.log(formData);
       onSuccess(); // Close the form
-      window.location.reload();
     } catch (error) {
       console.error('Error adding vehicle:', error.message);
     }
@@ -55,7 +51,7 @@ const VehicleForm = ({ onSuccess,id,  onCancel }) => {
                 <div className="mb-8 grid grid-cols-3 gap-6">
           {Object.keys(formData).map((fieldName, index) => (
             <div key={index} className="relative h-10 w-full">
-              {fieldName !== 'vehicle_type' ? (
+              {fieldName !== 'type' ? (
                 <input
                   className="peer h-full w-full bg-slate-50 rounded-[7px] border border-blue-gray-200 border-t-transparent bg-transparent px-3 py-2.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-gray-900 focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50 placeholder:opacity-0 focus:placeholder:opacity-100"
                   id={fieldName}

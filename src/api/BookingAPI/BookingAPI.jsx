@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const instance = axios.create({
-  baseURL: 'https://backend-2-v1ta.onrender.com/v1/api',
+  baseURL: 'http://localhost:7001/v1/api',
 });
 
 export const fetchBookings = async ({userId}) => {
@@ -11,6 +11,9 @@ export const fetchBookings = async ({userId}) => {
 };
 
 export const createBooking = async ({bookingData}) => {
-  const response = await instance.post('/booking/', {bookingData});
+  console.log(bookingData);
+  const response = await instance.post('/booking', {bookingData});
+  console.log("done");
+  console.log(response.data);
   return response.data;
 };

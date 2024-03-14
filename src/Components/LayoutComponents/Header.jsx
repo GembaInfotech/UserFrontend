@@ -15,12 +15,13 @@ const Navbar = () => {
     const scrollTop = window.scrollY;
     setIsScrolled(scrollTop > 5);
   };
+ const token = useSelector((state)=>state.Token.value)
+  const recievedToken = JSON.parse(localStorage.getItem('token'))
 
   useEffect(() => {
-    const storedUserData = JSON.parse(localStorage.getItem('userData'));
-    if (storedUserData?.token) {
+    if (token|| recievedToken) {
+      console.log(token)
       setIsLoggedIn(true);
-      dispatch(fetchVehiclesAsync({userId:storedUserData._id}))
     }
 
 
@@ -47,7 +48,7 @@ const Navbar = () => {
   }, []);
 
   const handleLogout = () => {
-    localStorage.removeItem('userData');
+    localStorage.removeItem('token');
     window.location.href = '/login';
   };
 

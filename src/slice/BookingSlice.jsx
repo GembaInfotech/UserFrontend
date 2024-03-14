@@ -13,8 +13,9 @@ export const fetchBookingsAsync = createAsyncThunk(
 export const createBookingAsync = createAsyncThunk(
   'bookings/add',
   async ({ bookingData }) => {
+    console.log(bookingData);
     const response = await createBooking({ bookingData });
-    return response.data;
+    return response.message;
   }
 );
 

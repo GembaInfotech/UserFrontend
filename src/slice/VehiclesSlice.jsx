@@ -1,32 +1,43 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { fetchVehicles, deleteVehicles, setDefaultVehicles } from '../api/ProfileAPI/VehiclesAPI';
-
+import { fetchVehicles, deleteVehicles, setDefaultVehicles , addVehicle} from '../api/ProfileAPI/VehiclesAPI';
 export const fetchVehiclesAsync = createAsyncThunk(
   'Vehicles/fetch',
-  async ({userId}) => {
-    const response = await fetchVehicles({userId});
-   
+  async ({token}) => {
+    console.log("eefg");
+    const response = await fetchVehicles({token});
+    console.log(token);
+   console.log("Called3")
     return response.data;
   }
 );
 export const deleteVehiclesAsync = createAsyncThunk(
   'Vehicles/delete',
-  async ({userid, id}) => {
+  async ({token, id}) => {
   
-    const response = await deleteVehicles({userid, id});
+    const response = await deleteVehicles({token, id});
  
     return response;
   }
 );
 export const setDefaultVehicleAsync = createAsyncThunk(
   'Vehicles/setDefault',
-  async ({userid, id,def}) => {
-    
-    const response = await setDefaultVehicles({userid, id,def});
+  async ({token, id,def}) => {
+      console.log(token )
+    const response = await setDefaultVehicles({token, id,def});
     
     return response;
   }
 );
+export const addVehicleAsync = createAsyncThunk(
+  'Vehicles/addVehicle',
+  async ({ token,formData}) => {
+    
+    const response = await addVehicle({token,formData});
+    
+    return response;
+  }
+);
+
 
 const VehiclesSlice = createSlice({
   name: 'Vehicles',

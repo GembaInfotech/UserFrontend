@@ -4,6 +4,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import Header from '../../Components/LayoutComponents/Header'
 import { fetchVehiclesAsync, selectVehicleById, setDefaultVehicleAsync } from '../../slice/VehiclesSlice';
 import { useSelector, useDispatch } from 'react-redux';
+import { createBookingAsync } from '../../slice/BookingSlice';
 function Booking() {
   const dispatch =useDispatch()
   const [fromDate, setFromDate] = useState(new Date());
@@ -27,9 +28,11 @@ function Booking() {
       setIsLoggedIn(true);
     setUser(storedUserData);
       console.log('User Data:', storedUserData);
-    const userId = user._id  
+    const userId = user._id;  
+    setDefaultVehicle(vehicles);
+
     }
-  }, []);
+  }, [defaultVehicle]);
   const getPrice = () => {
     if (!toDate || isNaN(new Date(toDate).getTime())) {
       
@@ -43,12 +46,14 @@ function Booking() {
     const value = Math.ceil(parkingData.price * mul);
     setPrice(value);
   }
+  const response = useSelector((state) => state.bookings);
+
   const handleConfirmBooking = async () => {
     console.log("dsf")
     try {
-      if (!vehicles) {  
-        return;
-      }
+      // if (!vehicles) {  
+      //   return;
+      // }
       
       const bookingDetails = {
         mail: user.mail,
@@ -59,20 +64,18 @@ function Booking() {
         In: fromDate || Intime,
         out: toDate || Totime,
         status: "Incoming",
-        num: vehicles.num, 
+        num: defaultVehicle.num, 
         price: price,
         sgst: Math.floor(price * 0.09),
         cgst: Math.floor(price * 0.09),
       };
      console.log(bookingDetails)
-     const response = await fetch('https://backend-2-v1ta.onrender.com/v1/api/booking', {
-       method: 'POST',
-       headers: {
-         'Content-Type': 'application/json',
-       },
-       body: JSON.stringify(bookingDetails),
-     });
-     if (response.ok) {      
+   
+   const  bookingData= bookingDetails;
+
+     await dispatch(createBookingAsync({bookingData}));
+
+     if (response.status=="succeeded") {      
        await Swal.fire({
          icon: 'success',
          title: 'Success',

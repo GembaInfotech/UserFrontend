@@ -2,21 +2,23 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { deleteVehiclesAsync, setDefaultVehicleAsync } from '../../../slice/VehiclesSlice';
 
-const VehicleCard = ({ vehicle, userid }) => {
+const VehicleCard = ({ vehicle, token }) => {
   const dispatch = useDispatch();
   const [showPopup, setShowPopup] = useState(false);
   const handleDelete = () => {
-    dispatch(deleteVehiclesAsync({ userid, id: vehicle._id }));
+    dispatch(deleteVehiclesAsync({ token, id: vehicle._id }));
     setShowPopup(false);
     window.location.reload(); 
   };
   const handleSetDefault = () => {
-    dispatch(setDefaultVehicleAsync({ userid, id: vehicle._id, def: true }));
+    console.log("call")
+    dispatch(setDefaultVehicleAsync({ token, id: vehicle._id, def: true }));
+    window.location.reload(); 
+
     setShowPopup(false);
-    window.location.reload();
   };
   const removeDefault = () => {
-    dispatch(setDefaultVehicleAsync({ userid, id: vehicle._id, def: false }));
+    dispatch(setDefaultVehicleAsync({ token, id: vehicle._id, def: false }));
     setShowPopup(false);
     window.location.reload();
   };

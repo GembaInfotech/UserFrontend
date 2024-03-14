@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import {setter} from '../../slice/TokenSlice'
 import { MdHome } from 'react-icons/md';
 import { BiX, BiHide, BiShowAlt } from 'react-icons/bi';
 
@@ -14,6 +16,9 @@ const SignupSchema = Yup.object().shape({
 const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+   const token =useSelector((state)=>state?.token?.value);
+   const dispatch = useDispatch();
+   const navigate= useNavigate();
 
   useEffect(() => {
     let timer;
@@ -27,10 +32,16 @@ const LoginForm = () => {
 
   const handleSubmit = async (values, { setSubmitting }) => {
     try {
-      const response = await axios.post('https://backend-2-v1ta.onrender.com/v1/api/User/login', values);
-      if (response.status === 200 && response.data.data) {
-        localStorage.setItem('userData', JSON.stringify(response.data.data));
-        window.location.href = "/";
+      const response = await axios.post('http://localhost:7001/v1/api/User/login', values);
+         console.log(response.data.token)
+       if(response.data?.token)
+       {
+        const recievedtoken= JSON.stringify(response.data.token.token)
+        localStorage.setItem('token', recievedtoken)
+        dispatch(setter(response.data.token))
+       }
+      if (response.status === 200 ) {
+        navigate('/')
       } else {
         throw new Error('No data received from server');
       }
