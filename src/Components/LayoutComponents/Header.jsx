@@ -86,7 +86,7 @@ const Navbar = () => {
               <Link to="/about" className="text-gray-800 font-medium hover:text-gray-500 transition">About</Link>
               <Link to="/contact" className="text-gray-800 font-medium hover:text-gray-500 transition">Contact Us</Link>
               <Link to="/profile/info" className="text-gray-800 font-medium hover:text-gray-500 transition">Profile</Link>
-              <button onClick={handleLogout} className="text-black bg-white hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-md dark:shadow-blue-800/80 font-xl rounded-md text-xl px-6 py-2 text-center me-2 mb-2">
+              <button onClick={handleLogout} className="bg-red-700 text-white p-1 rounded-md">
                 Logout
               </button>
             </>

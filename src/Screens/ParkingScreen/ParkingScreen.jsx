@@ -1,6 +1,7 @@
 import { fetchParkingsAsync } from '../../slice/ParkingSlice';
 import { useParams, React, DatePicker, useState, useEffect, IoSearch, Spinner, Skeleton, Stack, SkeletonCircle, SkeletonText, ParkingCard, Footer } from './index'
 import { useSelector, useDispatch } from 'react-redux';
+import ParkingSkeleton from '../../Skeletons/ParkingSkeleton';
 function ParkingScreen() {
   const [locationValue, setLocationValue] = useState('');
   const [fromDate, setFromDate] = useState(new Date());
@@ -13,34 +14,32 @@ function ParkingScreen() {
   const dispatch = useDispatch();
   const parkingdata = useSelector((state) => state.Parkings.data);
   const [parkings, setParkings] = useState([]);
+
+
+  const handleSearch = () => {
+    setLoading(true);
+    console.log(locationValue )
+    dispatch(fetchParkingsAsync({radii}));
+    setParkings(parkingdata);
+
+  };
+
+
+
   useEffect(() => {
     setParkings(parkingdata);
   }, [parkingdata]);
+
+
   useEffect(() => {
+    console.log("called")
     dispatch(fetchParkingsAsync({ radii }));
-  }, [dispatch, radii]);
+  }, [radii]);
+
+
   return (
     <div>{loading ?
-      <div className='flex-col items-center p-2'>
-        <Skeleton className='w-full p-2 ' height='40px'>
-          <div>contents wrapped</div>
-          <div>won't be visible</div>
-        </Skeleton>
-        <div className='flex  h-full justify-center items-center'>
-          <Stack className='w-[30%] py-2 px-2'>
-            <Skeleton height='100px' />
-            <Skeleton height='100px' />
-            <Skeleton height='100px' />
-            <Skeleton height='100px' />
-            <Skeleton height='100px' />
-            <Skeleton height='100px' />
-          </Stack>
-          <Skeleton className='w-[80%] h-screen py-2 px-2'>
-            <div>contents wrapped</div>
-            <div>won't be visible</div>
-          </Skeleton>
-        </div>
-      </div>
+       <ParkingSkeleton/>
       : <div className='bg-slate-100'>
         <div>
           <div className="fixed top-0 left-0 w-full flex items-center justify-between px-4 py-2  bg-[#5D76A9] z-10 max-sm:flex-col">
@@ -86,6 +85,14 @@ function ParkingScreen() {
                   className="px-4 py-1 max-md:px-1 max-sm:py-0 bg-gray-100 rounded-sm focus:outline-none focus:border-blue-500 "
                 />
               </div>
+              <button
+                onClick={handleSearch}
+                className="bg-green-500 text-white px-4 max-md:px-2 py-1 rounded-md hover:bg-blue-600 hover:text-black transition duration-300"
+              >
+                <div className='flex'>
+                  <h1 className='pt-1 px-1 text-xl'> <IoSearch /></h1>
+                </div>
+              </button>
             </div>
           </div>
           <div className='h-14 max-sm:h-7'>

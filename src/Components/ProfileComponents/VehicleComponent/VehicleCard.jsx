@@ -21,7 +21,7 @@ const VehicleCard = ({ vehicle, userid }) => {
     window.location.reload();
   };
   return (
-    <div className="max-w-xs bg-white shadow-lg rounded-lg overflow-hidden mx-2 mb-4">
+    <div className="max-w-xs bg-white shadow-lg rounded-lg overflow-hidden min-h-32 mx-2 mb-4">
       <div onClick={() => setShowPopup(true)} className="px-4 py-3">
         <p className="text-gray-700 text-sm mb-1">Vehicle Name: <span className="text-gray-900">{vehicle.name}</span></p>
         <p className="text-gray-700 text-sm mb-1">Vehicle Number: <span className="text-gray-900">{vehicle.num}</span></p>

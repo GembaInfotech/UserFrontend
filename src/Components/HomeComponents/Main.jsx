@@ -46,7 +46,6 @@ function Main() {
               <LocationCard image={image2} name="Sanjay Palace" />
               <LocationCard image={image1} name="Kamla Nagar" />
               <LocationCard image={image3} name="Trans Yamuna Colony" />
-              <LocationCard image={image2} name="M.G. Road" />
             </div>
           </div>
         </section>

@@ -17,10 +17,6 @@ export const createBooking = async (bookingData) => {
 
 
 
-export const fetchVehicles = async ({userId}) => {
-  const response = await instance.get(`/endUser/getVehicles/${userId}`);
-  return response.data;
-};
 
 
   export const updateBooking = async (id, status) => {
