@@ -1,12 +1,15 @@
-import React, { useState, useEffect } from 'react';
+
+
+
+import  { useState, useEffect } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import {setter} from '../../slice/TokenSlice'
 import { MdHome } from 'react-icons/md';
 import { BiX, BiHide, BiShowAlt } from 'react-icons/bi';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const SignupSchema = Yup.object().shape({
   mail: Yup.string().required('Email is required').email('Invalid email format'),
@@ -15,22 +18,11 @@ const SignupSchema = Yup.object().shape({
 
 const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
-   const token =useSelector((state)=>state?.token?.value);
-   const dispatch = useDispatch();
    const navigate= useNavigate();
 
-  useEffect(() => {
-    let timer;
-    if (errorMessage) {
-      timer = setTimeout(() => {
-        setErrorMessage('');
-      }, 6000);
-    }
-    return () => clearTimeout(timer);
-  }, [errorMessage]);
+ 
 
-  const handleSubmit = async (values, { setSubmitting }) => {
+  const handleSubmit = async (values,  ) => {
     try {
       const response = await axios.post('http://localhost:7001/v1/api/User/login', values);
          console.log(response.data.token)
@@ -38,34 +30,33 @@ const LoginForm = () => {
        {
         const recievedtoken= JSON.stringify(response.data.token.token)
         localStorage.setItem('token', recievedtoken)
-        dispatch(setter(response.data.token))
        }
+       toast.success('Registration successful!')
       if (response.status === 200 ) {
         navigate('/')
       } else {
         throw new Error('No data received from server');
       }
     } catch (error) {
-      let errorMessage = 'An error occurred.';
       if (error.response) {
         switch (error.response.status) {
           case 401:
-            errorMessage = 'Invalid password.';
+            toast.warn('Invalid password!')
+
             break;
           case 404:
-            errorMessage = 'User not found.';
+            toast.error('User not found.!')
             break;
           case 500:
-            errorMessage = 'Failed to update user.';
+            toast.error('Failed to update user!')
             break;
           default:
-            errorMessage = 'Unexpected error occurred.';
-        }
+            toast.error('Unexpected error occurred!')
+          }
       }
-      setErrorMessage(errorMessage);
-    } finally {
-      setSubmitting(false);
-    }
+
+    
+    } 
   };
 
   return (
@@ -114,17 +105,11 @@ const LoginForm = () => {
                 </Form>
               )}
             </Formik>
+            <ToastContainer/>
           </div>
         </div>
       </div>
-      {errorMessage && (
-        <div className="text-center mt-4">
-          <div className="bg-red-700 text-white px-4 py-3 rounded relative mx-auto flex items-center justify-between w-96">
-            {errorMessage}
-            <BiX className="cursor-pointer" onClick={() => setErrorMessage('')} />
-          </div>
-        </div>
-      )}
+     
     </div>
   );
 };

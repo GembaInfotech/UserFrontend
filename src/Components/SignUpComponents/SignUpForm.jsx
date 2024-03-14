@@ -3,6 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { signUpAsync } from './../../slice/AuthSlice/SignUpSlice';
 import { useEffect } from 'react';
 import Swal from 'sweetalert2';
+
+
 const SignupSchema = Yup.object().shape({
   Name: Yup.string().required('Name is required'),
   phone: Yup.string()
@@ -13,29 +15,32 @@ const SignupSchema = Yup.object().shape({
   password: Yup.string().min(8, 'Password must be at least 8 characters').required('Password is required'),
 });
 const SignUpForm = () => {
+
+  const dispatch = useDispatch();
+  const status = useSelector((state) => state.SignUp.data.status);
+
   const initialValues = {
     Name: '',
     phone: '',
     email: '',
     password: '',
   };
-  const dispatch = useDispatch();
-  const userdata = useSelector((state) => state.SignUp.data.status);
+ 
   useEffect(() => {
-    if (userdata === 201) {
+    if (status === 201) {
       Swal.fire({
         icon: 'success',
         title: 'Signup successful!',
         text: 'Please check your email for further instructions.'
       });
-    } else if (userdata === 205) {
+    } else if (status === 205) {
       Swal.fire({
         icon: 'error',
         title: 'Email Already Exists',
         text: 'Please try with another email.'
       });
     }
-  }, [userdata]);
+  }, [status]);
   const handleSubmit = async (values, { setSubmitting, resetForm }) => {
     try {
       dispatch(signUpAsync({ values }));

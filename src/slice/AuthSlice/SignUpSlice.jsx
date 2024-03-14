@@ -7,7 +7,7 @@ export const signUpAsync = createAsyncThunk(
         console.log(values);
         const response = await signUp({ values });
         console.log(response);
-        return response;
+        return response.data;
     }
 );
 const SignUpSlice = createSlice({

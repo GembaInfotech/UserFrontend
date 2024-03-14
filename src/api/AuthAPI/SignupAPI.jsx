@@ -4,7 +4,7 @@ const instance = axios.create({
 });
 export const signUp = async ({values}) => {
   console.log(values);
-  const response = await instance.post(`endUser/register`, values);
+  const response = await instance.post(`User/register`, values);
  console.log(response);
   return response;
 };
