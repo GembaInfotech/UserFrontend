@@ -2,6 +2,7 @@ import { fetchParkingsAsync } from '../../slice/ParkingSlice';
 import { useParams, React, DatePicker, useState, useEffect, IoSearch, Spinner, Skeleton, Stack, SkeletonCircle, SkeletonText, ParkingCard, Footer } from './index'
 import { useSelector, useDispatch } from 'react-redux';
 import ParkingSkeleton from '../../Skeletons/ParkingSkeleton';
+import MapScreen from './MapScreen';
 function ParkingScreen() {
   const [locationValue, setLocationValue] = useState('');
   const [fromDate, setFromDate] = useState(new Date());
@@ -106,16 +107,8 @@ function ParkingScreen() {
           </div>
         </div>
         <div className='w-3/4 max-sm:w-full  '>
-          <iframe
-            className='w-full h-full max-sm:min-h-[400px]'
-            title="Map"
-            frameBorder="0"
-            scrolling="no"
-            marginHeight="0"
-            marginWidth="0"
-            src={`https://www.openstreetmap.org/export/embed.html?bbox=${Longitude - 0.01}%2C${Latitude - 0.01}%2C${Longitude + 0.01}%2C${Latitude + 0.01}&amp;layer=mapnik`}
-            style={{ border: '1px solid black' }}
-          ></iframe>
+     
+        <MapScreen selectedParking={parkings[3]} />
         </div>
       </div>
     </div>
