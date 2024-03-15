@@ -19,7 +19,7 @@ const Navbar = () => {
   const recievedToken = JSON.parse(localStorage.getItem('token'))
 
   useEffect(() => {
-    if (token|| recievedToken) {
+    if (token|| recievedToken) {  
       console.log(token)
       setIsLoggedIn(true);
     }
