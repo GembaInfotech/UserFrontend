@@ -1,12 +1,13 @@
 import axios from 'axios';
-
+import getToken from '../../Hooks/getToken';
 const instance = axios.create({
   baseURL: 'http://localhost:7001/v1/api',
 });
 
-const token = JSON.parse(localStorage.getItem('token'))
-export const fetchVehicles = async () => {
 
+export const fetchVehicles = async () => {
+  
+  const token = await getToken();
   const response = await instance.get(`/User/getVehicles` , {
     headers: {
       'Authorization': `Bearer ${token}` 
@@ -19,6 +20,8 @@ export const fetchVehicles = async () => {
 
 export const addVehicle = async ( formData) => {
   console.log (formData)
+  const token = await getToken();
+
   const response = await instance.post(`/User/addVehicle`,  formData, 
  {
   headers: {
@@ -30,6 +33,7 @@ export const addVehicle = async ( formData) => {
 };
 
 export const deleteVehicles = async ( id) => {
+  const token = await getToken();
 
   const response = await instance.delete(`/User/deleteVehicle`,  { data: { id } },{
     headers: {
@@ -40,8 +44,8 @@ export const deleteVehicles = async ( id) => {
 };
 
 export const setDefaultVehicles = async ({ id, def}) => {
-  console.log("call2")
-  console.log( token )
+  
+  const token = await getToken();
 
   const response = await instance.put(`/User/setDefaultVehicle/`,   { vehicleId:id, def  },
   {

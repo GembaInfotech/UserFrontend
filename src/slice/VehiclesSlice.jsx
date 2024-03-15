@@ -2,11 +2,8 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { fetchVehicles, deleteVehicles, setDefaultVehicles , addVehicle} from '../api/ProfileAPI/VehiclesAPI';
 export const fetchVehiclesAsync = createAsyncThunk(
   'Vehicles/fetch',
-  async ({token}) => {
-    console.log("eefg");
-    const response = await fetchVehicles({token});
-    console.log(token);
-   console.log("Called3")
+  async () => {
+    const response = await fetchVehicles();
     return response.data;
   }
 );

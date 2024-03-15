@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { userDataAsync } from '../../slice/UserSlice';
+import PulseLoader from "react-spinners/PulseLoader";
 
 
 function InformationScreen() {
@@ -15,7 +16,7 @@ function InformationScreen() {
 
   return (
     <div>
-      {user.status == "loading" && <h1>Loading...</h1>}
+      {user.status == "loading" && <div className='flex  flex-row justify-center items-center '> <PulseLoader  size="8px" /></div>}
       {user.error && <h1>{user.error}</h1>}
       {!user.error && user.status == "succeeded" && 
       <div className='flex-row w-full p-8 max-sm:p-4'>

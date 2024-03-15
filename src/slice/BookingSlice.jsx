@@ -4,8 +4,8 @@ import { createBooking } from '../api/BookingAPI/BookingAPI';
 
 export const fetchBookingsAsync = createAsyncThunk(
   'bookings/fetch',
-  async ({ userId }) => {
-    const response = await fetchBookings({ userId });
+  async () => {
+    const response = await fetchBookings();
     return response;
   }
 );

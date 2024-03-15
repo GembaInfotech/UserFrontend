@@ -5,6 +5,8 @@ import Header from '../../Components/LayoutComponents/Header'
 import { fetchVehiclesAsync, selectVehicleById, setDefaultVehicleAsync } from '../../slice/VehiclesSlice';
 import { useSelector, useDispatch } from 'react-redux';
 import { createBookingAsync } from '../../slice/BookingSlice';
+import PulseLoader from "react-spinners/PulseLoader";
+
 function Booking() {
   const dispatch =useDispatch()
   const [fromDate, setFromDate] = useState(new Date());
@@ -20,19 +22,16 @@ function Booking() {
     setFromDate(Intime);
     setToDate(Totime);
   }, []);
-  const [user, setUser] = useState({});
   const vehicles = useSelector((state)=> selectVehicleById(state))
   useEffect(()=> async()=> {
-    const storedUserData = JSON.parse(localStorage.getItem('userData'));
-    if (storedUserData?._id) {
+     const token =  JSON.parse(localStorage.getItem('token'))
+    if (token) {
       setIsLoggedIn(true);
-    setUser(storedUserData);
-      console.log('User Data:', storedUserData);
-    const userId = user._id;  
+   
     setDefaultVehicle(vehicles);
 
     }
-  }, [defaultVehicle]);
+  }, [defaultVehicle, dispatch]);
   const getPrice = () => {
     if (!toDate || isNaN(new Date(toDate).getTime())) {
       
@@ -56,15 +55,14 @@ function Booking() {
       // }
       
       const bookingDetails = {
-        mail: user.mail,
-        userid: user._id,
+      
         parkingid: parkingData._id,
         pn: parkingData.pn,
         pa: parkingData?.pa,
         In: fromDate || Intime,
         out: toDate || Totime,
         status: "Incoming",
-        num: defaultVehicle.num, 
+        num: vehicles.num, 
         price: price,
         sgst: Math.floor(price * 0.09),
         cgst: Math.floor(price * 0.09),
@@ -74,7 +72,7 @@ function Booking() {
    const  bookingData= bookingDetails;
 
      await dispatch(createBookingAsync({bookingData}));
-
+   console.log(response)
      if (response.status=="succeeded") {      
        await Swal.fire({
          icon: 'success',

@@ -1,13 +1,13 @@
 import axios from 'axios';
+import getToken from '../../Hooks/getToken';
 
 const instance = axios.create({
   baseURL: 'http://localhost:7001/v1/api',
 });
-const token = localStorage.getItem('token')
 
-export const fetchBookings = async ({userId}) => {
+export const fetchBookings = async () => {
 
-
+ const token = await getToken();
   const response = await instance.get(`/booking/userBookings`, {
     headers: {
       'Authorization': `Bearer ${token}` 
@@ -17,8 +17,12 @@ export const fetchBookings = async ({userId}) => {
 };
 
 export const createBooking = async ({bookingData}) => {
-  console.log(bookingData);
-  const response = await instance.post('/booking', {bookingData});
+  const token = await  getToken();
+  const response = await instance.post('/booking', {bookingData} ,{
+    headers: {
+      'Authorization': `Bearer ${token}` 
+    }
+  });
   console.log("done");
   console.log(response.data);
   return response.data;

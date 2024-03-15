@@ -1,6 +1,8 @@
 import { Card } from './index';
-
+import useAuthToken from '../../Hooks/getToken';
 function AboutScreen() {
+  const token=  useAuthToken();
+  console.log(token)
   return (
     <div className='py-32 px-12 bg-[#f6f7fb]'>
       <h1 className='text-gray-700 text-4xl p-4 font-bold '>Welcome to Our Parking Booking System</h1>

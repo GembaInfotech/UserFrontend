@@ -19,10 +19,12 @@ const Navbar = () => {
   const recievedToken = JSON.parse(localStorage.getItem('token'))
 
   useEffect(() => {
-    if (token|| recievedToken) {  
-      console.log(token)
+    if (recievedToken) {  
       setIsLoggedIn(true);
-    }
+      console.log(recievedToken)
+
+      dispatch(fetchVehiclesAsync())
+   ,[dispatch] }
 
 
     window.addEventListener('scroll', handleScroll);
