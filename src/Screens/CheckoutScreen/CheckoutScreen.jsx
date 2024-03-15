@@ -7,6 +7,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { createBookingAsync } from '../../slice/BookingSlice';
 import PulseLoader from "react-spinners/PulseLoader";
 
+
+
 function Booking() {
   const dispatch =useDispatch()
   const [fromDate, setFromDate] = useState(new Date());
@@ -47,7 +49,86 @@ function Booking() {
   }
   const response = useSelector((state) => state.bookings);
 
-  const handleConfirmBooking = async () => {
+
+  const Amount=price+ 2 *Math.floor(price * 0.09)
+  const amount = Amount*100;
+  const currency = "INR";
+  const receiptId = "qwsaq1";
+
+  const paymentHandler = async (e) => {
+      const response = await fetch("http://localhost:7001/v1/api/razorpay/order", {
+          method: "POST",
+          body: JSON.stringify({
+              amount,
+              currency,
+              receipt: receiptId,
+          }),
+          headers: {
+              "Content-Type": "application/json"
+          },
+      });
+
+      const order = await response.json();
+      console.log(order);
+
+
+      var options = {
+          "key": "rzp_test_muLBb6gKqfrZA5", // Enter the Key ID generated from the Dashboard
+          amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+          currency,
+          "name": "Gemba Infotech", //your business name
+          "description": "Test Transaction",
+          "image": "https://example.com/your_logo",
+          "order_id": order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+          "handler": async function (response){
+              const body  = {
+                  ...response
+              };
+              const validateRes = await fetch("http://localhost:7001/v1/api/razorpay/order/validate",{
+                  method:"POST",
+                  body: JSON.stringify(body),
+                  headers:{
+                      "Content-Type": "application/json"
+                  },
+              });
+              const jsonRes =await validateRes.json();
+
+              if(jsonRes.msg === "success"){
+                console.log("booking successfull");
+                book()
+              }
+              console.log("frgdfg",jsonRes.msg);
+          },
+          "prefill": { //We recommend using the prefill parameter to auto-fill customer's contact information, especially their phone number
+              "name": "Surabhi Yadav", //your customer's name
+              "email": "Surabhiya2001@gmail.com", 
+              "contact": "8303672402"  //Provide the customer's phone number for better conversion rates 
+          },
+          "notes": {
+              "address": "Razorpay Corporate Office"
+          },
+          "theme": {
+              "color": "#3399cc"
+          }
+      };
+      var rzp1 = new window.Razorpay(options)
+      rzp1.on('payment.failed', function (response){
+              alert(response.error.code);
+              alert(response.error.description);
+              alert(response.error.source);
+              alert(response.error.step);
+              alert(response.error.reason);
+              alert(response.error.metadata.order_id);
+              alert(response.error.metadata.payment_id);
+      });
+
+      document.getElementById('pay').onclick = function(e){
+          rzp1.open();
+          e.preventDefault();
+      }
+  };
+
+  const book = async () => {
     console.log("dsf")
     try {
       // if (!vehicles) {  
@@ -72,7 +153,7 @@ function Booking() {
    const  bookingData= bookingDetails;
 
      await dispatch(createBookingAsync({bookingData}));
-   console.log(response)
+   console.log("booking",response)
      if (response.status=="succeeded") {      
        await Swal.fire({
          icon: 'success',
@@ -90,6 +171,8 @@ function Booking() {
      console.error('Error during booking:', error);
    }
  };
+
+
   return (
    <>
     <Header/>
@@ -134,10 +217,11 @@ function Booking() {
           <div className='flex justify-between px-1 '>
             <h1 className='text-xl font-semibold'>Price </h1>
             <button  onClick={()=>{getPrice()}}>refresh</button>
-            <h1 className='text-xl font-bold'><PiCurrencyInrBold />{price}</h1>
+            <h1 className='text-xl font-bold'><PiCurrencyInrBold />{Amount}</h1>
           </div>
           <button
-            onClick={handleConfirmBooking}
+          id="pay"
+            onClick={paymentHandler}
             className="bg-blue-500 text-white px-4 mt-2  max-md:px-2 py-2 rounded-lg hover:bg-blue-600 transition duration-300"
           >
             Confirm Booking
