@@ -25,6 +25,7 @@ function Booking() {
     setToDate(Totime);
   }, []);
   const vehicles = useSelector((state)=> selectVehicleById(state))
+  
   useEffect(()=> async()=> {
      const token =  JSON.parse(localStorage.getItem('token'))
     if (token) {
@@ -48,6 +49,7 @@ function Booking() {
     setPrice(value);
   }
   const response = useSelector((state) => state.bookings);
+  console.log("bookingggg status", response.status);
 
 
   const Amount=price+ 2 *Math.floor(price * 0.09)
@@ -94,10 +96,10 @@ function Booking() {
               const jsonRes =await validateRes.json();
 
               if(jsonRes.msg === "success"){
-                console.log("booking successfull");
+              
                 book()
               }
-              console.log("frgdfg",jsonRes.msg);
+            
           },
           "prefill": { //We recommend using the prefill parameter to auto-fill customer's contact information, especially their phone number
               "name": "Surabhi Yadav", //your customer's name
@@ -131,10 +133,10 @@ function Booking() {
   const book = async () => {
     console.log("dsf")
     try {
-      // if (!vehicles) {  
-      //   return;
-      // }
-      
+      if (!vehicles) {  
+        return;
+      }
+      console.log("fghfhh");
       const bookingDetails = {
       
         parkingid: parkingData._id,
@@ -151,10 +153,10 @@ function Booking() {
      console.log(bookingDetails)
    
    const  bookingData= bookingDetails;
-
-     await dispatch(createBookingAsync({bookingData}));
-   console.log("booking",response)
-     if (response.status=="succeeded") {      
+console.log(bookingData);
+     dispatch(createBookingAsync({bookingData}));
+     console.log("booking",response)
+     if (response.data=="idle") {      
        await Swal.fire({
          icon: 'success',
          title: 'Success',

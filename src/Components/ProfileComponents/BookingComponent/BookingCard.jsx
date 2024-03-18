@@ -8,7 +8,7 @@ const BookingCard = ({ booking }) => {
       <div className='flex flex-row items-center justify-start '>
         <p className="text-sm text-gray-700 font-semibold mr-1">Booking Price:</p>
         <MdCurrencyRupee className="text-sm text-gray-700"/>
-        <p className=" text-gray-700">{booking.price}</p>
+        <p className=" text-gray-700">{booking.price+2*booking.sgst}</p>
       </div>
       <p className="text-sm text-gray-700"><span className="font-semibold">Booking Status:</span> {booking.status}</p>
       <p className="text-sm text-gray-700"><span className="font-semibold">Check-in Time:</span> {new Date (booking.In).toLocaleString()}</p>

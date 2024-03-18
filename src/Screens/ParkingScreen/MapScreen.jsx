@@ -90,7 +90,7 @@ const MapScreen = ({ data, selected }) => {
 
   return (
 
-      <div  ref={mapContainerRef} style={{ width: 'w-full', height: '100vh' }} />
+      <div  ref={mapContainerRef} className='w-full h-full' />
      
 
   );
