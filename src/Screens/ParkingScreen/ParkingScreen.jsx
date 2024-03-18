@@ -13,6 +13,7 @@ function ParkingScreen() {
   const Latitude = 40.7128
   const Longitude = -74.0060
   const dispatch = useDispatch();
+  const [selected, setSelected]= useState();
   const parkingdata = useSelector((state) => state.Parkings);
   const [parkings, setParkings] = useState([]);
 
@@ -102,13 +103,13 @@ function ParkingScreen() {
           <div className='overflow-y-auto scrollbar'>
             <h1 className='w-full pt-1 px-4 text-sm font-semibold'>{parkings.length} available parkings</h1>
             {parkings?.map(parking => (
-              <ParkingCard key={[parking._id]} data={parking} intime={fromDate} totime={toDate} />
+               <button onClick={()=>{setSelected(parking)}}>  <ParkingCard key={[parking._id]} data={parking} intime={fromDate} totime={toDate} /></button>
             ))}
           </div>
         </div>
         <div className='w-3/4 max-sm:w-full  '>
      
-        <MapScreen selectedParking={parkings[3]} />
+        <MapScreen data={parkings} selected={selected} />
         </div>
       </div>
     </div>
