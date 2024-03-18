@@ -27,10 +27,8 @@ export const setDefaultVehicleAsync = createAsyncThunk(
 );
 export const addVehicleAsync = createAsyncThunk(
   'Vehicles/addVehicle',
-  async ({ token,formData}) => {
-    
-    const response = await addVehicle({token,formData});
-    
+  async ({formData}) => {
+    const response = await addVehicle({formData});
     return response;
   }
 );

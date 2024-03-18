@@ -18,11 +18,10 @@ export const fetchVehicles = async () => {
   return response.data;
 };
 
-export const addVehicle = async ( formData) => {
+export const addVehicle = async ( {formData}) => {
   console.log (formData)
   const token = await getToken();
-
-  const response = await instance.post(`/User/addVehicle`,  formData, 
+  const response = await instance.post(`/User/addVehicle`,  {formData}, 
  {
   headers: {
     'Authorization': `Bearer ${token}` // Include the bearerin the Authorization header

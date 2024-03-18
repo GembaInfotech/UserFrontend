@@ -28,8 +28,7 @@ const VehicleForm = ({ onSuccess,token,  onCancel }) => {
     e.preventDefault();
 
     try {
-  dispatch(addVehicleAsync({token, formData}));
-         console.log(formData);
+  dispatch(addVehicleAsync({formData}));
       onSuccess(); // Close the form
     } catch (error) {
       console.error('Error adding vehicle:', error.message);
