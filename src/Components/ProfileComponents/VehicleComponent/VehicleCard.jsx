@@ -6,7 +6,8 @@ const VehicleCard = ({ vehicle, token }) => {
   const dispatch = useDispatch();
   const [showPopup, setShowPopup] = useState(false);
   const handleDelete = () => {
-    dispatch(deleteVehiclesAsync({ token, id: vehicle._id }));
+
+    dispatch(deleteVehiclesAsync({  id: vehicle._id }));
     setShowPopup(false);
     window.location.reload(); 
   };

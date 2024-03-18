@@ -9,9 +9,9 @@ export const fetchVehiclesAsync = createAsyncThunk(
 );
 export const deleteVehiclesAsync = createAsyncThunk(
   'Vehicles/delete',
-  async ({token, id}) => {
-  
-    const response = await deleteVehicles({token, id});
+  async ({ id}) => {
+
+    const response = await deleteVehicles({ id});
  
     return response;
   }

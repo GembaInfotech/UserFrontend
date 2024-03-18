@@ -31,15 +31,20 @@ export const addVehicle = async ( {formData}) => {
   return response.data;
 };
 
-export const deleteVehicles = async ( id) => {
+export const deleteVehicles = async ({id}) => {
   const token = await getToken();
 
-  const response = await instance.delete(`/User/deleteVehicle`,  { data: { id } },{
-    headers: {
-      'Authorization': `Bearer ${token}` // Include the bearerin the Authorization header
-    }
-  });
-  return response.status;
+  const vid=id;
+
+  const response = await instance.delete(`/User/vehicle/${vid}`,  
+ {
+  headers: {
+    'Authorization': `Bearer ${token}` // Include the bearerin the Authorization header
+  }
+ }
+  );
+  console.log(response.data)
+  return response.data;
 };
 
 export const setDefaultVehicles = async ({ id, def}) => {
