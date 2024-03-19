@@ -4,12 +4,14 @@ import { useState, useEffect, img1, img2, img3, img4 } from './Index'
 const Login = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const images = [img1, img2, img3, img4];
+
   useEffect(() => {
     const intervalId = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex === images.length - 1 ? 0 : prevIndex + 1));
     }, 3000);
     return () => clearInterval(intervalId);
   }, []);
+
   return (
     <div className="flex flex-row max-sm:flex-col justify-center items-center bg-blue-600">
       <div className="relative w-[50%]  max-sm:w-full overflow-hidden">

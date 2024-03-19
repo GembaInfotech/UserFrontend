@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { userDataAsync } from '../../slice/UserSlice';
 import PulseLoader from "react-spinners/PulseLoader";
 
-
 function InformationScreen() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.User);
@@ -12,7 +11,6 @@ function InformationScreen() {
     console.log("called")
     dispatch(userDataAsync());
   }, [dispatch]);
-
 
   return (
     <div>
@@ -29,9 +27,7 @@ function InformationScreen() {
               <h1 className='text-sm font-normal text-gray-600 my-1 mx-4 max-sm:mx-0  '>{user?.data?.mail}</h1>
             </div>
           </div>
-
         </div>
-
       </div>}
     </div>
   );

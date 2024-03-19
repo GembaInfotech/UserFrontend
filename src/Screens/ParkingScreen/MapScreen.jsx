@@ -1,8 +1,5 @@
-
-
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Loader } from '@googlemaps/js-api-loader';
-import MarkerCard from '../../Components/MapComponent/MarkerCard'; // Import the MarkerCard component
 
 const MapScreen = ({ data, selected }) => {
   const mapContainerRef = useRef(null);
@@ -22,8 +19,6 @@ const MapScreen = ({ data, selected }) => {
         zoom: 20,
       });
 
-      
-
       let infoWindow;
 
       if (selected) {
@@ -31,14 +26,13 @@ const MapScreen = ({ data, selected }) => {
         const lat = lc.cord[0];
         const lng = lc.cord[1];
         const coordinates = { lat, lng };
-
         const marker = new google.maps.Marker({
           position: coordinates,
           map: map,
           title: selected.pn,
         });
 
-        const content = `   <div class="bg-white rounded-lg shadow-lg p-1 w-32">
+        const content = `<div class="bg-white rounded-lg shadow-lg p-1 w-32">
         <h1 class="text-lg font-bold">${selected.pn}</h1>
         <h3 class="text-sm font-semibold">${selected.pa},</h3>
         <h3 class="text-sm font-semibold">${selected.city},</h3>
@@ -48,16 +42,15 @@ const MapScreen = ({ data, selected }) => {
         infoWindow.open(map, marker);
         marker.addListener('mouseover', () => {
           infoWindow = new google.maps.InfoWindow({ content });
-      
-          // Open info window only if markerInfo is available
           if (markerInfo) {
               infoWindow.open(map, marker);
-              setSelectedParking(markerInfo); // Set selected parking on mouseover
+              setSelectedParking(markerInfo); 
           }
       });
       }
 
       data.forEach(markerInfo => {
+
         const lat = markerInfo.lc.cord[0];
         const lng = markerInfo.lc.cord[1];
         const coordinates = { lat, lng };
@@ -77,7 +70,7 @@ const MapScreen = ({ data, selected }) => {
         </div>`
           infoWindow = new google.maps.InfoWindow({ content });
           infoWindow.open(map, marker);
-          setSelectedParking(markerInfo); // Set selected parking on mouseover
+          setSelectedParking(markerInfo);
         });
 
         marker.addListener('mouseout', () => {
@@ -87,12 +80,8 @@ const MapScreen = ({ data, selected }) => {
     });
   }, [data, selected]);
 
-
   return (
-
-      <div  ref={mapContainerRef} className='w-full h-full' />
-     
-
+      <div ref={mapContainerRef} className='w-full h-full' />
   );
 };
 

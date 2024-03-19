@@ -14,16 +14,10 @@ function BookingScreen() {
   }, [dispatch]);
   return (
     <>
+      {bookings.error && <h1>error</h1>}
 
-    {
-      bookings.error && <h1>error</h1>
-    }
+      {bookings.status != "succeeded" && <div className='flex  flex-row justify-center items-center '> <PulseLoader size="8px" /></div>}
 
-    {
-       bookings.status !="succeeded"   && <div className='flex  flex-row justify-center items-center '> <PulseLoader  size="8px" /></div> 
-    }
-  
-    
       {bookings?.data.length > 0 ? (
         <div>
           <h1 className='ml-8 mt-1 mb-4 text-2xl font-light max-sm:text-base max-sm:mb-0'>My Bookings</h1>
@@ -40,9 +34,7 @@ function BookingScreen() {
           <img src={norecord} alt="No Record" />
         </div>
       )}
-    
-  
-</>
+    </>
   );
 }
 export default BookingScreen;

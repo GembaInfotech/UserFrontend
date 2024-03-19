@@ -5,7 +5,6 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { MdHome } from 'react-icons/md';
 import { BiX, BiHide, BiShowAlt } from 'react-icons/bi';
-
 import img1 from '../../assets/parking.webp';
 import img2 from '../../assets/parking3.jpg';
 import img3 from '../../assets/parking.webp';
