@@ -31,7 +31,7 @@ const LoginForm = () => {
         const recievedtoken= JSON.stringify(response.data.token.token)
         localStorage.setItem('token', recievedtoken)
        }
-       toast.success('Registration successful!')
+       toast.success('Login successful!')
       if (response.status === 200 ) {
         navigate('/')
       } else {
