@@ -4,36 +4,41 @@ import { signUpAsync } from './../../slice/AuthSlice/SignUpSlice';
 import { useEffect } from 'react';
 import Swal from 'sweetalert2';
 
-
 const SignupSchema = Yup.object().shape({
-  Name: Yup.string().required('Name is required'),
-  phone: Yup.string()
+  name: Yup.string().required('name is required'),
+  mob: Yup.string()
     .matches(/^[0-9]+$/, 'Phone number must only contain digits')
     .min(10, 'Phone number must be at least 10 digits')
     .required('Phone number is required'),
-  email: Yup.string().email('Invalid email').required('Email is required'),
+  mail: Yup.string().email('Invalid email').required('mail is required'),
   password: Yup.string().min(8, 'Password must be at least 8 characters').required('Password is required'),
 });
 const SignUpForm = () => {
-
-  const dispatch = useDispatch();
-  const status = useSelector((state) => state.SignUp.data.status);
-
+    const dispatch = useDispatch();
+  const status = useSelector((state) => state.SignUp.status);
+  console.log(status);
   const initialValues = {
     name: '',
-    phone: '',
+    mob: '',
     mail: '',
     password: '',
   };
  
   useEffect(() => {
-    if (status === 201) {
+    if (status === "succeeded") {
       Swal.fire({
         icon: 'success',
         title: 'Signup successful!',
-        text: 'Please check your email for further instructions.'
+        text: 'Please check your email for further instructions.',
+        allowOutsideClick: false,
+        confirmButtonText: 'OK',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          window.location.href="/login"
+        }
       });
-    } else if (status === 205) {
+      
+    } else if (status === "failed") {
       Swal.fire({
         icon: 'error',
         title: 'Email Already Exists',
@@ -41,16 +46,14 @@ const SignUpForm = () => {
       });
     }
   }, [status]);
-  const handleSubmit = async (values) => {
-    try {
-      console.log("Called")
-      console.log(values)
-      // Dispatch the signup action with form values
-      // dispatch(signUpAsync(values));
-    } catch (error) {
-      console.error('Error:', error);
-    } 
-  };
+ const handleSubmit = async (values) => {
+  try {
+    
+    dispatch(signUpAsync({values}));
+  } catch (error) {
+    console.error('Error:', error);
+  } 
+};
   return (
     <div className="flex flex-col items-center justify-center px-6 py-2   mx-auto md:h-screen lg:py-0 w-[50%] max-sm:py-8 max-sm:w-full  ">
       <div className="w-full  space-x-4 bg-[#f6f7fb] rounded-lg shadow  md:mt-0 sm:max-w-lg xl:p-0  dark:border-gray-700">
@@ -73,18 +76,18 @@ const SignUpForm = () => {
                 <ErrorMessage name="name" component="div" className="text-red-500 text-sm" />
               </div>
               <div>
-                <label htmlFor="phone" className="block mb-1 text-sm font-medium text-gray-900 dark:text-gray-600">
+                <label htmlFor="mob" className="block mb-1 text-sm font-medium text-gray-900 dark:text-gray-600">
                   Phone Number
                 </label>
                 <Field
                   type="text"
-                  name="phone"
-                  id="phone"
+                  name="mob"
+                  id="mob"
                   className="bg-[#eceef7]  border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-3  dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-600 font-medium dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="1234567890"
                   required
                 />
-                <ErrorMessage name="phone" component="div" className="text-red-500 text-sm" />
+                <ErrorMessage name="mob" component="div" className="text-red-500 text-sm" />
               </div>
               <div>
                 <label htmlFor="mail" className="block mb-1 text-sm font-medium text-gray-900 dark:text-gray-600">

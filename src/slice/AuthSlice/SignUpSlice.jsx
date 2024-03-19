@@ -4,9 +4,7 @@ import { signUp } from '../../api/AuthAPI/SignupAPI';
 export const signUpAsync = createAsyncThunk(
     'SignUp/fetch',
     async ({ values }) => {
-        console.log(values);
         const response = await signUp({ values });
-        console.log(response);
         return response.data;
     }
 );

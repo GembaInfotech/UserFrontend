@@ -44,6 +44,10 @@ const LoginForm = () => {
             toast.warn('Invalid password!')
 
             break;
+            case 405:
+              toast.warn('Unauthorized, click on the link sent to your email to verify ')
+  
+              break;
           case 404:
             toast.error('User not found.!')
             break;

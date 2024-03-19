@@ -3,8 +3,6 @@ const instance = axios.create({
   baseURL: 'http://localhost:7001/v1/api',
 });
 export const signUp = async ({values}) => {
-  console.log(values);
-  const response = await instance.post(`/User/register`, {values});
- console.log(response);
+  const response = await instance.post(`/user/register`, {values});
   return response;
 };
