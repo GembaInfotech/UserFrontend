@@ -5,6 +5,7 @@ const instance = axios.create({
 });
 
 export const fetchParking = async ({radii}) => {
-  const response = await instance.get(`/parking/27.1751/78.0421/${radii}`);
-  return response.data.data;
+  const radius = radii;
+  const response = await instance.get(`/parking/30.7055/76.8000/${radius}`);
+  return response.data.data;  
 };
