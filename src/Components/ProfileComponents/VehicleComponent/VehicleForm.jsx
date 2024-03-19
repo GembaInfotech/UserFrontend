@@ -30,6 +30,8 @@ const VehicleForm = ({ onSuccess,token,  onCancel }) => {
     try {
   dispatch(addVehicleAsync({formData}));
       onSuccess(); // Close the form
+      window.location.reload(); 
+
     } catch (error) {
       console.error('Error adding vehicle:', error.message);
     }

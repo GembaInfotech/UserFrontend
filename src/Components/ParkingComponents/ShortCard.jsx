@@ -8,12 +8,10 @@ function ShortCard({hideDetails, data}) {
                 <CardBody>
                     <Stack  spacing='1'>
                         <div>
-                        <h1 className='text-xl font-semibold'>{data.parkingName}</h1>                        
-                            <span className='font-normal text-sm'></span> {data.parkingArea}                           
+                        <h1 className='text-xl font-semibold'>{data.pn}</h1>                        
+                            <span className='font-normal text-sm'></span> {data.pa}                           
                         </div> 
-                        <div><span className=''>{data.pincode}</span>  {data.city}  </div>
-                        <div><span className='font-semibold'>Opening time:</span>  { new Date(data.openingTime).toLocaleTimeString()} </div>
-                        <div><span className='font-semibold'>Closing time:</span>  { new Date(data.closingTime).toLocaleTimeString()} </div>                     
+                        <div> {data.city}-<span className=''>{data.pc}</span>   </div>                    
                         <Button variant='ghost' colorScheme='blue' onClick={hideDetails}>
                             Hide
                         </Button>

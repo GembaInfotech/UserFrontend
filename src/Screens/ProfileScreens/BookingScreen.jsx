@@ -10,11 +10,11 @@ function BookingScreen() {
   const bookings = useSelector((state) => state.bookings);
   console.log(bookings);
   useEffect(() => {
-    dispatch(fetchBookingsAsync());
+    if ((bookings.status == "idle")) dispatch(fetchBookingsAsync());
   }, [dispatch]);
   return (
     <>
-      {bookings.error && <h1>error</h1>}
+      { booking.status=="failed" && bookings.error && <h1>error</h1>}
 
       {bookings.status != "succeeded" && <div className='flex  flex-row justify-center items-center '> <PulseLoader size="8px" /></div>}
 
