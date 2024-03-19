@@ -1,14 +1,8 @@
-import React from 'react'
-// index.js
-
-
 import { Skeleton, Stack } from '@chakra-ui/react';
 import 'react-datepicker/dist/react-datepicker.css';
 
 function ParkingSkeleton() {
   return (
-  
-
     <>
       <div className='flex-col items-center p-2'>
         <Skeleton className='w-full p-2 ' height='40px'>
