@@ -1,9 +1,23 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { MdBookmarks } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
 import { PiCarProfileFill } from "react-icons/pi";
-
+import { useEffect } from "react";
 function ProfileScreen() {
+  const navigate = useNavigate();
+
+
+  useEffect(() => {
+    const getToken=async()=>{
+        const token = JSON.parse(localStorage.getItem('token'));
+        if(!token) navigate('/login')
+
+
+    }
+  
+   getToken()
+  }, [])
+  
   return (
     <>
       <div className="flex-row ">

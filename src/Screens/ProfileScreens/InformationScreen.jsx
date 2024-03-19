@@ -8,8 +8,7 @@ function InformationScreen() {
   const user = useSelector((state) => state.User);
   console.log(user)
   useEffect(() => {
-    console.log("called")
-    dispatch(userDataAsync());
+    if ((user.status == "idle")) dispatch(userDataAsync());
   }, [dispatch]);
 
   return (

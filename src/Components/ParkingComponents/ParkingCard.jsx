@@ -48,7 +48,7 @@ setshow(true);
           <div className=' flex justify-between'>
             <div>
               <h3 className="  font-bold tracking-tight text-[16px] text-gray-900 ">{data.pn}</h3>
-              <h3 className="  font-semibold tracking-tight text-sm text-gray-600 ">{data.pa}</h3>
+              <h3 className="  font-semibold  text-left text-sm text-gray-600  ">{data.pa}</h3>
             </div>
             <div className='flex justify-between'>
               <h1 className='font-medium text-xl pt-1'><PiCurrencyInrBold /></h1>
