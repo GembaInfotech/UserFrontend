@@ -20,9 +20,9 @@ const SignUpForm = () => {
   const status = useSelector((state) => state.SignUp.data.status);
 
   const initialValues = {
-    Name: '',
+    name: '',
     phone: '',
-    email: '',
+    mail: '',
     password: '',
   };
  
@@ -41,15 +41,15 @@ const SignUpForm = () => {
       });
     }
   }, [status]);
-  const handleSubmit = async (values, { setSubmitting, resetForm }) => {
+  const handleSubmit = async (values) => {
     try {
-      dispatch(signUpAsync({ values }));
-      resetForm();
+      console.log("Called")
+      console.log(values)
+      // Dispatch the signup action with form values
+      // dispatch(signUpAsync(values));
     } catch (error) {
       console.error('Error:', error);
-    } finally {
-      setSubmitting(false);
-    }
+    } 
   };
   return (
     <div className="flex flex-col items-center justify-center px-6 py-2   mx-auto md:h-screen lg:py-0 w-[50%] max-sm:py-8 max-sm:w-full  ">
@@ -59,18 +59,18 @@ const SignUpForm = () => {
           <Formik initialValues={initialValues} validationSchema={SignupSchema} onSubmit={handleSubmit}>
             <Form className="space-y-4 md:space-y-6">
               <div>
-                <label htmlFor="Name" className="block mb-1 text-sm font-medium text-gray-900 dark:text-gray-600">
+                <label htmlFor="name" className="block mb-1 text-sm font-medium text-gray-900 dark:text-gray-600">
                   Name
                 </label>
                 <Field
                   type="text"
-                  name="Name"
-                  id="Name"
+                  name="name"
+                  id="name"
                   className="bg-[#eceef7]  border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-3  dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-600 font-medium dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="John Doe"
                   required
                 />
-                <ErrorMessage name="Name" component="div" className="text-red-500 text-sm" />
+                <ErrorMessage name="name" component="div" className="text-red-500 text-sm" />
               </div>
               <div>
                 <label htmlFor="phone" className="block mb-1 text-sm font-medium text-gray-900 dark:text-gray-600">
@@ -87,18 +87,18 @@ const SignUpForm = () => {
                 <ErrorMessage name="phone" component="div" className="text-red-500 text-sm" />
               </div>
               <div>
-                <label htmlFor="email" className="block mb-1 text-sm font-medium text-gray-900 dark:text-gray-600">
+                <label htmlFor="mail" className="block mb-1 text-sm font-medium text-gray-900 dark:text-gray-600">
                   E-mail ID
                 </label>
                 <Field
                   type="text"
-                  name="email"
-                  id="email"
+                  name="mail"
+                  id="mail"
                   className="bg-[#eceef7]  border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-3  dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-600 font-medium dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="John"
                   required
                 />
-                <ErrorMessage name="email" component="div" className="text-red-500 text-sm" />
+                <ErrorMessage name="mail" component="div" className="text-red-500 text-sm" />
               </div>
               <div>
                 <label htmlFor="password" className="block mb-1 text-sm font-medium text-gray-900 dark:text-gray-600">
