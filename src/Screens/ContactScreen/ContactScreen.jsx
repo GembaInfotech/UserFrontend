@@ -1,5 +1,3 @@
-import React from 'react';
-
 function ContactScreen() {
   return (
     <div className="flex justify-center items-center h-screen bg-[#f6f7fb]">

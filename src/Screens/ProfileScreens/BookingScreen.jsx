@@ -14,7 +14,7 @@ function BookingScreen() {
   }, [dispatch]);
   return (
     <>
-      { booking.status=="failed" && bookings.error && <h1>error</h1>}
+      { bookings.status=="failed" && bookings.error && <h1>error</h1>}
 
       {bookings.status != "succeeded" && <div className='flex  flex-row justify-center items-center '> <PulseLoader size="8px" /></div>}
 

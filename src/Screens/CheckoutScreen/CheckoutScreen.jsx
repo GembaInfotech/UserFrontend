@@ -2,7 +2,7 @@ import { useEffect, useState, DatePicker, MdEdit, useParams, UserInfoForm, PiCur
 import image from '../../assets/parking.webp'
 import 'react-datepicker/dist/react-datepicker.css';
 import Header from '../../Components/LayoutComponents/Header'
-import { fetchVehiclesAsync, selectVehicleById, setDefaultVehicleAsync } from '../../slice/VehiclesSlice';
+import { selectVehicleById } from '../../slice/VehiclesSlice';
 import { useSelector, useDispatch } from 'react-redux';
 import { createBookingAsync } from '../../slice/BookingSlice';
 

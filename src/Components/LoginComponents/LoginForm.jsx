@@ -1,13 +1,10 @@
-
-
-
-import  { useState, useEffect } from 'react';
+import { useState} from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import { MdHome } from 'react-icons/md';
-import { BiX, BiHide, BiShowAlt } from 'react-icons/bi';
+import { BiHide, BiShowAlt } from 'react-icons/bi';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -18,21 +15,17 @@ const SignupSchema = Yup.object().shape({
 
 const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
-   const navigate= useNavigate();
-
- 
-
-  const handleSubmit = async (values,  ) => {
+  const navigate = useNavigate();
+  const handleSubmit = async (values,) => {
     try {
       const response = await axios.post('http://localhost:7001/v1/api/User/login', values);
-         console.log(response.data.token)
-       if(response.data?.token)
-       {
-        const recievedtoken= JSON.stringify(response.data.token.token)
+      console.log(response.data.token)
+      if (response.data?.token) {
+        const recievedtoken = JSON.stringify(response.data.token.token)
         localStorage.setItem('token', recievedtoken)
-       }
-       toast.success('Login successful!')
-      if (response.status === 200 ) {
+      }
+      toast.success('Login successful!')
+      if (response.status === 200) {
         navigate('/')
       } else {
         throw new Error('No data received from server');
@@ -42,12 +35,10 @@ const LoginForm = () => {
         switch (error.response.status) {
           case 401:
             toast.warn('Invalid password!')
-
             break;
-            case 405:
-              toast.warn('Unauthorized, click on the link sent to your email to verify ')
-  
-              break;
+          case 405:
+            toast.warn('Unauthorized, click on the link sent to your email to verify ')
+            break;
           case 404:
             toast.error('User not found.!')
             break;
@@ -56,11 +47,9 @@ const LoginForm = () => {
             break;
           default:
             toast.error('Unexpected error occurred!')
-          }
+        }
       }
-
-    
-    } 
+    }
   };
 
   return (
@@ -109,11 +98,10 @@ const LoginForm = () => {
                 </Form>
               )}
             </Formik>
-            <ToastContainer/>
+            <ToastContainer />
           </div>
         </div>
       </div>
-     
     </div>
   );
 };

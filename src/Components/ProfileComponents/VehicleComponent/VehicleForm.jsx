@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import { useSelector, useDispatch } from 'react-redux';
+import { useState } from 'react';
+import {useDispatch } from 'react-redux';
 import { addVehicleAsync } from '../../../slice/VehiclesSlice';
 
 const initialValues = {
@@ -10,10 +9,7 @@ const initialValues = {
 };
 
 const VehicleForm = ({ onSuccess,token,  onCancel }) => {
- 
-  const dispatch = useDispatch();
-  
-     
+  const dispatch = useDispatch(); 
   const [formData, setFormData] = useState(initialValues);
 
   const handleChange = (e) => {
@@ -26,20 +22,17 @@ const VehicleForm = ({ onSuccess,token,  onCancel }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
   dispatch(addVehicleAsync({formData}));
-      onSuccess(); // Close the form
+      onSuccess();
       window.location.reload(); 
-
     } catch (error) {
       console.error('Error adding vehicle:', error.message);
     }
   };
 
-
   const handleCancel = () => {
-    onCancel(); // Close the form
+    onCancel(); 
   };
 
   return (

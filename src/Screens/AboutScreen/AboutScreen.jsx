@@ -1,7 +1,7 @@
 import { Card } from './index';
 import useAuthToken from '../../Hooks/getToken';
 function AboutScreen() {
-  const token=  useAuthToken();
+  const token = useAuthToken();
   console.log(token)
 
   return (

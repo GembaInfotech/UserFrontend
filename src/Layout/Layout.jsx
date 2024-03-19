@@ -1,5 +1,3 @@
-
-import background from '.././assets/background.png'
 import Header from '../Components/LayoutComponents/Header'
 import Footer from '../Components/LayoutComponents/Footer'
 

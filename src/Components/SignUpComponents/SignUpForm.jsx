@@ -14,7 +14,7 @@ const SignupSchema = Yup.object().shape({
   password: Yup.string().min(8, 'Password must be at least 8 characters').required('Password is required'),
 });
 const SignUpForm = () => {
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const status = useSelector((state) => state.SignUp.status);
   console.log(status);
   const initialValues = {
@@ -23,7 +23,7 @@ const SignUpForm = () => {
     mail: '',
     password: '',
   };
- 
+
   useEffect(() => {
     if (status === "succeeded") {
       Swal.fire({
@@ -34,10 +34,9 @@ const SignUpForm = () => {
         confirmButtonText: 'OK',
       }).then((result) => {
         if (result.isConfirmed) {
-          window.location.href="/login"
+          window.location.href = "/login"
         }
       });
-      
     } else if (status === "failed") {
       Swal.fire({
         icon: 'error',
@@ -46,14 +45,13 @@ const SignUpForm = () => {
       });
     }
   }, [status]);
- const handleSubmit = async (values) => {
-  try {
-    
-    dispatch(signUpAsync({values}));
-  } catch (error) {
-    console.error('Error:', error);
-  } 
-};
+  const handleSubmit = async (values) => {
+    try {
+      dispatch(signUpAsync({ values }));
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
   return (
     <div className="flex flex-col items-center justify-center px-6 py-2   mx-auto md:h-screen lg:py-0 w-[50%] max-sm:py-8 max-sm:w-full  ">
       <div className="w-full  space-x-4 bg-[#f6f7fb] rounded-lg shadow  md:mt-0 sm:max-w-lg xl:p-0  dark:border-gray-700">

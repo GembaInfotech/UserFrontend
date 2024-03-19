@@ -23,7 +23,8 @@ function ParkingSkeleton() {
             <div>won't be visible</div>
           </Skeleton>
         </div>
-      </div></>
+      </div>
+    </>
   )
 }
 
