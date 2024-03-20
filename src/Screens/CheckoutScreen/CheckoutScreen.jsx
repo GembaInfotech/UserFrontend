@@ -13,9 +13,9 @@ function Booking() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [defaultVehicle, setDefaultVehicle] = useState(null);
   const { data, intime, totime } = useParams();
+  const parkingData = JSON.parse(decodeURIComponent(data));
   const [price, setPrice] = useState(parkingData?.price);
 
-  const parkingData = JSON.parse(decodeURIComponent(data));
   const Intime = JSON.parse(decodeURIComponent(intime));
   const Totime = JSON.parse(decodeURIComponent(totime));
 
