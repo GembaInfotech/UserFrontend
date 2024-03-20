@@ -21,8 +21,13 @@ function VehicleScreen() {
 
     return (
         <>
+<<<<<<< Updated upstream
             {vehicles.status != "succeeded" && <div className='flex  flex-row justify-center items-center '> <PulseLoader size="8px" /></div>}
             {vehicles.status == "failed" && vehicles.error && <h1>{vehicles.error}</h1>}
+=======
+            { vehicles.status != "succeeded" && <div className='flex  flex-row justify-center items-center '> <PulseLoader size="8px" /></div>}
+            { vehicles.status=="failed"&&    vehicles.error && <h1>{vehicles.error}</h1>}
+>>>>>>> Stashed changes
 
             {!vehicles.error && <div className='w-full h-fit p-8 max-sm:p-0'>
                 <div className=''>
