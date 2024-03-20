@@ -24,6 +24,6 @@ export const createBooking = async ({bookingData}) => {
     }
   });
   console.log("done");
-  console.log(response.data);
+  console.log(response.data.message);
   return response.data;
 };

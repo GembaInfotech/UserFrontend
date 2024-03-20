@@ -22,6 +22,8 @@ function Booking() {
   const vehicles = useSelector((state) => selectVehicleById(state)) 
   const response = useSelector((state) => state.bookings);
 
+console.log(response);
+
   useEffect(() => {
     setFromDate(Intime);
     setToDate(Totime);
@@ -87,6 +89,7 @@ function Booking() {
         });
 
         const jsonRes = await validateRes.json();
+        console.log(jsonRes.msg);
         
         if (jsonRes.msg === "success") {
           book()
@@ -139,8 +142,6 @@ function Booking() {
       };
       const bookingData = bookingDetails;
       dispatch(createBookingAsync({ bookingData }));
-      console.log("booking", response)
-      if (response.data == "idle") {
         await Swal.fire({
           icon: 'success',
           title: 'Success',
@@ -150,10 +151,12 @@ function Booking() {
             window.location.href = '/profile/bookings';
           }
         });
-      } else {
-        console.error('Failed to book');
-      }
     } catch (error) {
+      await Swal.fire({
+        icon: 'success',
+        title: 'Success',
+        text: 'Error during booking',
+      })
       console.error('Error during booking:', error);
     }
   };

@@ -6,8 +6,9 @@ import LoginReducer from './slice/AuthSlice/LoginSlice';
 import QueryReducer from './slice/QuerySlice';
 import ContactReducer from './slice/ContactSlice';
 import SignUpReducer from './slice/AuthSlice/SignUpSlice';
-import UserDataReducer from './slice/UserSlice'
-import tokenReducer from './slice/TokenSlice'
+import UserDataReducer from './slice/UserSlice';
+import tokenReducer from './slice/TokenSlice';
+
 
 export default configureStore({
   reducer: {
@@ -20,6 +21,5 @@ export default configureStore({
     Contact:ContactReducer,
     Token:tokenReducer,
     User:UserDataReducer
-
   },
 });
