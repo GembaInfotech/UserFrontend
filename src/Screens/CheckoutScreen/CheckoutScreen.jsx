@@ -80,6 +80,20 @@ console.log(response);
         const body = {
           ...response
         };
+
+        const bookingData = {
+          parkingid: parkingData._id,
+          pn: parkingData.pn,
+          pa: parkingData?.pa,
+          In: fromDate || Intime,
+          out: toDate || Totime,
+          status: "Incoming",
+          num: vehicles.num,
+          price: price,
+          sgst: Math.floor(price * 0.09),
+          cgst: Math.floor(price * 0.09),
+        };
+
         const validateRes = await fetch("http://localhost:7001/v1/api/razorpay/order/validate", {
           method: "POST",
           body: JSON.stringify(body),
@@ -92,7 +106,14 @@ console.log(response);
         console.log(jsonRes.msg);
         
         if (jsonRes.msg === "success") {
-          book()
+          try {
+            const bookResponse = await book(bookingData); // Call book function with bookingData
+            if (bookResponse && bookResponse.error) {
+              throw new Error(bookResponse.error);
+            }
+          } catch (error) {
+            throw new Error(`Error in booking API: ${error.message}`);
+          }
         }
       },
       "prefill": { //We recommend using the prefill parameter to auto-fill customer's contact information, especially their phone number
@@ -123,23 +144,11 @@ console.log(response);
     }
   };
 
-  const book = async () => {
+  const book = async (bookingDetails) => {
     try {
       if (!vehicles) {
         return;
       }
-      const bookingDetails = {
-        parkingid: parkingData._id,
-        pn: parkingData.pn,
-        pa: parkingData?.pa,
-        In: fromDate || Intime,
-        out: toDate || Totime,
-        status: "Incoming",
-        num: vehicles.num,
-        price: price,
-        sgst: Math.floor(price * 0.09),
-        cgst: Math.floor(price * 0.09),
-      };
       const bookingData = bookingDetails;
       dispatch(createBookingAsync({ bookingData }));
         await Swal.fire({
