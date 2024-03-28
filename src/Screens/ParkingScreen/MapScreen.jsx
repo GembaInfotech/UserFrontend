@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Loader } from '@googlemaps/js-api-loader';
 
 const MapScreen = ({ data, selected }) => {
+  console.log(data)
   const mapContainerRef = useRef(null);
   const [selectedParking, setSelectedParking] = useState(null);
   console.log(selected)
@@ -21,9 +22,9 @@ const MapScreen = ({ data, selected }) => {
 
       let infoWindow;
       if (selected) {
-        const { lc, pn } = selected;
-        const lat = lc.cord[0];
-        const lng = lc.cord[1];
+        const { location, pn } = selected;
+        const lat = location.coordinates[0];
+        const lng = location.coordinates[1];
         const coordinates = { lat, lng };
         const marker = new google.maps.Marker({
           position: coordinates,
@@ -49,8 +50,8 @@ const MapScreen = ({ data, selected }) => {
       }
 
       data.forEach(markerInfo => {
-        const lat = markerInfo.lc.cord[0];
-        const lng = markerInfo.lc.cord[1];
+        const lat = markerInfo.location.coordinates[0];
+        const lng = markerInfo.location.coordinates[1];
         const coordinates = { lat, lng };
         const marker = new google.maps.Marker({
           position: coordinates,

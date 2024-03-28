@@ -16,9 +16,9 @@ function BookingScreen() {
     <>
       { bookings.status=="failed" && bookings.error && <h1>error</h1>}
 
-      {bookings.status != "succeeded" && <div className='flex  flex-row justify-center items-center '> <PulseLoader size="8px" /></div>}
+      {bookings.status == "loading" && !bookings.error  && <div className='flex  flex-row justify-center items-center '> <PulseLoader size="8px" /></div>}
 
-      {bookings?.data.length > 0 ? (
+      { bookings.status =="succeeded" && bookings?.data?.length > 0 ? (
         <div>
           <h1 className='ml-8 mt-1 mb-4 text-2xl font-light max-sm:text-base max-sm:mb-0'>My Bookings</h1>
           <div className="flex flex-wrap justify-center mx-4 max-sm:mx-0">

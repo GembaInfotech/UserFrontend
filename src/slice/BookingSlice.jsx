@@ -15,7 +15,7 @@ export const createBookingAsync = createAsyncThunk(
   async ({ bookingData }) => {
     console.log(bookingData);
     const response = await createBooking({ bookingData });
-    return response.message;
+    return response;
   }
 );
 

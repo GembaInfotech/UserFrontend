@@ -6,9 +6,10 @@ import ShortCard from './ShortCard';
 import { Fade, ScaleFade, WrapItem, Slide, SlideFade, Button, Box, useDisclosure, Collapse } from '@chakra-ui/react'
 
 function ParkingCard({ data, intime, totime }) {
+  console.log(data)
   const [distance, sdis] = useState(0);
   const userLocation = [localStorage.getItem('lat'), localStorage.getItem('long')]
-  const parkingLocation = [data.lc.cord[1], data.lc.cord[0]];
+  const parkingLocation = [data.location.coordinates[1], data.location.coordinates[0]];
   function calculateDistance(userLocation, parkingLocation) {
     const [lat1, lon1] = userLocation;
     const [lat2, lon2] = parkingLocation;

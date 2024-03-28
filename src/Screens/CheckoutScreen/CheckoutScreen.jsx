@@ -13,9 +13,10 @@ function Booking() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [defaultVehicle, setDefaultVehicle] = useState(null);
   const { data, intime, totime } = useParams();
+  const parkingData = JSON.parse(decodeURIComponent(data));
+
   const [price, setPrice] = useState(parkingData?.price);
 
-  const parkingData = JSON.parse(decodeURIComponent(data));
   const Intime = JSON.parse(decodeURIComponent(intime));
   const Totime = JSON.parse(decodeURIComponent(totime));
 
@@ -53,7 +54,7 @@ function Booking() {
   const currency = "INR";
   const receiptId = "qwsaq1";
 
-  const paymentHandler = async (e) => {
+  const paymentHandler = async () => {
     const response = await fetch("http://localhost:7001/v1/api/razorpay/order", {
       method: "POST",
       body: JSON.stringify({
@@ -72,7 +73,6 @@ function Booking() {
       currency,
       "name": "Gemba Infotech", //your business name
       "description": "Test Transaction",
-      "image": "https://example.com/your_logo",
       "order_id": order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
       "handler": async function (response) {
         const body = {
@@ -138,19 +138,27 @@ function Booking() {
         cgst: Math.floor(price * 0.09),
       };
       const bookingData = bookingDetails;
-      dispatch(createBookingAsync({ bookingData }));
-      console.log("booking", response)
-      if (response.data == "idle") {
+       const avail = await dispatch(createBookingAsync({ bookingData }));
+      console.log("bookings", avail)
+      if (avail?.payload?.success) {
         await Swal.fire({
           icon: 'success',
           title: 'Success',
           text: 'Your parking booked successfully',
-        }).then((result) => {
-          if (result.isConfirmed) {
+        }).then(() => {
+          
             window.location.href = '/profile/bookings';
-          }
+          
         });
       } else {
+        await Swal.fire({
+          icon: 'success',
+          title: 'Success',
+          text: 'Your parking does not booked successfully',
+        }).then(() => {
+          
+     console.log("flaied")          
+        });
         console.error('Failed to book');
       }
     } catch (error) {
