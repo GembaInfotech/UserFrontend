@@ -59,7 +59,7 @@ function ParkingCard({ data, intime, totime }) {
           <div className='flex justify-between'>
             <Link to={`/checkout/${encodeURIComponent(JSON.stringify(data))}/${encodeURIComponent(JSON.stringify(intime))}/${encodeURIComponent(JSON.stringify(totime))}`}>
               <WrapItem>
-                <Button onClick={showDetails} size='sm' colorScheme='green'>Book</Button>
+                <Button  size='sm' colorScheme='green'>Book</Button>
               </WrapItem>
             </Link>
             <WrapItem>
