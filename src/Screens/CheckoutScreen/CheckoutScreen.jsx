@@ -7,7 +7,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { createBookingAsync } from '../../slice/BookingSlice';
 import { createPayment } from '../../Redux/Payment/Action';
 import Razorpay from '../../Components/CheckoutComponents/Razorpay';
-import axios from 'axios';
+// import axios from 'axios';
 
 function Booking() {
   const dispatch = useDispatch();
@@ -57,7 +57,15 @@ function Booking() {
     setPrice(value);
   }
 
-  const Amount = price + 2 * Math.floor(price * 0.09)
+  const check = price * 0.09;
+
+let rounded = Math.round(check);
+
+if (check - Math.floor(check) === 0.5) {
+    rounded = Math.ceil(check);
+}
+
+const Amount = price + 2*rounded;
 
 
   const book = async () => {
@@ -74,8 +82,8 @@ function Booking() {
         status: "Incoming",
         num: vehicles.num,
         price: price,
-        sgst: Math.floor(price * 0.09),
-        cgst: Math.floor(price * 0.09),
+        sgst: rounded,
+        cgst: rounded,
       };
       const bookingData = bookingDetails;
        const avail = await dispatch(createBookingAsync({ bookingData }));
