@@ -1,4 +1,4 @@
-import { useEffect, useState, DatePicker, MdEdit, useParams, UserInfoForm, PiCurrencyInrBold, Swal, PaymentInfo } from './index.jsx';
+import { useEffect, useState, DatePicker, MdEdit, useParams, UserInfoForm, PiCurrencyInrBold, Swal, PaymentInfo } from './index';
 import image from '../../assets/parking.webp'
 import 'react-datepicker/dist/react-datepicker.css';
 import Header from '../../Components/LayoutComponents/Header'
