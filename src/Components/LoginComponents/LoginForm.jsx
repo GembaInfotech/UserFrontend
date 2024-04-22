@@ -18,7 +18,7 @@ const LoginForm = () => {
   const navigate = useNavigate();
   const handleSubmit = async (values,) => {
     try {
-      const response = await axios.post('http://localhost:7001/v1/api/User/login', values);
+      const response = await axios.post('https://backend-2-v1ta.onrender.com/v1/api/User/login', values);
       console.log(response.data.token)
       if (response.data?.token) {
         const recievedtoken = JSON.stringify(response.data.token.token)
