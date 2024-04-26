@@ -8,7 +8,7 @@ import {
   } from './ActionType';
   
   import axios from 'axios';
-   const API_BASE_URL ="http://localhost:7001/v1"
+   const API_BASE_URL ="https://backend-2-v1ta.onrender.com/v1"
   export const createPayment = (data) => async (dispatch) => {
     
     console.log("create payment data ",data)
