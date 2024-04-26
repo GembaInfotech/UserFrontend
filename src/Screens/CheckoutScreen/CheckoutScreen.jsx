@@ -1,4 +1,3 @@
-import { useEffect, useState, DatePicker, MdEdit, useParams, UserInfoForm, PiCurrencyInrBold, Swal, PaymentInfo } from './index';
 import image from '../../assets/parking.webp'
 import 'react-datepicker/dist/react-datepicker.css';
 import Header from '../../Components/LayoutComponents/Header'
@@ -7,6 +6,16 @@ import { useSelector, useDispatch } from 'react-redux';
 import { createBookingAsync } from '../../slice/BookingSlice';
 import { createPayment } from '../../Redux/Payment/Action';
 import Razorpay from '../../Components/CheckoutComponents/Razorpay';
+import {  useEffect, useState } from 'react';
+import DatePicker from 'react-datepicker';
+import { MdEdit } from 'react-icons/md';
+import { useParams } from 'react-router-dom';
+import UserInfoForm from '../../Components/CheckoutComponents/UserInfoForm';
+import { FaArrowRight } from 'react-icons/fa';
+import { PiCurrencyInrBold } from 'react-icons/pi';
+import Swal from 'sweetalert2';
+import 'react-datepicker/dist/react-datepicker.css';
+import PaymentInfo from '../../Components/CheckoutComponents/PaymentInfo';
 // import axios from 'axios';
 
 function Booking() {

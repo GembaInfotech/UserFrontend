@@ -1,4 +1,4 @@
-import { Card } from './index';
+import Card from '../../Components/HomeComponents/Card';
 import useAuthToken from '../../Hooks/getToken';
 function AboutScreen() {
   const token = useAuthToken();
