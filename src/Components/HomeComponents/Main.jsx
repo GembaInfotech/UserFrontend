@@ -39,7 +39,7 @@ function Main() {
       <div>
         <section className='mt-24 max-sm:mt-4' >
           <div className='h-[700px] max-sm:h-[1100px]  bg-white py-6 px-12  max-sm:p-1 mt-12 mb-16 '>
-            <h1 className=' text-[48px] px-8 max-sm:px-1 font-medium text-gray-800 mb-2 max-sm:text-3xl'> Locations near you</h1>
+            <h1 className=' text-[48px] px-8 max-sm:px-1 font-medium text-gray-800 mb-2 max-sm:text-3xl'> Location near you</h1>
             <h1 className=' text-[28px] px-8 max-sm:px-1  max-sm:text-sm text-gray-800 mb-2'>explore the parking areas near your location....</h1>
             <div className='flex mt-4 justify-center flex-wrap'>
               <LocationCard image={image1} name="Sikandra Crossing" />
