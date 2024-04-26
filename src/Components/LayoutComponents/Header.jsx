@@ -3,7 +3,9 @@ import { Link } from 'react-router-dom';
 import logo from '../../assets/tlogo.png';
 import {useSelector , useDispatch}  from "react-redux";
 import { fetchVehiclesAsync } from '../../slice/VehiclesSlice';
+import { useNavigate } from 'react-router-dom';
 const Navbar = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -51,7 +53,8 @@ const Navbar = () => {
 
   const handleLogout = () => {
     localStorage.removeItem('token');
-    window.location.href = '/login';
+    
+    navigate('/login');
   };
 
   const toggleMobileMenu = () => {

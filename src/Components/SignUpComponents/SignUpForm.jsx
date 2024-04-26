@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { signUpAsync } from './../../slice/AuthSlice/SignUpSlice';
 import { useEffect } from 'react';
 import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
 
 const SignupSchema = Yup.object().shape({
   name: Yup.string().required('name is required'),
@@ -14,6 +15,8 @@ const SignupSchema = Yup.object().shape({
   password: Yup.string().min(8, 'Password must be at least 8 characters').required('Password is required'),
 });
 const SignUpForm = () => {
+  const navigate = useNavigate();
+
   const dispatch = useDispatch();
   const status = useSelector((state) => state.SignUp.status);
   console.log(status);
@@ -34,7 +37,7 @@ const SignUpForm = () => {
         confirmButtonText: 'OK',
       }).then((result) => {
         if (result.isConfirmed) {
-          window.location.href = "/login"
+          navigate('/login');
         }
       });
     } else if (status === "failed") {
