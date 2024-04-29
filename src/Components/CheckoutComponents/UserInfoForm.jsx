@@ -37,9 +37,9 @@ const UserInfoForm = () => {
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
       >
-          <Form>
+        <Form>
           <div className='flex space-x-8'>
-          <div className="mb-4">
+            <div className="mb-4">
               <label htmlFor="name" className="block mb-1">
                 Name
               </label>
@@ -68,20 +68,20 @@ const UserInfoForm = () => {
             </div>
 
           </div>
-            <div className="mb-4">
-              <label htmlFor="mobile" className="block mb-1">
-                Mobile
-              </label>
-              <Field
-                type="text"
-                id="mobile"
-                name="mobile"
-                placeholder="Enter your mobile number"
-                className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500"
-              />
-              <ErrorMessage name="mobile" component="div" className="text-red-500 mt-1" />
-            </div>
-          </Form>
+          <div className="mb-4 max-md:mb-0">
+            <label htmlFor="mobile" className="block mb-1">
+              Mobile
+            </label>
+            <Field
+              type="text"
+              id="mobile"
+              name="mobile"
+              placeholder="Enter your mobile number"
+              className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500"
+            />
+            <ErrorMessage name="mobile" component="div" className="text-red-500 mt-1" />
+          </div>
+        </Form>
       </Formik>
     </div>
   );

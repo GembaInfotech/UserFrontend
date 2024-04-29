@@ -50,7 +50,7 @@ const PaymentInfo = () => {
             <ErrorMessage name="cardNumber" component="div" className="text-red-500 mt-1" />
           </div>
 
-          <div className="grid grid-cols-3 gap-4 mb-4">
+          <div className="grid grid-cols-3 gap-4 mb-4 max-md:mb-0">
             <div>
               <label htmlFor="expiryDate" className="block mb-1">
                 Expiry Date
