@@ -18,7 +18,7 @@ export const fetchBookings = async () => {
 
 export const createBooking = async ({bookingData}) => {
   const token = await  getToken();
-  const response = await instance.post('/booking', {bookingData} ,{
+  const response = await instance.post('/booking/', {bookingData} ,{
     headers: {
       'Authorization': `Bearer ${token}` 
     }
