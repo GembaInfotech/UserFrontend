@@ -113,7 +113,7 @@ function ParkingScreen() {
                   ))}
                 </div>
               </div>
-              <div className='w-3/4  max-md:w-full max-md:h-96 max-md:h-[600px] '>
+              <div className='w-3/4  max-md:w-full  max-md:h-[400px] '>
 
                 <MapScreen data={parkings} selected={selected} />
               </div>
