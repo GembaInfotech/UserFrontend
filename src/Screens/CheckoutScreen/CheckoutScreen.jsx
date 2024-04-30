@@ -129,19 +129,19 @@ function Booking() {
   return (
     <>
       <Header />
-      <section className='flex min-h-screen mt-12 max-md:flex-col max-md:justify-center max-md:items-center '>
+      <section className='flex min-h-screen mt-12 max-md:flex-col max-md:items-center '>
         <div className='w-2/3 flex-col px-32 max-md:px-0'>
           <div className=' border-black w-full h-48 my-1  py-6 max-md:my-0 '>
             <h1 className='font-light text-gray-800'>complete your booking process</h1>
             <h1 className='text-gray-800 text-xl font-bold px-2 my-2'>{parkingData.pn}</h1>
-            <div className=' flex bg-[#f0f4f9] p-2 max-md:flex-col rounded-lg h-24 justify-evenly items-center '>
+            <div className=' flex bg-[#f0f4f9] p-2  max-md:flex-col rounded-lg h-24 justify-evenly items-center'>
               <div className='max-md:m-1'>
                 <DatePicker
                   selected={fromDate}
                   onChange={(date) => setFromDate(date)}
                   showTimeSelect
                   dateFormat="MM/dd/yyyy h:mm aa"
-                  className="px-2 py-2 max-md:px-1 max-md:py-1 rounded-sm focus:outline-none focus:border-blue-500"
+                  className="px-2 py-2 max-md:px-1 max-md:py-1  rounded-sm focus:outline-none focus:border-blue-500"
                 />
                 <button onClick={() => {
                   setFromDate(new Date())
@@ -163,7 +163,7 @@ function Booking() {
               </div>
             </div>
           </div>
-          {isLoggedIn ? null : (<div className='bg-[#fbfbfb]  border-gray-300 rounded-md flex h-80 my-2 max-md:my-0 justify-evenly  items-center'>
+          {isLoggedIn ? null : (<div className='bg-[#fbfbfb] border-gray-300 rounded-md flex h-80 my-2 max-md:my-0 justify-evenly  items-center'>
             <UserInfoForm />
           </div>)}
           <div className='bg-[#fbfbfb]  border-gray-300 rounded-md flex h-80 my-2 max-md:my-0 justify-evenly  items-center'>
