@@ -130,7 +130,7 @@ function Booking() {
     <>
       <Header />
       <section className='flex min-h-screen mt-12 max-md:flex-col max-md:items-center '>
-        <div className='w-2/3 flex-col px-32 max-md:px-0'>
+        <div className='w-2/3 max-md:w-[90%] flex-col px-32 max-md:px-0'>
           <div className=' border-black w-full h-48 my-1  py-6 max-md:my-0 '>
             <h1 className='font-light text-gray-800'>complete your booking process</h1>
             <h1 className='text-gray-800 text-xl font-bold px-2 my-2'>{parkingData.pn}</h1>
