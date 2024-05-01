@@ -47,7 +47,6 @@ export default function Example() {
   }, []);
 
   useEffect(() => {
-    // Close the popup when the component mounts
     const handleOutsideClick = (event) => {
       if (popupRef.current && !popupRef.current.contains(event.target)) {
         setShowLoginPopup(false);
@@ -55,8 +54,6 @@ export default function Example() {
     };
 
     window.addEventListener('mousedown', handleOutsideClick);
-
-    // Cleanup the event listener
     return () => {
       window.removeEventListener('mousedown', handleOutsideClick);
     };
@@ -141,7 +138,8 @@ export default function Example() {
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                 
-                {isLoggedIn? (<Menu as="div" className="relative ml-3">
+                {isLoggedIn? (
+                <Menu as="div" className="relative ml-3">
                   <div>
                     <Menu.Button className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                       <span className="absolute -inset-1.5" />

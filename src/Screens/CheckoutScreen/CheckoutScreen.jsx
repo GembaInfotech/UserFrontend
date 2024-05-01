@@ -131,7 +131,7 @@ function Booking() {
       <Header />
       <section className='flex min-h-screen mt-12 max-md:flex-col max-md:items-center '>
         <div className='w-2/3 max-md:w-[90%] flex-col px-32 max-md:px-0'>
-          <div className=' border-black w-full h-48 my-1  py-6 max-md:my-0 '>
+          <div className=' border-black w-full h-48 my-1  py-6 max-md:my-0'>
             <h1 className='font-light text-gray-800'>complete your booking process</h1>
             <h1 className='text-gray-800 text-xl font-bold px-2 my-2'>{parkingData.pn}</h1>
             <div className=' flex bg-[#f0f4f9] p-2  max-md:flex-col rounded-lg h-24 justify-evenly items-center'>
@@ -143,7 +143,7 @@ function Booking() {
                   dateFormat="MM/dd/yyyy h:mm aa"
                   className="px-2 py-2 max-md:px-1 max-md:py-1  rounded-sm focus:outline-none focus:border-blue-500"
                 />
-                <button onClick={() => {
+                <button className='max-md:m-2' onClick={() => {
                   setFromDate(new Date())
                 }}><h1><MdEdit /></h1>
                 </button>
@@ -156,20 +156,20 @@ function Booking() {
                   dateFormat="MM/dd/yyyy h:mm aa"
                   className="px-2 py-2 max-md:px-1 max-md:py-1  rounded-sm focus:outline-none focus:border-blue-500 "
                 />
-                <button onClick={() => {
+                <button className='max-md:m-2' onClick={() => {
                   setToDate(new Date())
                 }}><h1><MdEdit /></h1>
                 </button>
               </div>
             </div>
           </div>
-          {isLoggedIn ? null : (<div className='bg-[#fbfbfb] border-gray-300 rounded-md flex h-80 my-2 max-md:my-0 justify-evenly  items-center'>
+          {isLoggedIn ? null : (<div className='bg-[#fbfbfb] border-gray-300 rounded-md flex h-80 max-md:h-60 my-2 max-md:my-0 justify-evenly  items-center'>
             <UserInfoForm />
           </div>)}
-          <div className='bg-[#fbfbfb]  border-gray-300 rounded-md flex h-80 my-2 max-md:my-0 justify-evenly  items-center'>
+          {/* <div className='bg-[#fbfbfb]  border-gray-300 rounded-md flex h-80 my-2 max-md:my-0 justify-evenly  items-center'>
             <PaymentInfo className="max-md:-mt-4"/>
-          </div>
-          <div className='bg-gray-100  border-gray-300 rounded-md flex-row h-40 my-2 justify-evenly px-8 items-center'>
+          </div> */}
+          <div className='bg-gray-100  border-gray-300 rounded-md flex-row h-40 my-2 max-md:my-0 justify-evenly px-8 items-center'>
             <h1 className='text-gray-800 font-semibold text-2xl py-3 max-md:text-xl'>Payment Summary </h1>
             <div className='flex justify-between px-1 '>
               <h1 className='text-xl font-semibold max-md:text-base max-md:font-light max-md:mt-2'>Price </h1>

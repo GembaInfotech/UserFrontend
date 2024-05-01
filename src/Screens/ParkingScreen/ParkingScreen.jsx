@@ -44,21 +44,20 @@ function ParkingScreen() {
       {
         !parkingdata.error && parkingdata.status == "succeeded" && parkingdata.data && <div className='bg-slate-100'>
           <div>
-            <div className="fixed top-0 left-0 w-full flex items-center justify-between px-4 py-2  bg-[#5D76A9] z-10 max-md:flex-col max-md:h-42">
+            <div className="fixed top-0 left-0 w-full flex items-center justify-between px-4 py-2  bg-[#5D76A9] z-10 max-md:flex-col max-md:h-32">
               <h1 className=' font-medium max-md:hidden'>Search for your nearby Parking Spot</h1>
-              <div className='flex max-md:flex-row max-md:mt-2'>
+              <div className='flex max-md:flex-row '>
                 <input
                   type="text"
                   placeholder="Search by city, market, etc."
                   onChange={(e) => setLocationValue(e.target.value)}
                   value={locationValue}
-                  className="px-4 py-1 max-md:py-0 max-md:px-2 max-md:w-42 border rounded-sm focus:outline-none bg-gray-100 focus:border-blue-500 ml-2"
+                  className="px-4 py-1 max-md:text-sm max-md:py-0 max-md:my-7 max-md:px-2 border rounded-sm focus:outline-none bg-gray-100 max-md:h-5 focus:border-blue-500 ml-2"
                 />
-
                 <div className='flex max-sm:flex-col max-md:mx-2'>
-                  <label htmlFor="distanceSelect" className='text-white px-2 mt-2 font-medium max-sm:font-light max-sm:mt-1 max-sm:px-0 max-sm:mb-1'> Distance: </label>
+                  <label htmlFor="distanceSelect" className='text-white px-2 mt-2 font-medium max-sm:font-light max-md:text-sm max-sm:mt-1 max-sm:px-0 max-sm:mb-1'> Distance: </label>
                   <select
-                    className="px-4 py-1 max-md:px-0 max-md:py-0 max-sm:mb-1 bg-gray-100 rounded-sm focus:outline-none focus:border-blue-500"
+                    className="px-4 py-1 max-md:text-sm max-md:px-0 max-md:py-0 max-sm:mb-1 bg-gray-100 rounded-sm focus:outline-none focus:border-blue-500"
                     id="distanceSelect" value={radii} onChange={(e) => { setradii(e.target.value) }}>
                     <option value={100}>100 meters</option>
                     <option value={500}>500 meters</option>
@@ -70,37 +69,39 @@ function ParkingScreen() {
                 </div>
               </div>
 
-              <div className='flex max-sm:flex-row '>
+              <div className='flex max-sm:flex-row max-md:-mt-8'>
                 <div className='flex max-md:flex-col max-md:m-1 max-md:p-0'>
-                  <h1 className='text-white px-2 font-medium max-md:font-light mt-2 max-md:m-0 max-sm:mt-0'>From:</h1>
+                  <h1 className='text-white px-2 max-sm:px-0 font-medium mt-2 max-md:m-0 max-sm:mt-0 max-md:text-sm max-sm:font-light'>From:</h1>
                   <DatePicker
                     selected={fromDate}
                     onChange={(date) => setFromDate(date)}
                     showTimeSelect
                     dateFormat="MM/dd/yyyy h:mm aa"
-                    className="px-4 py-1 max-md:px-0 max-md:w-40 max-md:py-0 bg-gray-100 rounded-sm focus:outline-none focus:border-blue-500"
+                    className="px-4 py-1 max-md:text-sm max-md:px-0 max-md:w-32 max-md:py-0 bg-gray-100 rounded-sm focus:outline-none focus:border-blue-500"
                   />
                 </div>
                 <div className='flex max-sm:flex-col max-sm:m-1 max-sm:p-0'>
-                  <h1 className='text-white px-2 mt-2 font-medium max-md:font-light max-md:m-0 max-sm:mt-0'>To:</h1>
+                  <h1 className='text-white px-2 mt-2 font-medium max-md:m-0 max-sm:mt-0 max-md:text-sm max-sm:font-light'>To:</h1>
                   <DatePicker
                     selected={toDate}
                     onChange={(date) => setToDate(date)}
                     showTimeSelect
                     dateFormat="MM/dd/yyyy h:mm aa"
-                    className="px-4 py-1 max-md:px-0 max-md:w-40 max-sm:py-0 bg-gray-100 rounded-sm focus:outline-none focus:border-blue-500"
+                    className="px-4 py-1 max-md:text-sm text-sm max-md:px-0 max-md:w-32 max-sm:py-0 bg-gray-100 rounded-sm focus:outline-none focus:border-blue-500"
                   />
+
                 </div>
+                <button
+                onClick={handleSearch}
+                className="bg-green-500 text-white px-4 max-sm:px-2 max-md:w-12 py-1 max-sm:h-6  max-sm:py-0 rounded-md hover:bg-blue-600 hover:text-black transition duration-300 max-md:mt-6 "
+              >
+             
+                  <h1 className='pt-1 px-1 max-md:px-0 text-sm max-md:text-lg'> <IoSearch /></h1>
+            
+              </button>
               </div>
 
-              <button
-                onClick={handleSearch}
-                className="bg-green-500 text-white px-4 max-md:px-2 max-md:w-12 py-1  max-md:py-0 rounded-md hover:bg-blue-600 hover:text-black transition duration-300 max-md:mt-2 "
-              >
-                <div className='flex'>
-                  <h1 className='pt-1 px-1 text-xl'> <IoSearch /></h1>
-                </div>
-              </button>
+           
             </div>
             <div className='h-14 max-sm:h-7'>
             </div>
